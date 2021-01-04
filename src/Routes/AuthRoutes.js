@@ -5,14 +5,17 @@ import ForgotPassword from "Views/ForgotPassword";
 export const AUTH_ROUTES = [
   {
     path: "/login",
-    Component: Login,
+    component: Login,
+    title: "Login",
   },
   {
     path: "/signup",
-    Component: SignUp,
+    component: SignUp,
+    title: "Signup",
   },
   {
     path: "/forgot-password",
-    Component: ForgotPassword,
+    component: ForgotPassword,
+    title: "Forgot Password",
   },
 ];
