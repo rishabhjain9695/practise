@@ -2,9 +2,10 @@ import { useSelector } from "react-redux";
 
 import { useNetworkStatus } from "Hooks/NetworkStatus";
 
-const AppHOC = ({ children }) => {
+const AppHOC = ({ isAuthenticated, children }) => {
   const errorMsg = useSelector((state) => state.error.msg);
   const networkStatus = useNetworkStatus();
+
   return (
     <>
       error Msg: {errorMsg}

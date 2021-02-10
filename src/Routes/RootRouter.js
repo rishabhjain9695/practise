@@ -13,12 +13,12 @@ import PrivateLayout from "Components/HOC/PrivateLayout";
 import RenderRoutes from "./RenderRoutes";
 
 const DEFAULT_AUTHENTICATED_ROUTE = "/dashboard";
-const DEFAULT_GUEST_ROUTE = "/login";
+const DEFAULT_GUEST_ROUTE = "/";
 
 const GuestRoutes = () => {
   return (
     <Switch>
-      <Route path={AUTH_ROUTES.map((route) => route.path)}>
+      <Route exact path={AUTH_ROUTES.map((route) => route.path)}>
         <RenderRoutes routes={AUTH_ROUTES} />
       </Route>
       <Route exact path={PUBLIC_ROUTES.map((route) => route.path)}>
@@ -49,10 +49,11 @@ const RootRouter = () => {
   const token = useSelector((state) => state.auth.token);
   updateAuthToken(token);
   const baseName = process.env.REACT_APP_BASE_NAME;
+  const isAuthenticated = !!token;
   return (
     <BrowserRouter basename={baseName}>
-      <DocumentTitle isAuthenticated={!!token} />
-      <AppHOC>{token ? <AuthenticatedRoutes /> : <GuestRoutes />}</AppHOC>
+      <DocumentTitle isAuthenticated={isAuthenticated} />
+      <AppHOC isAuthenticated={isAuthenticated}>{token ? <AuthenticatedRoutes /> : <GuestRoutes />}</AppHOC>
     </BrowserRouter>
   );
 };

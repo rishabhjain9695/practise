@@ -6,4 +6,9 @@ export const PRIVATE_ROUTES = [
     component: Dashbord,
     title: "Dashboard",
   },
+  {
+    path: "/wishlist",
+    component: () => "Your wishlist here",
+    title: "Dashboard",
+  },
 ];
