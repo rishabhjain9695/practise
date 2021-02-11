@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 import { updateAuthToken } from "Shared/Axios";
-import AppHOC from "Components/HOC/AppHOC";
+import AppLayout from "Components/Core/AppLayout";
 import { AUTH_ROUTES } from "./AuthRoutes";
 import { PUBLIC_ROUTES } from "./PublicRoutes";
 import { PRIVATE_ROUTES } from "./PrivateRoutes";
 import DocumentTitle from "./DocumentTitle";
-import PublicLayout from "Components/HOC/PublicLayout";
-import PrivateLayout from "Components/HOC/PrivateLayout";
+import PublicLayout from "Components/Core/PublicLayout";
+import PrivateLayout from "Components/Core/PrivateLayout";
 import RenderRoutes from "./RenderRoutes";
 
 const DEFAULT_AUTHENTICATED_ROUTE = "/dashboard";
@@ -53,7 +53,7 @@ const RootRouter = () => {
   return (
     <BrowserRouter basename={baseName}>
       <DocumentTitle isAuthenticated={isAuthenticated} />
-      <AppHOC isAuthenticated={isAuthenticated}>{token ? <AuthenticatedRoutes /> : <GuestRoutes />}</AppHOC>
+      <AppLayout isAuthenticated={isAuthenticated}>{token ? <AuthenticatedRoutes /> : <GuestRoutes />}</AppLayout>
     </BrowserRouter>
   );
 };
