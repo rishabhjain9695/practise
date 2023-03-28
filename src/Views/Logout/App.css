@@ -5,11 +5,12 @@
     font-weight: bold;
     padding: 14px 30px;
     border: 0px;
-    border-radius: 40px;
+    border-radius: 400px;
     cursor: pointer;
     margin-left: 58px;
     margin-top: -7px;
     width: 123px;
+    
 }
 #logoutbtn{
     background-color: #ffffff;

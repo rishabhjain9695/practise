@@ -84,12 +84,13 @@ function LoginPage() {
       </Form.Group>
       {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group> */}
+      </Form.Group>
       {/* <Button variant="primary" type="submit" className='btnstyle'>
         Login
       </Button> */}
       <button  id='btnstyle' type='submit' >Login</button>
-    </Form>
+    </Form> 
+   
     {error?<span style={{color:'red'}}>Invalid Credentials.Enter Valid Credential</span>:<span></span>}
     <Link style={{textDecoration:'none'}} to='/forgotpassword'>Forgot Password</Link>
     <Link style={{textDecoration:'none'}} to='/signup'>Dont have an Acoount! Create a new Account</Link>
