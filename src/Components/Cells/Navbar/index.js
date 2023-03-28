@@ -8,7 +8,7 @@ import {useSelector } from "react-redux"
 // import Button from 'react-bootstrap/Button';
 import './navbar.css'
 function Navbars() {
-  // const loggedin=useSelector((state)=>state.loginreducer.loggedInuser);
+  const loggedinuser=useSelector((state)=>state.loginreducer.loggedin);
   // console.log(loggedin,"reducer");
   return (
     <>
@@ -34,7 +34,7 @@ function Navbars() {
             <Link to='/signup'>Sign Up</Link>
             </li>
           </ul>
-         {<button type="button"> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>}
+         {!loggedinuser?<button type="button"> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>:null}
           <button type="button" hidden={false}> <Link style={{textDecoration:'none'}}to='/logout'>Log Out</Link></button>
         </div>
       </div>

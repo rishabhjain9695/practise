@@ -16,22 +16,22 @@ export const PUBLIC_ROUTES = [
   {
     path: "/playlist",
     component: Playlist,
-    title: "Show Player",
+    title: "Playlist",
   },
   {
     path: "/login",
     component: LoginPage,
-    title: "Show Team",
+    title: "LoginPage",
   },
   {
     path: "/logout",
     component: Logout,
-    title: "Show Team",
+    title: "Logout",
   },
   {
     path: "/forgotpassword",
     component: ForgotPassword,
-    title: "Show Team",
+    title: "ForgotPassword",
   },
   {
     path: "/resetpassword",

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Sidebar.css"
-// import SpotifyLogo from "../../Components/imagess/SpotifyLogo.png"
+import SpotifyLogo from "../../../imagess/SpotifyLogo.png"
 import { Link } from 'react-router-dom'
 
 function Sidebar() {
@@ -8,7 +8,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="logo">
         
-          {/* <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" /> */}
+          <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
       </div>
       
       <div class="navigation">

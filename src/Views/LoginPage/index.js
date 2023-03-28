@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import '../LoginPage'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import SpotifyLogo from './../Components/imagess/SpotifyLogo.png'
+import SpotifyLogo from '../../imagess/SpotifyLogo.png'
 import { Link } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {auth} from "../../firebase"
@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 // import { setLogin } from '../action/loginaction';
+import { Login } from 'Redux/Actions/Loginactions/loginactions';
 import { useDispatch, useSelector } from "react-redux";
 function LoginPage() {
   const navigate=useHistory();
@@ -50,9 +51,9 @@ function LoginPage() {
       console.log(user.user.uid,"useridcheck");
       localStorage.setItem("userIdToken",user.user.uid);
       setUserToken(user.user.uid);
-      // dispatch(setLogin(user.user.uid))
+      dispatch(Login(user.user.id));
       // localStorage.setItem("useremail",user.user.email);
-      localStorage.setItem("login","true");
+      // localStorage.setItem("login","true");
       navigate.push('/playlist');
       // localStorage.setItem("token",user.user.accessToken);
       // localStorage.setItem("login",true);
@@ -64,7 +65,7 @@ function LoginPage() {
   return (
     <div id='loginp'>
     
-      {/* <img src={SpotifyLogo} alt=""  /> */}
+      <img src={SpotifyLogo} alt=""  />
       <br />
       <h1 id="heading">To continue,login to Spotify</h1>
       <Form onSubmit={(e)=>{sigin(e)}}>
