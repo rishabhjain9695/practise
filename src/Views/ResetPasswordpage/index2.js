@@ -1,0 +1,24 @@
+import React from 'react'
+
+import '../Signup/App.css'
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+// import SpotifyLogo from './../Components/imagess/SpotifyLogo.png'
+// import "./App.css"
+function ForgotPasswordPage() {
+  return (
+       <div id='loginp'>
+    {/* <div id="sign-in-button"></div> */}
+    <div id="head">
+    {/* <img src={SpotifyLogo} alt=""  /> */}
+    
+      <br />
+      <h1 id="headingforgot">Password Reset</h1>
+      <p id="para">We've sent you an email. Just follow the instructions to reset your password.
+      </p>
+    </div>
+    </div>
+  )
+}
+
+export default ForgotPasswordPage

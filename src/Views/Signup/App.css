@@ -1,0 +1,15 @@
+#loginp{
+    display: flex;
+    background-color:white;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+img{
+    height:50px;
+    width: 120px;
+}
+.heading{
+    font-size: 15px;
+    font-weight: bolder;
+}

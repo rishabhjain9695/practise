@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 
 import { useNetworkStatus } from "Hooks/NetworkStatus";
+import Sidebar from "Views/LoginPage/Sidebar";
+import Navbars from "Components/Cells/Navbar";
 
 const AppLayout = ({ isAuthenticated, children }) => {
   const errorMsg = useSelector((state) => state.error.msg);
@@ -8,8 +10,10 @@ const AppLayout = ({ isAuthenticated, children }) => {
 
   return (
     <>
-      error Msg: {errorMsg}
-      network status: {networkStatus ? "online" : "offline"}
+    <Navbars/>
+    <Sidebar/>
+      {/* error Msg: {errorMsg}
+      network status: {networkStatus ? "online" : "offline"} */}
       {children}
     </>
   );

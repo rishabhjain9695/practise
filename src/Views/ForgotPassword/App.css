@@ -1,0 +1,26 @@
+#headingforgot{
+font-size:45px ;
+}
+#head{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+#para{
+    margin-left: 433px;
+    margin-right: 433px;
+}
+#Send{
+    background-color: green;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-left: 50px;
+    margin-top: 28px;
+}

@@ -1,16 +1,17 @@
-import Login from "Views/Login";
-import SignUp from "Views/SignUp";
-import ForgotPassword from "Views/ForgotPassword";
 
+// import SignUp from "Views/SignUp";
+import ForgotPassword from "../Views/ForgotPassword/index";
+import LoginPage from "Views/LoginPage";
+import SignUp from "../Views/Signup/index"
 export const AUTH_ROUTES = [
   {
     path: "/login",
-    component: Login,
+    component: LoginPage,
     title: "Login",
   },
   {
     path: "/signup",
-    component: SignUp,
+    component:SignUp ,
     title: "Signup",
   },
   {
