@@ -1,26 +1,4 @@
-// import React from 'react'
-// import { lists } from "../../../firebase";
-// function Plaulist() {
-//   const getsongs = () => {
-//     lists();
-//   };
-//   return (
-//     <div>
-//       playlist
-//       <button
-//         onClick={() => {
-//           getsongs();
-//         }}
-//       >
-//         List{" "}
-//       </button>
-//     </div>
-//   )
-// }
 
-
-// export default Plaulist
-// import { lists } from '../../../firebase';
 import React, { useEffect, useState } from 'react'
 import './navbar.css'
 import {
