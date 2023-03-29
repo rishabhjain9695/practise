@@ -5,9 +5,9 @@ export const Login=(loggedin)=>{
         loggedin
     }
 }
-export const Logout=(loggedinuser)=>{
+export const Logoutuser=(loggedin)=>{
     return {
         type:"LOGOUT",
-        loggedinuser
+        loggedin
     }
 }

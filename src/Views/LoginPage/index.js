@@ -51,7 +51,7 @@ function LoginPage() {
       console.log(user.user.uid,"useridcheck");
       localStorage.setItem("userIdToken",user.user.uid);
       setUserToken(user.user.uid);
-      dispatch(Login(user.user.id));
+      dispatch(Login(user.user.uid));
       // localStorage.setItem("useremail",user.user.email);
       // localStorage.setItem("login","true");
       navigate.push('/playlist');

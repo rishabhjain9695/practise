@@ -9,7 +9,7 @@ import {useSelector } from "react-redux"
 import './navbar.css'
 function Navbars() {
   const loggedinuser=useSelector((state)=>state.loginreducer.loggedin);
-  // console.log(loggedin,"reducer");
+  console.log(loggedinuser,"asshshsh");
   return (
     <>
   <div class="topbar">
@@ -31,11 +31,11 @@ function Navbars() {
             </li>
             <li class="divider">|</li>
             <li>
-            <Link to='/signup'>Sign Up</Link>
+          {!loggedinuser?  <Link to='/signup'>Sign Up</Link>:null}
             </li>
           </ul>
          {!loggedinuser?<button type="button"> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>:null}
-          <button type="button" hidden={false}> <Link style={{textDecoration:'none'}}to='/logout'>Log Out</Link></button>
+          {loggedinuser? <button type="button" hidden={false}> <Link style={{textDecoration:'none'}}to='/logout'>Log Out</Link></button>:null}
         </div>
       </div>
       <br />

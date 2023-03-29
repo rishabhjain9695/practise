@@ -6,13 +6,15 @@ import './App.css'
 import {useHistory} from "react-router-dom";
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 // import { setlogout } from "../action/loginaction";
+import  {Logoutuser} from "Redux/Actions/Loginactions/loginactions";
+
 // setlogout
 export default function Logout() {
   const navigate = useHistory();
 //   const navigate = useHistory();
 const dispatch=useDispatch();
   function handleLogout() {
-    // dispatch(setlogout(null));
+    dispatch(Logoutuser(null));
     enqueueSnackbar("Logged Out Successfuly", {
       variant: "success",
       autoHideDuration: 3000,
@@ -22,7 +24,7 @@ const dispatch=useDispatch();
       },
     });
     navigate.push("/");
-    localStorage.clear();
+    // localStorage.clear();
   }
   return (
     <div className="d-flex  justify-content-center w-100 ">

@@ -1,5 +1,6 @@
 import React from 'react'
 const initialState={
+    name:"token",
     loggedin:null
 }
 const loginreducer=(data=initialState,action)=>{
@@ -7,6 +8,8 @@ const loginreducer=(data=initialState,action)=>{
         case "LOGIN":
           return { ...data, loggedin: action.loggedin };
     
+          case "LOGOUT":
+            return { ...data, loggedin: action.loggedin };
         // case REHYDRATE:
         //   let persistedData = ((action || {}).payload).loginReducer || initalData
         //   console.log(persistedData, action,data,"persistedData<><<><><>")
