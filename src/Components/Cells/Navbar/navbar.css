@@ -80,3 +80,18 @@
     justify-content: center;
     align-items: center;
   }
+  #searchbutton{
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px ;
+    border: 0px;
+    border-radius: 37px;
+    cursor: pointer;
+    width: 273px;
+    margin-left: 0px;
+    padding-left: 68px;
+    font-size: 27px;
+    font-weight: bolder;
+  }

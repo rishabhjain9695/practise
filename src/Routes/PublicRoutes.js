@@ -1,22 +1,23 @@
 
-import Home from "../Views/Home";
 import Logout from "Views/Logout/logout";
 import ForgotPasswordPage from "Views/ResetPasswordpage/index2";
 import LoginPage from "Views/LoginPage";
-import Playlist from "Views/Playlist/Playlist";
+import Home from "../Views/Playlist/Playlist";
 import ForgotPassword from "Views/ForgotPassword";
+import Homes from "../Views/Home";
+import UserPlaylist from "Views/UserPlaylist/index";
 
 export const PUBLIC_ROUTES = [
   {
     path: "/",
-    component: Home,
+    component:Homes,
     title: "Homepage",
     exact: true,
   },
   {
-    path: "/playlist",
-    component: Playlist,
-    title: "Playlist",
+    path: "/Home",
+    component: Home,
+    title: "Home",
   },
   {
     path: "/login",
@@ -36,6 +37,11 @@ export const PUBLIC_ROUTES = [
   {
     path: "/resetpassword",
     component: ForgotPasswordPage,
+    title: "Show Team",
+  },
+  {
+    path: "/playlist",
+    component: UserPlaylist,
     title: "Show Team",
   },
 

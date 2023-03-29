@@ -15,15 +15,15 @@ function Sidebar() {
       <div class="navigation">
         <ul>
           <li>
-          { loggedinuser?  <Link to='/playlist'>   <span class="fa fas fa-plus-square"></span>
+          { loggedinuser?  <Link to='/home'>   <span class="fa fas fa-plus-square"></span>
               <span>Home</span></Link>:<Link>Home</Link>}
           </li>
 
           <li>
-            
+          <a href="#">
               <span class="fa fa-search"></span>
               <span>Search</span>
-       
+              </a>
           </li>
 
           <li>
@@ -38,9 +38,10 @@ function Sidebar() {
       <div class="navigation">
         <ul>
           <li>
-       <Link to='/playlist'>   <span class="fa fas fa-plus-square">Create Playlist</span></Link>
+       {loggedinuser?<Link to='/playlist'>   <span class="fa fas fa-plus-square">Create Playlist</span></Link>:
+       <Link >   <span class="fa fas fa-plus-square">Create Playlist</span></Link>
            
-            
+}            
           </li>
 
           <li>

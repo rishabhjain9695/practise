@@ -37,6 +37,8 @@ function Navbars() {
          {!loggedinuser?<button type="button"> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>:null}
           {loggedinuser? <button type="button" hidden={false}> <Link style={{textDecoration:'none'}}to='/logout'>Log Out</Link></button>:null}
         </div>
+        {/* <div id="searchdiv">    <input type="text" id="searchbutton" placeholder="Search.."/></div> */}
+    
       </div>
       <br />
    

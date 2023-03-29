@@ -27,15 +27,7 @@ function LoginPage() {
       setError(true);
     }
     else{
-    //   useEffect(()=>{
-    // localStorage.setItem("login","true");
-    //   },[])
-    // const call=()=>{
-    //   enqueueSnackbar('LoggedIn Successfully!', { 
-    //     variant: 'success',
-    //     persist: true
-    //   });
-    // }
+ 
     signInWithEmailAndPassword(auth,email,password).then((user)=>{
     
       enqueueSnackbar("Logged In Successfuly", {
@@ -54,7 +46,7 @@ function LoginPage() {
       dispatch(Login(user.user.uid));
       // localStorage.setItem("useremail",user.user.email);
       // localStorage.setItem("login","true");
-      navigate.push('/playlist');
+      navigate.push('/home');
       // localStorage.setItem("token",user.user.accessToken);
       // localStorage.setItem("login",true);
     }).catch((error)=>{
@@ -83,12 +75,7 @@ function LoginPage() {
         <Form.Control type="password" placeholder="Password"  value={password} onChange={(e)=>{setPassword(e.target.value)
         setError(false);}}/>
       </Form.Group>
-      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        <Form.Check type="checkbox" label="Check me out" />
-      </Form.Group>
-      {/* <Button variant="primary" type="submit" className='btnstyle'>
-        Login
-      </Button> */}
+
       <button  id='btnstyle' type='submit' >Login</button>
     </Form> 
    

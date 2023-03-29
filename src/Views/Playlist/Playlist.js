@@ -36,7 +36,7 @@ import { db } from '../../firebase';
 import "./navbar.css"
 // import { list } from 'firebase/storage';
 
-function Playlist() {
+function Home() {
   const [listofSongs, setListofsongs] = useState([]);
   const [playArray, setPlayArray] = useState([]);
   const [songsUrl, setSongsUrl] = useState([]);
@@ -155,4 +155,4 @@ function Playlist() {
   )
 }
 
-export default Playlist
+export default Home;
