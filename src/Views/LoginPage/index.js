@@ -12,7 +12,19 @@ import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 // import { setLogin } from '../action/loginaction';
 import { Login } from 'Redux/Actions/Loginactions/loginactions';
 import { useDispatch, useSelector } from "react-redux";
+import { getLoggedinuserPlaylist } from 'Redux/Actions/Loginactions/loginactions';
+import {
+  collection,arrayUnion,
+  getDocs,
+  getDoc,
+  addDoc,
+  doc,
+  updateDoc,
+  setDoc
+} from "firebase/firestore";
+import { db } from '../../firebase';
 function LoginPage() {
+  // const mydata=useSelector((state)=>{state.loginreducer.playlist})
   const navigate=useHistory();
   const[isLoggedIn,setLoggedIn]=useState(false);
   const[userToken,setUserToken]=useState("");
@@ -20,8 +32,18 @@ function LoginPage() {
   const[password,setPassword]=useState("");
   const [error,setError]=useState(false);
   const dispatch=useDispatch();
+  // console.log(mydata,"mydaytaa");
+  const hello=async(uid)=>{
+    console.log("hello");
+     const docRef = doc(db, "users",uid);
+    const docSnap = await getDoc(docRef);
+    const getsongs = docSnap.data();
+    console.log(getsongs,"getsongsdedede");
+    console.log("getsongsdedede");
+    dispatch(getLoggedinuserPlaylist(uid));
+  }
+  const sigin=async(e)=>{
   
-  const sigin=(e)=>{
     e.preventDefault();
     if(email==""|| password==""){
       setError(true);
@@ -29,7 +51,7 @@ function LoginPage() {
     else{
  
     signInWithEmailAndPassword(auth,email,password).then((user)=>{
-    
+      hello(user.user.uid);
       enqueueSnackbar("Logged In Successfuly", {
         variant: "success",
         autoHideDuration: 3000,
@@ -44,6 +66,9 @@ function LoginPage() {
       localStorage.setItem("userIdToken",user.user.uid);
       setUserToken(user.user.uid);
       dispatch(Login(user.user.uid));
+      // dispatch(getLoggedinuserPlaylist(getsongs));
+
+      
       // localStorage.setItem("useremail",user.user.email);
       // localStorage.setItem("login","true");
       navigate.push('/home');

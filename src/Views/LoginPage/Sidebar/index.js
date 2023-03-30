@@ -4,7 +4,9 @@ import SpotifyLogo from "../../../imagess/SpotifyLogo.png"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 function Sidebar() {
-  const loggedinuser=useSelector((state)=>state.loginreducer.loggedin);
+  const loggedinuser=useSelector((state)=>state.loginreducer);
+  // const l=useSelector((state)=>state.loginreducer.userplaylists);
+  console.log(loggedinuser,"checkedtarun")
   return (  
     <div className="sidebar">
       <div className="logo">

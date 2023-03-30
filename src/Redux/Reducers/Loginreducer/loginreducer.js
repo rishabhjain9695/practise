@@ -1,6 +1,6 @@
 import React from 'react'
 const initialState={
-    name:"token",
+    userplaylists:[],
     loggedin:null
 }
 const loginreducer=(data=initialState,action)=>{
@@ -10,13 +10,8 @@ const loginreducer=(data=initialState,action)=>{
     
           case "LOGOUT":
             return { ...data, loggedin: action.loggedin };
-        // case REHYDRATE:
-        //   let persistedData = ((action || {}).payload).loginReducer || initalData
-        //   console.log(persistedData, action,data,"persistedData<><<><><>")
-        //   return {
-        //     ...data,
-        //     token:persistedData.token
-        //   }
+            case "LoggedInUserPlaylist":
+                return {...data,userplaylists:action.userplaylists}
         default:
           return data;
       }
