@@ -24,7 +24,7 @@ const dispatch=useDispatch();
       },
     });
     navigate.push("/");
-    // localStorage.clear();
+    localStorage.clear();
   }
   return (
     <div className="d-flex  justify-content-center w-100 ">

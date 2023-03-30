@@ -9,7 +9,7 @@ const loginreducer=(data=initialState,action)=>{
           return { ...data, loggedin: action.loggedin };
     
           case "LOGOUT":
-            return { ...data, loggedin: action.loggedin };
+            return { ...data, loggedin: action.loggedin,userplaylists:[] };
             case "LoggedInUserPlaylist":
                 return {...data,userplaylists:action.userplaylists}
         default:

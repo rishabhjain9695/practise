@@ -6,6 +6,7 @@ import Home from "../Views/Playlist/Playlist";
 import ForgotPassword from "Views/ForgotPassword";
 import Homes from "../Views/Home";
 import UserPlaylist from "Views/UserPlaylist/index";
+import Playlistcreated from "Views/PlaylistCreated/playlistcreated";
 
 export const PUBLIC_ROUTES = [
   {
@@ -42,7 +43,8 @@ export const PUBLIC_ROUTES = [
   {
     path: "/playlist",
     component: UserPlaylist,
-    title: "Show Team",
+    title: "Userplaylist",
   },
+
 
 ];

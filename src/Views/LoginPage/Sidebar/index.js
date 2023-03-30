@@ -4,7 +4,7 @@ import SpotifyLogo from "../../../imagess/SpotifyLogo.png"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 function Sidebar() {
-  const loggedinuser=useSelector((state)=>state.loginreducer);
+  const loggedinuser=useSelector((state)=>state.loginreducer.loggedin);
   // const l=useSelector((state)=>state.loginreducer.userplaylists);
   console.log(loggedinuser,"checkedtarun")
   return (  
@@ -18,7 +18,7 @@ function Sidebar() {
         <ul>
           <li>
           { loggedinuser?  <Link to='/home'>   <span class="fa fas fa-plus-square"></span>
-              <span>Home</span></Link>:<Link>Home</Link>}
+              <span>Home</span></Link>:<Link to='/login'>Homes</Link>}
           </li>
 
           <li>
@@ -40,8 +40,8 @@ function Sidebar() {
       <div class="navigation">
         <ul>
           <li>
-       {loggedinuser?<Link to='/playlist'>   <span class="fa fas fa-plus-square">Create Playlist</span></Link>:
-       <Link >   <span class="fa fas fa-plus-square">Create Playlist</span></Link>
+       { loggedinuser? <Link to='/playlist'>   <span class="fa fas fa-plus-square">Create Playlist</span></Link>:
+       <Link to='/login' >   <span class="fa fas fa-plus-square">Create Playlist</span></Link>
            
 }            
           </li>

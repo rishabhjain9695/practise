@@ -40,7 +40,7 @@ function LoginPage() {
     const getsongs = docSnap.data();
     console.log(getsongs,"getsongsdedede");
     console.log("getsongsdedede");
-    dispatch(getLoggedinuserPlaylist(uid));
+    dispatch(getLoggedinuserPlaylist(getsongs.playlist));
   }
   const sigin=async(e)=>{
   
