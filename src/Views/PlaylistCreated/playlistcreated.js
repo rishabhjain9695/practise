@@ -150,7 +150,7 @@ const [songdata,setSongData]=useState([]);
     <div id="mid">
      {playlistnames?.map((e)=>{
       const pl={e};
-      console.log(pl.e,"help");
+      console.log(pl.e,"help",e,"djdjsdjdjsd");
       return <div>
         <NavLink to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink>
         {/* <button id={e} onClick={(e)=>{console.log(e.target.id)
@@ -162,6 +162,9 @@ const [songdata,setSongData]=useState([]);
         
         
         {/* }>Show {e}</button> */}
+        <button id={playlistnames}onClick={(e)=>{
+          console.log(e.target.id,"pppppppppppp")
+        }}>ffffffffffffffffffff</button>
       </div>
      })}
     </div>
