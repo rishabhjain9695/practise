@@ -47,7 +47,7 @@ function Home(props) {
        });
            playlist();
 
-  },[])
+  },[playlistname])
   // const d=()=>{
   //   console.log(songdata,"ss");
   // }
@@ -96,33 +96,38 @@ function Home(props) {
   return (
     <div id='flexx'>
       <div>
+    <h1>selectedplaylistSongs</h1>
 {playlistsongs?.map((e)=>{
   console.log(e,"obj");
   console.log(e.SongName,"songname");
   console.log(e.SongUrl,"songurl");
   return (
     <div>
-    <h1>selectedplaylistSongs</h1>
     <h1>{e.SongName}</h1>
           <audio controls>
             <source src={e.SongUrl} />
           </audio> 
+          
     </div>
   )
 })}
       </div>
       {/* <button style={{ color: 'red' }} onClick={listsongs}>click to load songs</button> */}
+      <h1>All Songssssssssssssssssss</h1>
       {listofSongs.map((e) => {
         {/* console.log(ind),"kk"); */}
         return (
           <div id="flexx">
           <div>
+        
           <h1>{e.data.SongName}</h1>
-          <audio controls>
+          {/* <audio controls>
             <source src={e.data.SongUrl} />
-          </audio>
+          </audio> */}
+          
           <button id={e.data.SongUrl}  onClick={(e)=>{setSongs(e.target.id)}}>
-            Add Song
+            Add <i class="bi bi-heart"></i>
+            
           </button>
           </div>
           </div>

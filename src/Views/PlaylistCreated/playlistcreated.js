@@ -152,7 +152,8 @@ const [songdata,setSongData]=useState([]);
       const pl={e};
       console.log(pl.e,"help",e,"djdjsdjdjsd");
       return <div>
-        <NavLink to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink>
+      <button id="btnstyle">   <NavLink style={{textDecoration:"none"}} to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink></button>
+     
         {/* <button id={e} onClick={(e)=>{console.log(e.target.id)
         submitModal(e.target.id)
         setPn(e.target.id)}}>+</button> */}
@@ -162,9 +163,9 @@ const [songdata,setSongData]=useState([]);
         
         
         {/* }>Show {e}</button> */}
-        <button id={playlistnames}onClick={(e)=>{
+        {/* <button id={playlistnames}onClick={(e)=>{
           console.log(e.target.id,"pppppppppppp")
-        }}>clickhere</button>
+        }}>clickhere</button> */}
       </div>
      })}
     </div>
