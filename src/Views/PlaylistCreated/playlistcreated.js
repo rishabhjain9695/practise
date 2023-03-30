@@ -76,10 +76,10 @@ const [songdata,setSongData]=useState([]);
             await updateDoc(doc(db, "users", uid), {
               ["playlist" + ["."+`${pn}`]]: arrayUnion(filterele)
             });
-              const docRef = doc(db, "users","UserId");
+              const docRef = doc(db, "users",uid);
               const docSnap = await getDoc(docRef);
-              const getsongs = docSnap.data().playlist;
-              console.log(getsongs, "getsongsdata");
+              const getsongs = docSnap.data().playlistname;
+              console.log("getsongsdata");
             
       }   
     async function hello(){

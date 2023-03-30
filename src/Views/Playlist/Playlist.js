@@ -15,14 +15,18 @@ import "./navbar.css"
 import { useSelector } from 'react-redux';
 // import { list } from 'firebase/storage';
 
-function Home() {
+function Home(props) {
   const [listofSongs, setListofsongs] = useState([]);
   const [playArray, setPlayArray] = useState([]);
   const [songsUrl, setSongsUrl] = useState([]);
   const [songdata,setSongData]=useState([]);
   const[userToken,setUserToken]=useState(""); 
+  const[playlistname,setPlaylist]=useState("");
+  const[playlistsongs,setPlaylistSongs]=useState([]);
   // const playlist=useSelector((state)=>state.loginreducer.playlist)   // lists(listofSongs, setListofsongs);
   useEffect(()=>{
+    setPlaylist(props.pn);
+    console.log(props.pn,"Propspassingtohome")
     listsongs();
      setUserToken(localStorage.getItem("userIdToken"))
      console.log(useState,"usertoken");
@@ -41,12 +45,24 @@ function Home() {
        .catch((error) => {
          console.log(error);
        });
-
+           playlist();
 
   },[])
   // const d=()=>{
   //   console.log(songdata,"ss");
   // }
+  async function playlist(){
+    const docRef = doc(db, "users",userToken);
+    const docSnap = await getDoc(docRef);
+    const getplaylistdata = docSnap.data().playlist[playlistname];
+    console.log("getplaylist",getplaylistdata)
+    //     let selectedPlaylist=getplaylistarray.find((e)=>{
+    //       return 
+    //     })
+    setPlaylistSongs(getplaylistdata);
+    console.log(playlistname,"tttt");
+    // console.log(getsongs,"get");
+  }
   function listsongs() {
     const getsongs = collection(db, "songslist");
     getDocs(getsongs)
@@ -54,7 +70,6 @@ function Home() {
         const a = response.docs.map((doc) => {
           return {
             data: doc.data(),
-            id: doc.id
           };
         });
         setListofsongs(a);
@@ -71,8 +86,9 @@ function Home() {
             return e.SongUrl==id;
         })
         await updateDoc(doc(db, "users", userToken), {
-          ["playlist" + ["."+`${playlistname}`]]: arrayUnion()
+          ["playlist" + ["."+`${playlistname}`]]: arrayUnion(filterele)
         });
+    playlist();
       }
 
       
@@ -80,7 +96,20 @@ function Home() {
   return (
     <div id='flexx'>
       <div>
-
+{playlistsongs?.map((e)=>{
+  console.log(e,"obj");
+  console.log(e.SongName,"songname");
+  console.log(e.SongUrl,"songurl");
+  return (
+    <div>
+    <h1>selectedplaylistSongs</h1>
+    <h1>{e.SongName}</h1>
+          <audio controls>
+            <source src={e.SongUrl} />
+          </audio> 
+    </div>
+  )
+})}
       </div>
       {/* <button style={{ color: 'red' }} onClick={listsongs}>click to load songs</button> */}
       {listofSongs.map((e) => {
@@ -93,7 +122,7 @@ function Home() {
             <source src={e.data.SongUrl} />
           </audio>
           <button id={e.data.SongUrl}  onClick={(e)=>{setSongs(e.target.id)}}>
-            Add 
+            Add Song
           </button>
           </div>
           </div>
