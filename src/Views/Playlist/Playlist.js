@@ -71,11 +71,10 @@ function Home() {
             return e.SongUrl==id;
         })
         await updateDoc(doc(db, "users",userToken), {
-          playlist: arrayUnion({
-           filterele
-          }),
+          playlist: arrayUnion( filterele),
         });
       }
+
       
       console.log(listofSongs,"listOfSongs");
   return (
@@ -93,8 +92,8 @@ function Home() {
           <audio controls>
             <source src={e.data.SongUrl} />
           </audio>
-          <button id={e.data.SongUrl} onClick={(e)=>{setSongs(e.target.id)}}>
-            +
+          <button id={e.data.SongUrl}  onClick={(e)=>{setSongs(e.target.id)}}>
+            Add 
           </button>
           </div>
           </div>

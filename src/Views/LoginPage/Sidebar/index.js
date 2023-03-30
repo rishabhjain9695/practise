@@ -17,8 +17,7 @@ function Sidebar() {
       <div class="navigation">
         <ul>
           <li>
-          { loggedinuser?  <Link to='/home'>   <span class="fa fas fa-plus-square"></span>
-              <span>Home</span></Link>:<Link to='/login'>Homes</Link>}
+           <Link to='/home'>Home</Link> 
           </li>
 
           <li>
@@ -38,6 +37,11 @@ function Sidebar() {
       </div>
 
       <div class="navigation">
+      <ul>
+          <li>
+           <Link to='/createdplaylist'>Playlist</Link> 
+          </li>
+          </ul>
         <ul>
           <li>
        { loggedinuser? <Link to='/playlist'>   <span class="fa fas fa-plus-square">Create Playlist</span></Link>:

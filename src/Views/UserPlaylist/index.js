@@ -13,7 +13,9 @@ import { db } from '../../firebase';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "./User.css"
+import { useHistory } from "react-router-dom";
 const UserPlaylist = () => {
+    const navigate=useHistory();
     const uid=useSelector((state)=>state.loginreducer.loggedin);
     const[playlistname,setPlaylistName]=useState("");
 const addplaylist=async()=>{
@@ -24,6 +26,7 @@ const addplaylist=async()=>{
         const docSnap = await getDoc(docRef);
         const getsongs = docSnap.data().playlist.playlistname;
         console.log(getsongs, "getsongsdata");
+        navigate.push('/createdplaylist')
       
 }
     return(

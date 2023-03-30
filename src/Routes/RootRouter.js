@@ -13,7 +13,7 @@ import PrivateLayout from "Components/Core/PrivateLayout";
 import RenderRoutes from "./RenderRoutes";
 
 const DEFAULT_AUTHENTICATED_ROUTE = "/dashboard";
-const DEFAULT_GUEST_ROUTE = "/";
+const DEFAULT_GUEST_ROUTE = "/login";
 
 const GuestRoutes = () => {
   return (
@@ -46,7 +46,7 @@ const AuthenticatedRoutes = () => {
 };
 
 const RootRouter = () => {
-  const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.loginreducer.loggedin);
   updateAuthToken(token);
   const baseName = process.env.REACT_APP_BASE_NAME;
   const isAuthenticated = !!token;

@@ -1,29 +1,19 @@
-#loginp{
+#mid{
     display: flex;
-    background-color:white;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-img{
-    height:50px;
-    width: 120px;
-}
-#heading{
-    font-size: 1111115px;
-    font-weight: normal;
-    color: blue;
-}
 #btnstyle{
     background-color: green;
     color: #000000;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-    padding: 14px 30px;
+    /* padding: 14px 30px; */
     border: 0px;
     border-radius: 400px;
     cursor: pointer;
     margin-left: 73px;
     margin-top: 2px;
-    width: 15px;
+    width: 130px;
 }
