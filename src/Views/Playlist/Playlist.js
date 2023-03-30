@@ -70,8 +70,8 @@ function Home() {
      console.log(e,"eeeee");
             return e.SongUrl==id;
         })
-        await updateDoc(doc(db, "users",userToken), {
-          playlist: arrayUnion( filterele),
+        await updateDoc(doc(db, "users", userToken), {
+          ["playlist" + ["."+`${playlistname}`]]: arrayUnion()
         });
       }
 
