@@ -32,6 +32,10 @@ function LoginPage() {
   const[password,setPassword]=useState("");
   const [error,setError]=useState(false);
   const dispatch=useDispatch();
+  useEffect(()=>{
+    setEmail("");
+      setPassword("");
+  },[])
   // console.log(mydata,"mydaytaa");
   const hello=async(uid)=>{
     console.log("hello");
@@ -51,6 +55,8 @@ function LoginPage() {
     else{
  
     signInWithEmailAndPassword(auth,email,password).then((user)=>{
+      setEmail("");
+      setPassword("");
       hello(user.user.uid);
       enqueueSnackbar("Logged In Successfuly", {
         variant: "success",
@@ -71,7 +77,7 @@ function LoginPage() {
       
       // localStorage.setItem("useremail",user.user.email);
       // localStorage.setItem("login","true");
-      navigate.push('/home');
+      navigate.push('/Home');
       // localStorage.setItem("token",user.user.accessToken);
       // localStorage.setItem("login",true);
     }).catch((error)=>{

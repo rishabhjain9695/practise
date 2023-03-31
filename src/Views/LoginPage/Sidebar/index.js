@@ -17,7 +17,7 @@ function Sidebar() {
       <div class="navigation">
         <ul>
           <li>
-           <Link to='/home'>Home</Link> 
+           <Link to='/Home'>Home</Link> 
           </li>
 
           <li>

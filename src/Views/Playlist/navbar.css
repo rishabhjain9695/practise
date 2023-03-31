@@ -80,3 +80,7 @@
     justify-content: center;
     align-items: center;
   }
+
+  #hearticon{width: 28px;
+    cursor: pointer;
+    height: 36px;}

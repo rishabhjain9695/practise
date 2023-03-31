@@ -99,7 +99,8 @@ function SignUp() {
     email,
   password,
 phoneno,
-playlist:[] })
+playlist:[],
+LikedSongs:[] })
       .then((r) => {
         // console.log(r.id);
       })

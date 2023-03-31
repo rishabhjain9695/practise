@@ -111,7 +111,6 @@ const [songdata,setSongData]=useState([]);
           console.log(error);
         });
     }
-    let a=[1,12,22,2];
   return (
     <>
     <CustomModal
@@ -151,9 +150,12 @@ const [songdata,setSongData]=useState([]);
      {playlistnames?.map((e)=>{
       const pl={e};
       console.log(pl.e,"help",e,"djdjsdjdjsd");
-      return <div>
-      <button id="btnstyle">   <NavLink style={{textDecoration:"none"}} to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink></button>
-     
+      return( < div >
+      <div>
+      <button>   <NavLink style={{textDecoration:"none"}} to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink></button>
+     </div>
+     </div>
+      )
         {/* <button id={e} onClick={(e)=>{console.log(e.target.id)
         submitModal(e.target.id)
         setPn(e.target.id)}}>+</button> */}
@@ -166,7 +168,7 @@ const [songdata,setSongData]=useState([]);
         {/* <button id={playlistnames}onClick={(e)=>{
           console.log(e.target.id,"pppppppppppp")
         }}>clickhere</button> */}
-      </div>
+      
      })}
     </div>
     </>

@@ -14,6 +14,8 @@ import { db } from '../../firebase';
 import "./navbar.css"
 import { useSelector } from 'react-redux';
 // import { list } from 'firebase/storage';
+import likedicon from '../../imagess2/likedicon.png'
+import maxresdefault from '../../imagess/maxresdefault.jpg'
 
 function Home(props) {
   const [listofSongs, setListofsongs] = useState([]);
@@ -23,10 +25,7 @@ function Home(props) {
   const[userToken,setUserToken]=useState(""); 
   const[playlistname,setPlaylist]=useState("");
   const[playlistsongs,setPlaylistSongs]=useState([]);
-  // const playlist=useSelector((state)=>state.loginreducer.playlist)   // lists(listofSongs, setListofsongs);
   useEffect(()=>{
-    setPlaylist(props.pn);
-    console.log(props.pn,"Propspassingtohome")
     listsongs();
      setUserToken(localStorage.getItem("userIdToken"))
      console.log(useState,"usertoken");
@@ -46,11 +45,16 @@ function Home(props) {
          console.log(error);
        });
            playlist();
-
-  },[playlistname])
-  // const d=()=>{
-  //   console.log(songdata,"ss");
+          },[])
+          // const d=()=>{
+            //   console.log(songdata,"ss");
   // }
+  async function addtoLikedSongs(songname){
+    console.log(songname,"songname")
+    await updateDoc(doc(db, "users", userToken), {
+      ["LikedSongs"]: arrayUnion(songname)
+    });
+  }
   async function playlist(){
     const docRef = doc(db, "users",userToken);
     const docSnap = await getDoc(docRef);
@@ -66,10 +70,10 @@ function Home(props) {
   function listsongs() {
     const getsongs = collection(db, "songslist");
     getDocs(getsongs)
-      .then((response) => {
-        const a = response.docs.map((doc) => {
-          return {
-            data: doc.data(),
+    .then((response) => {
+      const a = response.docs.map((doc) => {
+        return {
+          data: doc.data(),
           };
         });
         setListofsongs(a);
@@ -84,9 +88,9 @@ function Home(props) {
    const filterele=songdata.find((e)=>{
      console.log(e,"eeeee");
             return e.SongUrl==id;
-        })
-        await updateDoc(doc(db, "users", userToken), {
-          ["playlist" + ["."+`${playlistname}`]]: arrayUnion(filterele)
+          })
+          await updateDoc(doc(db, "users", userToken), {
+            ["playlist" + ["."+`${playlistname}`]]: arrayUnion(filterele)
         });
     playlist();
       }
@@ -95,23 +99,6 @@ function Home(props) {
       console.log(listofSongs,"listOfSongs");
   return (
     <div id='flexx'>
-      <div>
-    <h1>selectedplaylistSongs</h1>
-{playlistsongs?.map((e)=>{
-  console.log(e,"obj");
-  console.log(e.SongName,"songname");
-  console.log(e.SongUrl,"songurl");
-  return (
-    <div>
-    <h1>{e.SongName}</h1>
-          <audio controls>
-            <source src={e.SongUrl} />
-          </audio> 
-          
-    </div>
-  )
-})}
-      </div>
       {/* <button style={{ color: 'red' }} onClick={listsongs}>click to load songs</button> */}
       <h1>All Songssssssssssssssssss</h1>
       {listofSongs.map((e) => {
@@ -119,17 +106,23 @@ function Home(props) {
         return (
           <div id="flexx">
           <div>
-        
+        <img src={maxresdefault}/>
           <h1>{e.data.SongName}</h1>
           {/* <audio controls>
             <source src={e.data.SongUrl} />
           </audio> */}
           
-          <button id={e.data.SongUrl}  onClick={(e)=>{setSongs(e.target.id)}}>
-            Add <i class="bi bi-heart"></i>
+          <button id={e.data.SongUrl}  onClick={(e)=>{
+            console.log(e.target.id,"btn")
+            setSongs(e.target.id)}}>
+            Add 
             
           </button>
-          </div>
+          <button  onClick={() =>{
+            addtoLikedSongs(e.data.SongName);
+          }}><img src={likedicon} id="hearticon"alt=""  />
+</button>
+                    </div>
           </div>
         )
       })}
@@ -146,8 +139,8 @@ export default Home;
   //   getDocs(getsongs)
   //     .then((response) => {
     //       const a = response.docs.map((doc) => {
-//         return {
-  //           data: doc.data(),
+      //         return {
+        //           data: doc.data(),
   //           id: doc.id
   //         };
   //       });
@@ -169,13 +162,13 @@ export default Home;
     //     arr.push(e.data);
     //     console.log(arr,"ch");
     //   })
-  //   console.log(arr,"arrys");
-  //   arr.push(id);
+    //   console.log(arr,"arrys");
+    //   arr.push(id);
   //   console.log(arr,"onclick");
   //     
-//     })
-//     .catch((error) => {
-//       console.log(error);
+  //     })
+  //     .catch((error) => {
+    //       console.log(error);
 //     });
 // }
   // let arr=[];
@@ -186,6 +179,48 @@ export default Home;
   //              setPlayArray(getsongs);
   //         // console.log(playArray,"playlisat")
   //         playArray.map((e)=>{
-  //           arr.push(e);
-  //         })
-  //         console.log(arr,"aswsonfffgs");
+    //           arr.push(e);
+    //         })
+    //         console.log(arr,"aswsonfffgs");
+    // const playlist=useSelector((state)=>state.loginreducer.playlist)   // lists(listofSongs, setListofsongs);
+    // useEffect(()=>{
+    //   setPlaylist(props.pn);
+    //   console.log(props.pn,"Propspassingtohome")
+    //   listsongs();
+    //    setUserToken(localStorage.getItem("userIdToken"))
+    //    console.log(useState,"usertoken");
+    //    const getdevref = collection(db, "songslist",);
+    //    getDocs(getdevref)
+    //      .then((response) => {
+    //        const a = response.docs.map((doc) => {
+    //          return(doc.data());
+                
+    //        });
+    //        console.log(a,"vikas")
+    //        setSongData(a);
+    //        console.log("Songsssss", songdata);
+    //       //  console.log(m, "mmm");
+    //      })
+    //      .catch((error) => {
+    //        console.log(error);
+    //      });
+    //          playlist();
+    
+    // },[playlistname])
+    {/* <div>
+  <h1>selectedplaylistSongs</h1>
+{ props? playlistsongs?.map((e)=>{
+console.log(e,"obj");
+console.log(e.SongName,"songname");
+console.log(e.SongUrl,"songurl");
+return (
+  <div>
+  <h1>{e.SongName}</h1>
+        <audio controls ref={e.song}>
+          <source src={e.SongUrl} />
+        </audio> 
+        
+  </div>
+)
+}):null}
+    </div> */}
