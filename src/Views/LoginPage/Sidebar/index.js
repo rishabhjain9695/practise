@@ -51,10 +51,10 @@ function Sidebar() {
           </li>
 
           <li>
-            <a href="#">
+       
               <span class="fa fas fa-heart"></span>
-              <span>Liked Songs</span>
-            </a>
+              <Link to="/likedsongs">Liked Songs</Link>
+    
           </li>
         </ul>
       </div>

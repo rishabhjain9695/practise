@@ -19,6 +19,7 @@ import maxresdefault from '../../imagess/maxresdefault.jpg'
 
 function Home(props) {
   const [listofSongs, setListofsongs] = useState([]);
+  
   const [playArray, setPlayArray] = useState([]);
   const [songsUrl, setSongsUrl] = useState([]);
   const [songdata,setSongData]=useState([]);
@@ -134,93 +135,3 @@ function Home(props) {
 
 export default Home;
 
-// function listsongs() {
-  //   const getsongs = collection(db, "songslist");
-  //   getDocs(getsongs)
-  //     .then((response) => {
-    //       const a = response.docs.map((doc) => {
-      //         return {
-        //           data: doc.data(),
-  //           id: doc.id
-  //         };
-  //       });
-  //       setListofsongs(a);
-  //       console.log("aacheck", a);
-  //       // console.log(m, "mmm");
-  // console.log(filterele,"filktreweeer");
-  // arr.push(filterele);
-  // console.log(arr,"setting");
-  // const UpdateSongRef = doc(db, "users",userToken);
-  // updateDoc(UpdateSongRef,{playlist:arr}) 
-  
-  // setListofsongs(a);
-  // console.log("aacheck", a);
-  // console.log(m, "mmm");
-  //   console.log(playArray,"play")
-  //   playArray.map((e)=>{
-    //     // setSongsUrl(.e.data);
-    //     arr.push(e.data);
-    //     console.log(arr,"ch");
-    //   })
-    //   console.log(arr,"arrys");
-    //   arr.push(id);
-  //   console.log(arr,"onclick");
-  //     
-  //     })
-  //     .catch((error) => {
-    //       console.log(error);
-//     });
-// }
-  // let arr=[];
-  // const docRef =  doc(db, "users", userToken);
-  // const docSnap = await getDoc(docRef);
-  //     const getsongs = docSnap.data().playlist;
-  //     console.log(getsongs,"gettt");
-  //              setPlayArray(getsongs);
-  //         // console.log(playArray,"playlisat")
-  //         playArray.map((e)=>{
-    //           arr.push(e);
-    //         })
-    //         console.log(arr,"aswsonfffgs");
-    // const playlist=useSelector((state)=>state.loginreducer.playlist)   // lists(listofSongs, setListofsongs);
-    // useEffect(()=>{
-    //   setPlaylist(props.pn);
-    //   console.log(props.pn,"Propspassingtohome")
-    //   listsongs();
-    //    setUserToken(localStorage.getItem("userIdToken"))
-    //    console.log(useState,"usertoken");
-    //    const getdevref = collection(db, "songslist",);
-    //    getDocs(getdevref)
-    //      .then((response) => {
-    //        const a = response.docs.map((doc) => {
-    //          return(doc.data());
-                
-    //        });
-    //        console.log(a,"vikas")
-    //        setSongData(a);
-    //        console.log("Songsssss", songdata);
-    //       //  console.log(m, "mmm");
-    //      })
-    //      .catch((error) => {
-    //        console.log(error);
-    //      });
-    //          playlist();
-    
-    // },[playlistname])
-    {/* <div>
-  <h1>selectedplaylistSongs</h1>
-{ props? playlistsongs?.map((e)=>{
-console.log(e,"obj");
-console.log(e.SongName,"songname");
-console.log(e.SongUrl,"songurl");
-return (
-  <div>
-  <h1>{e.SongName}</h1>
-        <audio controls ref={e.song}>
-          <source src={e.SongUrl} />
-        </audio> 
-        
-  </div>
-)
-}):null}
-    </div> */}

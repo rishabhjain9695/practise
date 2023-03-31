@@ -47,7 +47,7 @@ console.log(storage);
 export function send(email) {
   sendPasswordResetEmail(auth, email)
     .then(() => {
-      // Password reset email sent!
+      // Password reset email sent!export const db = getFirestore(app);
       console.log(auth, email, "auth", "emaill");
       // ..
     })
