@@ -30,6 +30,10 @@ export const PRIVATE_ROUTES = [
     path: "/likedsongs",
     component: LikedSong,
     title: "LikedSongs",
+  },{
+    path: "/playlist",
+    component: UserPlaylist,
+    title: "Userplaylist",
   },
  
 ];

@@ -10,6 +10,7 @@ import {
     setDoc
   } from "firebase/firestore";
 import { db } from 'firebase';
+import maxresdefault from '../../imagess/maxresdefault.jpg'
 const LikedSong = () => {
     const uid=useSelector((state)=>state.loginreducer.loggedin);
     const [userlikedSongs,setUserLikedSongs]=useState([]);
@@ -25,15 +26,26 @@ const LikedSong = () => {
 
     } 
   return (
-    <div id="flexx">
-            <h1 style={{color:'red'}}>Liked Songs</h1>
+    <div className='main-container'>
+    <div className='spotify-playlists'>
+     <h2>Liked Songs</h2>
+     <div className='spotifydiv'>
+    <div className="list">  
       {userlikedSongs.map((e)=>{
         return (
-            <div id="flexx">
-               <p style={{color:'orange'}}>{e}</p> 
-            </div>
+          <>
+  
+  <div className="item">
+<img src={maxresdefault} alt=""/>
+
+<h4>{e}</h4>   
+</div>
+</>
         )
       })}
+      </div>
+    </div>
+    </div>
     </div>
   )
 }

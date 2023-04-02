@@ -24,7 +24,7 @@ function Navbars() {
           
           <li> <Link>Premium</Link></li>
         
-    <input type={'search'} placeholder=" Search Songs " style={{borderRadius:'10%'}}  />
+    {/* <input type={'search'} placeholder=" Search Songs " style={{borderRadius:'10%'}}  /> */}
             <li class="divider">|</li>
             <li>
           {!loggedinuser?  <Link to='/signup'>Sign Up</Link>:null}

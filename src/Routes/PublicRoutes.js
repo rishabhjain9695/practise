@@ -36,11 +36,7 @@ export const PUBLIC_ROUTES = [
     component: ForgotPasswordPage,
     title: "Show Team",
   },
-  {
-    path: "/playlist",
-    component: UserPlaylist,
-    title: "Userplaylist",
-  },
+  
 
 
 ];

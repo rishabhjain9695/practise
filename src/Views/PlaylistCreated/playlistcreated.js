@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import {db} from "../../firebase"
 import { Modals } from 'Components/Modal/Modal'
 import './playlist.css'
+import { Link } from 'react-router-dom'
 
 import {
   collection,arrayUnion,
@@ -15,6 +16,7 @@ import {
 } from "firebase/firestore";
 import CustomModal from 'Components/Cells/CustomModal/Custommodal'
 import { NavLink } from 'react-router-dom'
+import maxresdefault from "../../imagess/maxresdefault.jpg"
 const Playlistcreated = () => {
 
   const[pn,setPn]=useState("");
@@ -113,66 +115,33 @@ const [songdata,setSongData]=useState([]);
     }
   return (
     <>
-    <CustomModal
-            footer={true}
-            header={true}
-            visible={showModal}
-            showModal={showModal}
-            setShowModal={setShowModal}
-            title={" New Song to your playlist"}
-            btnText={"Add"}
-            onSubmitModal={submitModal}
-            playlistname={pn}
-          >
-   <div id='flexx'>
-   {listofSongs.map((e) => {
-        {/* console.log(ind),"kk"); */}
-        return (
-          <div id="flexx">
-          <div>
-          <h1>{e.data.SongName}</h1>
-          <audio controls>
-            <source src={e.data.SongUrl} />
-          </audio>
-          <button id={e.data.SongUrl} onClick={(e)=>{addplaylist(pn,e.target.id)}} >
-            ++
-          </button>
-          </div>
-          </div>
-        )
-      })}
-   </div> 
-
-
-
-          </CustomModal>
-    <div id="mid">
+    <div className='main-container'>
+    <div className='spotify-playlists'>
+     <h2>Spotify Playlists</h2>
+     <div className='spotifydiv'>
+<div className="list">
      {playlistnames?.map((e)=>{
       const pl={e};
-      console.log(pl.e,"help",e,"djdjsdjdjsd");
-      return( < div >
-      <div>
-      <button>   <NavLink style={{textDecoration:"none"}} to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink></button>
-     </div>
-     </div>
-      )
-        {/* <button id={e} onClick={(e)=>{console.log(e.target.id)
-        submitModal(e.target.id)
-        setPn(e.target.id)}}>+</button> */}
-        {/* <button id={e} style={{marginLeft:11}} onClick={(e)=>console.log(e.target.id) */}
-        
-        
-        
-        
-        {/* }>Show {e}</button> */}
-        {/* <button id={playlistnames}onClick={(e)=>{
-          console.log(e.target.id,"pppppppppppp")
-        }}>clickhere</button> */}
-      
+
+       return(
+       
+<div className="item">
+<img src={maxresdefault}alt=""/>
+ 
+  <h4>Today's Top Hits</h4>
+  <NavLink className='navstyle' to={'/userplaylistdisplay/'+pl.e}>{e}</NavLink>
+</div>
+
+       )
      })}
+    </div>
+</div>
+    </div>
+    
     </div>
     </>
   )
-}
 
-export default Playlistcreated
+  }
+
+export default Playlistcreated;

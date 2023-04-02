@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './navbar.css'
 import {
   collection,arrayUnion,
@@ -13,19 +13,21 @@ import {
 import { db } from '../../firebase';
 import "./navbar.css"
 import { useSelector } from 'react-redux';
-// import { list } from 'firebase/storage';
 import likedicon from '../../imagess2/likedicon.png'
 import maxresdefault from '../../imagess/maxresdefault.jpg'
+import Player from 'Views/Player/Player';
+import { Link } from 'react-router-dom';
 
-function Home(props) {
+function Home() {
+  const audioElem=useRef();
   const [listofSongs, setListofsongs] = useState([]);
-  
-  const [playArray, setPlayArray] = useState([]);
-  const [songsUrl, setSongsUrl] = useState([]);
+  const [currentSong,setCurrentSong]=useState('');
+  const [isPlaying,setIsPlaying]=useState(false);
   const [songdata,setSongData]=useState([]);
   const[userToken,setUserToken]=useState(""); 
   const[playlistname,setPlaylist]=useState("");
   const[playlistsongs,setPlaylistSongs]=useState([]);
+  const[seekbar,setSeekbar]=useState(false);
   useEffect(()=>{
     listsongs();
      setUserToken(localStorage.getItem("userIdToken"))
@@ -38,18 +40,23 @@ function Home(props) {
               
          });
          console.log(a,"vikas")
+         console.log(songdata,"MAFi")
          setSongData(a);
-         console.log("Songsssss", songdata);
-        //  console.log(m, "mmm");
+         console.log(songdata,"MAFi")
+         setCurrentSong("");
+         console.log(currentSong,"cs");
        })
        .catch((error) => {
          console.log(error);
        });
            playlist();
           },[])
-          // const d=()=>{
-            //   console.log(songdata,"ss");
-  // }
+          useEffect(()=>{
+  
+            audioElem.current.play();
+          
+            }
+          ,[isPlaying])
   async function addtoLikedSongs(songname){
     console.log(songname,"songname")
     await updateDoc(doc(db, "users", userToken), {
@@ -61,9 +68,6 @@ function Home(props) {
     const docSnap = await getDoc(docRef);
     const getplaylistdata = docSnap.data().playlist[playlistname];
     console.log("getplaylist",getplaylistdata)
-    //     let selectedPlaylist=getplaylistarray.find((e)=>{
-    //       return 
-    //     })
     setPlaylistSongs(getplaylistdata);
     console.log(playlistname,"tttt");
     // console.log(getsongs,"get");
@@ -95,40 +99,62 @@ function Home(props) {
         });
     playlist();
       }
+      const onPlaying=()=>{
+        const duration= audioElem.current.duration;
+        const ct= audioElem.current.currentTime;
+        setCurrentSong({...currentSong,"progress":ct/duration *100,"length":duration})
+      }
 
       
       console.log(listofSongs,"listOfSongs");
-  return (
-    <div id='flexx'>
-      {/* <button style={{ color: 'red' }} onClick={listsongs}>click to load songs</button> */}
-      <h1>All Songssssssssssssssssss</h1>
-      {listofSongs.map((e) => {
-        {/* console.log(ind),"kk"); */}
+      return (
+        <>
+    <audio src={currentSong?.SongUrl} ref={audioElem} onTimeUpdate={onPlaying}/>
+      <div className='main-container'>
+        <input type="search" name="" id="" />
+<div className='spotify-playlists'>
+ <h2>All Songs</h2>
+ <div className='spotifydiv'>
+<div className="list">  
+    
+       { songdata.map((e) => {
+        console.log(currentSong,"ram");
         return (
-          <div id="flexx">
-          <div>
-        <img src={maxresdefault}/>
-          <h1>{e.data.SongName}</h1>
-          {/* <audio controls>
-            <source src={e.data.SongUrl} />
-          </audio> */}
-          
-          <button id={e.data.SongUrl}  onClick={(e)=>{
+          <>
+  
+          <div className="item">
+<img src={maxresdefault} alt=""/>
+
+<h4>{e.SongName}</h4>      
+<button  onClick={()=>{
+  setCurrentSong(e);
+  setIsPlaying(!isPlaying);
+  setSeekbar(true);
+}}>click</button>
+
+{/* <button id={e.SongUrl}  onClick={(e)=>{
+
             console.log(e.target.id,"btn")
             setSongs(e.target.id)}}>
             Add 
             
-          </button>
-          <button  onClick={() =>{
-            addtoLikedSongs(e.data.SongName);
-          }}><img src={likedicon} id="hearticon"alt=""  />
-</button>
-                    </div>
-          </div>
-        )
+          </button> */}
+          <Link  onClick={() =>{
+            addtoLikedSongs(e.SongName);
+          }}>
+          <img src={likedicon} id="hearticon"alt=""  />
+</Link>
+</div>
+</>  )
       })}
-      {/* <button onClick={d}>op</button> */}
+
     </div>
+    </div>
+    </div>
+    <Player songdata={songdata} setSongData={setSongData} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} seekbar={seekbar} setSeekbar={setSeekbar}/>
+    </div>
+  
+    </>
 
 )
 }

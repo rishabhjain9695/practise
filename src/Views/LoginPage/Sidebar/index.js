@@ -21,17 +21,10 @@ function Sidebar() {
           </li>
 
           <li>
-          <a href="#">
+         
               <span class="fa fa-search"></span>
-              <span>Search</span>
-              </a>
-          </li>
-
-          <li>
-            <a href="#">
-              <span class="fa fas fa-book"></span>
-              <span>Your Library</span>
-            </a>
+              <Link >Search</Link>
+             
           </li>
         </ul>
       </div>
@@ -44,8 +37,8 @@ function Sidebar() {
           </ul>
         <ul>
           <li>
-       { loggedinuser? <Link to='/playlist'>   <span class="fa fas fa-plus-square">Create Playlist</span></Link>:
-       <Link to='/login' >   <span class="fa fas fa-plus-square">Create Playlist</span></Link>
+      
+       <Link to='/playlist' >Createe Playlist</Link>
            
 }            
           </li>
@@ -59,16 +52,7 @@ function Sidebar() {
         </ul>
       </div>
 
-      <div class="policies">
-        <ul>
-          <li>
-            <a href="#">Cookies</a>
-          </li>
-          <li>
-            <a href="#">Privacy</a>
-          </li>
-        </ul>
-      </div>
+     
     </div>
 
 
