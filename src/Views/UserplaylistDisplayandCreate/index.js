@@ -34,6 +34,7 @@ const Userplaylistdisplayandcreate = () => {
   const[playlistname,setPlaylist]=useState("");
   const[playlistsongs,setPlaylistSongs]=useState([]);
   const[seekbar,setSeekbar]=useState(false);
+
   useEffect(()=>{
     listsongs();
      console.log(useState,"usertoken");
@@ -113,10 +114,17 @@ const Userplaylistdisplayandcreate = () => {
       const ct= audioElem.current.currentTime;
       setCurrentSong({...currentSong,"progress":ct/duration *100,"length":duration})
     }
+
     return (
       <>
          <audio src={currentSong?.SongUrl} ref={audioElem} onTimeUpdate={onPlaying}/>
       <div className='main-container'>
+      <div class="input-group rounded">
+ 
+  <span class="input-group-text border-0" id="search-addon">
+    <i class="fas fa-search"></i>
+  </span>
+</div>
 <div className='spotify-playlists'>
  <h2>{name}</h2>
  <div className='spotifydiv'>
@@ -142,7 +150,7 @@ const Userplaylistdisplayandcreate = () => {
 </div>
 </div>
  <>
-      <div className='main-container'>
+    {  <div className='main-container'>
 <div className='spotify-playlists'>
  <h2>All Songs</h2>
  <div className='spotifydiv'>
@@ -177,10 +185,10 @@ const Userplaylistdisplayandcreate = () => {
     </div>
     </div>
     <Player songdata={playlistsongs} setSongData={setPlaylistSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} seekbar={seekbar} setSeekbar={setSeekbar}/>
-    </div>
+    </div>}
   
     </>
-<Player songdata={songdata} setSongData={setSongData} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} seekbar={seekbar} setSeekbar={setSeekbar}/>/
+
 
 
 </div>

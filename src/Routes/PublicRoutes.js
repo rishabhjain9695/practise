@@ -4,17 +4,12 @@ import ForgotPasswordPage from "Views/ResetPasswordpage/index2";
 import LoginPage from "Views/LoginPage";
 import Playlist from "../Views/Playlist/Playlist";
 import ForgotPassword from "Views/ForgotPassword";
-import Homes from "../Views/Home";
+// import Homes from "../Views/Home";
 import UserPlaylist from "Views/UserPlaylist/index";
 import Playlistcreated from "Views/PlaylistCreated/playlistcreated";
 
 export const PUBLIC_ROUTES = [
-  {
-    path: "/",
-    component:Homes,
-    title: "Homepage",
-    exact: true,
-  },
+  
   
   {
     path: "/login",

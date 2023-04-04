@@ -161,3 +161,12 @@
       margin-top: 2px;
       width: 1px;
   }
+  .ui.search {
+    margin-top: 50px;
+    text-align: center;
+  }
+  
+  i {
+    cursor: pointer;
+  }
+  

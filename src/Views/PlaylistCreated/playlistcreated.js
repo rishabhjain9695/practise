@@ -49,7 +49,7 @@ const [songdata,setSongData]=useState([]);
   
     },[])
     useEffect(()=>{
-     hello();
+     setPlaylistNames();
     },[])
     function submitModal(e){
       console.log(e,"name")
@@ -65,7 +65,7 @@ const [songdata,setSongData]=useState([]);
               filterele
              }),
            });
-         }
+          }
           const addplaylist=async(pn,id)=>{
             console.log(songdata,id,"sooooooooooooooo")
             const filterele=songdata.find((e)=>{
@@ -84,14 +84,14 @@ const [songdata,setSongData]=useState([]);
               console.log("getsongsdata");
             
       }   
-    async function hello(){
+    async function setPlaylistNames(){
       const docRef = doc(db, "users",uid);
       const docSnap = await getDoc(docRef);
       const userdata = docSnap.data();
       const userdataplaylist=userdata.playlist;
       console.log(userdataplaylist,"userplaylist")
       const playlistnames=Object.keys(userdataplaylist);
-      // console.log(keys,"keysssss");
+      console.log(playlistnames,"playlistnames");
       setPlaylistName(playlistnames);
       console.log(userdata,"getsongs")
     }
@@ -139,6 +139,7 @@ const [songdata,setSongData]=useState([]);
     </div>
     
     </div>
+
     </>
   )
 

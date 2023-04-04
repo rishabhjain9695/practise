@@ -72,14 +72,8 @@ function LoginPage() {
       localStorage.setItem("userIdToken",user.user.uid);
       setUserToken(user.user.uid);
       dispatch(Login(user.user.uid));
-      // dispatch(getLoggedinuserPlaylist(getsongs));
-
-      
-      // localStorage.setItem("useremail",user.user.email);
-      // localStorage.setItem("login","true");
       navigate.push('/Home');
-      // localStorage.setItem("token",user.user.accessToken);
-      // localStorage.setItem("login",true);
+     
     }).catch((error)=>{
       console.log(error);
     })

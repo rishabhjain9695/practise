@@ -5,23 +5,6 @@ import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, 
 const Player = ({songdata,setSongData,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,seekbar,setSeekbar})=> {
 const [show,setShow]=useState(false);
       const clickRef = useRef();
-
-    //  const PlayPause = ()=>
-    //   {
-    //     console.log("tarunstrong",isPlaying);
-    //     console.log("tarunstrong",isPlaying);
-    //     if(isPlaying){
-    //         console.log("q",isPlaying);
-    //         console.log("Ayushh")
-    //         audioElem.current.pause();
-    //     }
-    //     else{
-    //         audioElem.current.pause();
-    //     }
-    //     setIsPlaying(!isPlaying);
-    //   }
-
-
   const checkWidth = (e)=>
   {
     let width = clickRef.current.clientWidth;

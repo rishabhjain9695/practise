@@ -101,8 +101,8 @@ function SignUp() {
 phoneno,
 playlist:[],
 LikedSongs:[] })
-      .then((r) => {
-        // console.log(r.id);
+      .then((response) => {
+        console.log(response.id);
       })
       .catch((err) => {
         console.log(err);
@@ -110,8 +110,6 @@ LikedSongs:[] })
   }
   return (
     <div id='loginp'>
-    {/* <div id="sign-in-button"></div> */}
-      {/* <img src={SpotifyLogo} alt=""  /> */}
       <br />
       <h1 className="heading">To continue,login to Spotify</h1>
       <Form onSubmit={(e)=>{onSignInSubmit(e)}}>
@@ -157,34 +155,3 @@ LikedSongs:[] })
 }
 
 export default SignUp;
-
-
-
-
-
-
-    
-    // // import { RecaptchaVerifier ,recaptchaVerifier} from 'firebase/auth';
-    // // const SignUp=()=>
-    
-    
-    
-    // //     return (
-    // //       <div>
-    // //         <h2>Login Form</h2>
-    // //         <form onSubmit={(e)=>{onSignInSubmit(e)}}>
-    // //           <div id="sign-in-button"></div>
-    // //           <input type="number" name="mobile" placeholder="Mobile number" required value={phoneno} onChange={(e)=>{handlephoneno(e)}}/>
-    // //           <button type="submit">Submit</button>
-    // //         </form>
-    
-    // //         <h2>Enter OTP</h2>
-    // //         <form onSubmit={(e)=>{onSubmitOTP(e)}}>
-    // //           <input type="number" name="otp" placeholder="OTP Number" required value={otp} onChange={(e)=>{handleotp(e)}}/>
-    // //           <button type="submit">Submit</button>
-    // //         </form>
-    // //       </div>
-    // //     )
-    // //   }
-    
-    // // export default SignUp;

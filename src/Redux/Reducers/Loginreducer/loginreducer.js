@@ -1,7 +1,6 @@
 import React from 'react'
 const initialState={
-    userplaylists:[],
-    loggedin:null
+userData:[],
 }
 const loginreducer=(data=initialState,action)=>{
     switch (action.type) {
