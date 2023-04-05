@@ -13,19 +13,18 @@ function Navbars() {
   // const[searching,setSearching]=useState("");
   return (
     <>
-  <div class="topbar">
-        <div class="prev-next-buttons">
-          <button type="button" class="fa fas fa-chevron-left"></button>
-          <button type="button" class="fa fas fa-chevron-right"></button>
+  <div className="topbar">
+        <div className="prev-next-buttons">
+          <button type="button" className="fa fas fa-chevron-left"></button>
+          <button type="button" className="fa fas fa-chevron-right"></button>
         </div>
 
-        <div class="navbar">
+        <div className="navbar">
           <ul>
           
-          <li> <Link>Premium</Link></li>
-        
-    {/* <input type={'search'} placeholder=" Search Songs " style={{borderRadius:'10%'}}  /> */}
-            <li class="divider">|</li>
+          <li> <span>Premium</span></li>
+      
+            <li className="divider">|</li>
             <li>
           {!loggedinuser?  <Link to='/signup'>Sign Up</Link>:null}
             </li>

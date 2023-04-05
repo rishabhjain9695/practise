@@ -35,7 +35,7 @@ const [show,setShow]=useState(false);
 
   const skiptoNext = ()=>
   {
-    console.log("he12")
+    
     const index = songdata.findIndex(x=>x.SongName == currentSong.SongName);
 
     if (index == songdata.length-1)
@@ -49,7 +49,6 @@ const [show,setShow]=useState(false);
     audioElem.current.currentTime = 0;
     setIsPlaying(!isPlaying);
     setSeekbar(true);
-    
   }
 const PlayPause=()=>{
     setSeekbar(!seekbar);
@@ -64,6 +63,7 @@ useEffect(()=>{
 },[seekbar])
 
 useEffect(()=>{
+  audioElem.current.play();
     setShow(true);
 },[isPlaying])
 useEffect(()=>{
@@ -73,10 +73,10 @@ useEffect(()=>{
     <>
 
    {show? <div className='player_container'>
-   <h1>{currentSong.SongName}</h1>
+   <h1>{currentSong?.SongName}</h1>
     <div className="navigation">
       <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef} >
-        <div className="seek_bar" style={{width:`${currentSong.progress+'%'}`}}></div>
+        <div className="seek_bar" style={{width:`${currentSong?.progress+'%'}`}}></div>
       </div>
     </div>
     <div className="controls">

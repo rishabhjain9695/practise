@@ -25,7 +25,6 @@ function Home() {
   const[userToken,setUserToken]=useState(""); 
   const[playlistname,setPlaylist]=useState("");
   const[playlistsongs,setPlaylistSongs]=useState([]);
-  const [premiumSongslist,setPremium]=useState([]);
   const[seekbar,setSeekbar]=useState(false);
   useEffect(()=>{
     playlist();
@@ -49,33 +48,11 @@ function Home() {
        })
        .catch((error) => {
          console.log(error);
-       });
-       getpremium(usertoken);
-          
-           
+       });   
            
           },[])
-       const getpremium=async(usertoken)=>{
-        try{
-          
-        const docRef = doc(db, "users",usertoken);
-        const docSnap = await getDoc(docRef);
-        const getsongs = docSnap.data().PremiumSongs;
-        console.log("PLZ",getsongs);
-        setPremium(getsongs);}
-        catch(error){
-          console.log(error,"ERROR REPORTING");
-        }
 
-       }
-
-
-          useEffect(()=>{
-  
-            audioElem.current.play();
-          
-            }
-          ,[isPlaying])
+       
   async function addtoLikedSongs(songname){
     console.log(songname,"songname")
     await updateDoc(doc(db, "users", userToken), {
@@ -119,10 +96,10 @@ function Home() {
 <div className='spotify-playlists'>
  <h2>All Songs</h2>
  <div className='spotifydiv'>
-<div className="list">  
+<div className="currentsong">  
     
        { songdata.map((e) => {
-        console.log(currentSong,"ram");
+        console.log(currentSong,"checkk");
         return (
           <>
   
@@ -146,26 +123,8 @@ function Home() {
     </div>
     </div>
     <div className='spotify-playlists'>
- <h2>Premium Songs</h2>
  <div className='spotifydiv'>
 <div className="list">  
-    
-       {premiumSongslist.map((e) => {
-        console.log(e,"premiumsongs");
-        return (
-          <>
-  
-          <div className="item">
-<img src={maxresdefault} alt=""/>
-
-<h4>{e.SongName}</h4>      
-
-
-
-
-</div>
-</>  )
-      })}
 
     </div>
     </div>

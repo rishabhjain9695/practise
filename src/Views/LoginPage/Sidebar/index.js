@@ -14,23 +14,13 @@ function Sidebar() {
           <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
       </div>
       
-      <div class="navigation">
+      <div className="navigation">
         <ul>
           <li>
            <Link to='/Home'>Home</Link> 
           </li>
-
-          <li>
-         
-              <span class="fa fa-search"></span>
-              <Link >Search</Link>
-             
-          </li>
         </ul>
-      </div>
-
-      <div class="navigation">
-      <ul>
+         <ul>
           <li>
            <Link to='/createdplaylist'>Playlist</Link> 
           </li>
@@ -38,19 +28,21 @@ function Sidebar() {
         <ul>
           <li>
       
-       <Link to='/playlist' >Createe Playlist</Link>
+       <Link to='/playlist' >Create Playlist</Link>
            
-}            
+          
           </li>
 
           <li>
        
-              <span class="fa fas fa-heart"></span>
+              <span className="fa fas fa-heart"></span>
               <Link to="/likedsongs">Liked Songs</Link>
     
           </li>
         </ul>
       </div>
+
+     
 
      
     </div>
