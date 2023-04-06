@@ -12,7 +12,6 @@ import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 // import { setLogin } from '../action/loginaction';
 import { Login } from 'Redux/Actions/Loginactions/loginactions';
 import { useDispatch, useSelector } from "react-redux";
-import { getLoggedinuserPlaylist } from 'Redux/Actions/Loginactions/loginactions';
 import {
   collection,arrayUnion,
   getDocs,
@@ -26,7 +25,6 @@ import { db } from '../../firebase';
 function LoginPage() {
   // const mydata=useSelector((state)=>{state.loginreducer.playlist})
   const navigate=useHistory();
-  const[isLoggedIn,setLoggedIn]=useState(false);
   const[userToken,setUserToken]=useState("");
   const[email,setEmail]=useState("");
   const[password,setPassword]=useState("");
@@ -44,7 +42,7 @@ function LoginPage() {
     const getsongs = docSnap.data();
     console.log(getsongs,"getsongsdedede");
     console.log("getsongsdedede");
-    dispatch(getLoggedinuserPlaylist(getsongs.playlist));
+
   }
   const sigin=async(e)=>{
   
@@ -85,8 +83,8 @@ function LoginPage() {
       <img src={SpotifyLogo} alt=""  />
       <br />
       <h1 id="heading">To continue,login to Spotify</h1>
-      <Form onSubmit={(e)=>{sigin(e)}}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form onSubmit={sigin}>
+      <Form.Group className="mb-3" controlId="formBasicEmail" aria-autocomplete=''>
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e)=>{setEmail(e.target.value)
         setError(false);}} />
