@@ -63,11 +63,11 @@ function Home() {
     console.log("Hey");
     const docRef = doc(db, "users",userToken);
     const docSnap = await getDoc(docRef);
-    console.log(docSnap.data(),"docsnap")
+    // console.log(docSnap.data(),"docsnap")
     const getplaylistdata = docSnap.data().playlist[playlistname];
     console.log("getplaylist",getplaylistdata)
     setPlaylistSongs(getplaylistdata);
-    console.log(playlistname,"playlistname");
+    // console.log(playlistname,"playlistname");
     
   }
 
@@ -90,7 +90,7 @@ function Home() {
         <>
        
      
-    <audio src={currentSong?.SongUrl} ref={audioElem} onTimeUpdate={onPlaying}/>
+    <audio src={currentSong?.SongUrl} ref={audioElem} onTimeUpdate={onPlaying} autoPlay={true} muted={true}/>
       <div className='main-container'>
       
 <div className='spotify-playlists'>

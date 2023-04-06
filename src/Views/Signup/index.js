@@ -182,7 +182,7 @@ function SignUp() {
             </Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-3" controlId="formBasicPassword" autoComplete="off" auto>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"

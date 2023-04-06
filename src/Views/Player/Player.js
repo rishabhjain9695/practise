@@ -18,61 +18,76 @@ const [show,setShow]=useState(false);
   const skipBack = ()=>
   {
     const index = songdata.findIndex(x=>x.SongName == currentSong.SongName);
+    let selectedSong;
     if (index == 0)
     {
       setCurrentSong(songdata[songdata.length - 1])
+      selectedSong=songdata[songdata.length-1];
     }
     else
-    {
+    {  selectedSong=songdata[index-1];
+
       setCurrentSong(songdata[index - 1])
     }
+    // console.log(selectedSong,"sele")
+    audioElem.current.pause();
     audioElem.current.currentTime = 0;
-    setIsPlaying(!isPlaying);
-  setSeekbar(true);
+    audioElem.current.src=`${selectedSong.SongUrl}`;
+    audioElem.current.play();
+    // setIsPlaying(!isPlaying);
+  // setSeekbar(true);
+
     
   }
 
 
   const skiptoNext = ()=>
   {
+    let selectedSong;
     
     const index = songdata.findIndex(x=>x.SongName == currentSong.SongName);
 
     if (index == songdata.length-1)
     {
+      selectedSong=songdata[0];
       setCurrentSong(songdata[0])
     }
     else
     {
+      selectedSong=songdata[index+1];
       setCurrentSong(songdata[index + 1])
     }
+    audioElem.current.pause();
     audioElem.current.currentTime = 0;
-    setIsPlaying(!isPlaying);
-    setSeekbar(true);
+    audioElem.current.src=`${selectedSong.SongUrl}`;
+    audioElem.current.play();
+    // setIsPlaying(!isPlaying);
+    // setSeekbar(true);
   }
 const PlayPause=()=>{
-    setSeekbar(!seekbar);
+    audioElem.current.pause();
 }
-useEffect(()=>{
-    if(seekbar){
-        audioElem.current.play();
-    }
-    else{
-        audioElem.current.pause();
-    }
-},[seekbar])
+// useEffect(()=>{
+//     if(seekbar){
+//         audioElem.current.play();
+//     }
+//     else{
+//         audioElem.current.pause();
+//     }
+// },[seekbar])
 
-useEffect(()=>{
-  audioElem.current.play();
-    setShow(true);
-},[isPlaying])
+// useEffect(()=>{
+//   audioElem.current.play();
+//     setShow(true);
+//     console.log("12")
+// },[isPlaying])
 useEffect(()=>{
     setShow(false);
 },[])
   return (
     <>
 
-   {show? <div className='player_container'>
+   { <div className='player_container'>
    <h1>{currentSong?.SongName}</h1>
     <div className="navigation">
       <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef} >
@@ -84,7 +99,7 @@ useEffect(()=>{
       {seekbar ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
       <BsFillSkipEndCircleFill className='btn_action' onClick={skiptoNext}/>        
     </div>
-  </div>: null}
+  </div>}
 </>
   
   )
