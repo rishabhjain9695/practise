@@ -14,73 +14,30 @@ import { useSelector } from 'react-redux';
 import likedicon from '../../imagess2/likedicon.png'
 import maxresdefault from '../../imagess/maxresdefault.jpg'
 import "./App.css"
-import { NavLink } from 'react-router-dom';
 import Player from 'Views/Player/Player';
 import { useRef } from 'react';
-import Home from 'Views/Playlist/Playlist';
-// import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToPlaylist,addtoLikedSongs } from 'Redux/Actions/Loginactions/loginactions';
 const Userplaylistdisplayandcreate = () => {
+  const dispatch=useDispatch();
+  const userSongsList=useSelector((state)=> state.loginreducer.songs);
+  const userToken=useSelector((state)=>state.loginreducer.loggedin);
+  const updatedPlaylistSongs=useSelector((state)=>state.loginreducer.playlistSongs);
+  console.log(updatedPlaylistSongs,"updatedPlaylistSongsssss");
   const params = useParams();
   const audioElem = useRef();
   const { name } = params;
-  console.log(name, "playlistname")
-  const uid = useSelector((state) => state.loginreducer.loggedin);
   const [songdata, setSongData] = useState([]);
   const [currentSong, setCurrentSong] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playlistname, setPlaylist] = useState("");
   const [playlistsongs, setPlaylistSongs] = useState([]);
-  const [seekbar, setSeekbar] = useState(false);
-  const [playingPlaylistSongs, setP] = useState(false);
+  const [enablePlaybutton, setPlaybutton] = useState(false);
+  const [playingPlaylistSongs, setplayingPlaylistSong] = useState(false);
 
   useEffect(() => {
-    setPlaylist(name);
-    console.log(useState, "usertoken");
-    const getsongslist = collection(db, "songslist",);
-    getDocs(getsongslist)
-      .then((response) => {
-        const songsarray = response.docs.map((doc) => {
-          return (doc.data());
-
-        });
-        console.log(songsarray, "vikas")
-        setSongData(songsarray);
-        console.log("Songsssss", songdata);
-
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    playlist();
+ setSongData(userSongsList)
+    
   }, [])
-
-  async function addtoLikedSongs(songname) {
-    console.log(songname, "songname")
-    await updateDoc(doc(db, "users", uid), {
-      ["LikedSongs"]: arrayUnion(songname)
-    });
-  }
-
-  async function setSongs(id) {
-    const filterele = songdata.find((e) => {
-      console.log(e, "eeeee");
-      return e.SongUrl == id;
-    })
-    await updateDoc(doc(db, "users", uid), {
-      ["playlist" + ["." + `${playlistname}`]]: arrayUnion(filterele)
-    });
-    playlist();
-  }
-  async function playlist() {
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-    const getplaylistdata = docSnap.data().playlist[name];
-    console.log("getplaylist", getplaylistdata)
-
-    setPlaylistSongs(getplaylistdata);
-    console.log(playlistname, "tttt");
-
-  }
   const onPlaying = () => {
     const duration = audioElem.current.duration;
     const ct = audioElem.current.currentTime;
@@ -91,29 +48,28 @@ const Userplaylistdisplayandcreate = () => {
     <>
       <audio src={currentSong?.SongUrl} ref={audioElem} onTimeUpdate={onPlaying} />
       <div className='main-container'>
-        <div className="input-group rounded">
-        </div>
+
         <div className='spotify-playlists'>
-          <h2>{name}</h2>
+          <h2>{name}s</h2>
           <div className='spotifydiv'>
             <div className="list">
-              {playlistsongs?.map((e) => {
+              {updatedPlaylistSongs?.map((e,i) => {
+
                 return (
-                  <>
-                    <div className="item">
-                      <img src={maxresdefault} alt="" />
+                    <div className="item" key={i}>
+                      <img  src={maxresdefault} alt="" />
 
                       <h4>Today's Top Hits</h4>
-                      <span >{e.SongName}</span>
-                      <button style={{ backgroundColor: 'grey' }} onClick={() => {
+                      <span > {e.SongName}</span>
+                      <button  style={{ backgroundColor: 'grey' }} onClick={() => {
                         setCurrentSong(e);
                         setIsPlaying(!isPlaying);
-                        setSeekbar(true);
-                        setP(true);
-                      }}>click</button>
+                        setPlaybutton(true);
+                        setplayingPlaylistSong(true);
+                      }}>click to Play Playlist</button>
                     </div>
 
-                  </>)
+                  )
               })}
             </div>
           </div>
@@ -125,42 +81,44 @@ const Userplaylistdisplayandcreate = () => {
               <div className='spotifydiv'>
                 <div className="list">
 
-                  {songdata.map((e) => {
-                    console.log(currentSong, "ram");
+                  {songdata?.map((songObject,i) => {
+                    const payloadtoSent={songInfo:{...songObject},
+                    userToken,
+                    name
+                    }
+                    const payloadToSenttoLikedSongs={
+                              userToken,
+                             songName: songObject.SongName
+                            }
                     return (
-                      <>
-
-                        <div className="item">
+                        <div className="item" key={i}>
                           <img src={maxresdefault} alt="" />
 
-                          <h4>{e.SongName}</h4>
-                          <button id={e.SongUrl} style={{ backgroundColor: 'grey' }} onClick={(e) => {
-
-                            console.log(e.target.id, "btn")
-                            setSongs(e.target.id)
-                          }}>
-                            Add
+                          <h4>{songObject.SongName}</h4>
+                          <button  style={{ backgroundColor: 'grey' }} onClick={()=>{dispatch(addToPlaylist(payloadtoSent))}}>
+                            Add Song to Playlist
 
                           </button>
                           <button onClick={() => {
-                            addtoLikedSongs(e.SongName);
+                       
+                            dispatch(addtoLikedSongs(payloadToSenttoLikedSongs))
                           }}>
                             <img src={likedicon} id="hearticon" alt="" />
                           </button>
                           <button onClick={() => {
-                            setCurrentSong(e);
-                            setIsPlaying(!isPlaying);
-                            setSeekbar(true);
-                            setP(false);
+                            // setCurrentSong(songObject);
+                            // setIsPlaying(!isPlaying);
+                            // setPlaybutton(true);
+                            // setplayingPlaylistSong(false);
                           }}>click</button>
                         </div>
-                      </>)
+                      )
                   })}
 
                 </div>
               </div>
             </div>
-            {<Player songdata={playingPlaylistSongs ? playlistsongs : songdata} setSongData={playingPlaylistSongs?setPlaylistSongs:setP} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} seekbar={seekbar} setSeekbar={setSeekbar} /> }
+            {<Player songdata={playingPlaylistSongs ? playlistsongs : songdata} setSongData={playingPlaylistSongs ? setPlaylistSongs : setSongData} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePlaybutton={enablePlaybutton} setPlaybutton={setPlaybutton} />}
           </div>}
 
         </>

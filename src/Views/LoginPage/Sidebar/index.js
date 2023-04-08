@@ -16,24 +16,24 @@ function Sidebar() {
       
       <div className="navigation">
         <ul>
-          <li>
+          <li key={Math.floor(Math.random()*100)}>
            <Link to='/Home'>Home</Link> 
           </li>
         </ul>
          <ul>
-          <li>
+         <li key={Math.floor(Math.random()*100)}>
            <Link to='/createdplaylist'>Playlist</Link> 
           </li>
           </ul>
         <ul>
-          <li>
+        <li key={Math.floor(Math.random()*100)}>
       
        <Link to='/playlist' >Create Playlist</Link>
            
           
           </li>
 
-          <li>
+          <li key={Math.random()}>
        
               <span className="fa fas fa-heart"></span>
               <Link to="/likedsongs">Liked Songs</Link>

@@ -10,9 +10,8 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 // import { setLogin } from '../action/loginaction';
-import { Login } from 'Redux/Actions/Loginactions/loginactions';
+import { getPlaylists, Login } from 'Redux/Actions/Loginactions/loginactions';
 import { useDispatch, useSelector } from "react-redux";
-import { getLoggedinuserPlaylist } from 'Redux/Actions/Loginactions/loginactions';
 import {
   collection,arrayUnion,
   getDocs,
@@ -23,6 +22,7 @@ import {
   setDoc
 } from "firebase/firestore";
 import { db } from '../../firebase';
+import { getSongs } from 'Redux/Actions/Loginactions/loginactions';
 function LoginPage() {
   // const mydata=useSelector((state)=>{state.loginreducer.playlist})
   const navigate=useHistory();
@@ -44,7 +44,7 @@ function LoginPage() {
     const getsongs = docSnap.data();
     console.log(getsongs,"getsongsdedede");
     console.log("getsongsdedede");
-    dispatch(getLoggedinuserPlaylist(getsongs.playlist));
+    // dispatch(getLoggedinuserPlaylist(getsongs.playlist));
   }
   const sigin=async(e)=>{
   
@@ -54,10 +54,10 @@ function LoginPage() {
     }
     else{
  
-    signInWithEmailAndPassword(auth,email,password).then((user)=>{
+    signInWithEmailAndPassword(auth,email,password).then((Usercredential)=>{
       setEmail("");
       setPassword("");
-      hello(user.user.uid);
+      hello(Usercredential.user.uid);
       enqueueSnackbar("Logged In Successfuly", {
         variant: "success",
         autoHideDuration: 3000,
@@ -66,12 +66,12 @@ function LoginPage() {
           horizontal: "left",
         },
       });
-      console.log(user,"auth");
-      console.log(user.user.email,"user");
-      console.log(user.user.uid,"useridcheck");
-      localStorage.setItem("userIdToken",user.user.uid);
-      setUserToken(user.user.uid);
-      dispatch(Login(user.user.uid));
+      console.log(Usercredential,"ussssssss")
+      console.log(Usercredential.user.uid,"usk")
+      setUserToken(Usercredential.user.uid);
+      dispatch(Login(Usercredential.user.uid));
+      dispatch(getSongs());
+      dispatch(getPlaylists(Usercredential.user.uid));
       navigate.push('/Home');
      
     }).catch((error)=>{

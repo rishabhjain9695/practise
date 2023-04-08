@@ -1,6 +1,11 @@
 import React from 'react'
 const initialState={
-userData:[],
+loggedin:null,
+songs:[],
+playlists:[],
+playlistSongs:[],
+likedSongs:[]
+
 }
 const loginreducer=(data=initialState,action)=>{
     switch (action.type) {
@@ -8,9 +13,29 @@ const loginreducer=(data=initialState,action)=>{
           return { ...data, loggedin: action.loggedin };
     
           case "LOGOUT":
-            return { ...data, loggedin: action.loggedin,userplaylists:[] };
-            case "LoggedInUserPlaylist":
-                return {...data,userplaylists:action.userplaylists}
+            return { ...data, loggedin: action.loggedin};
+            case "GETALLSONGS":{
+              return { ...data, songs: action.payload};
+            }
+                case "SETSONGS":
+                  return {...data,songs:action.payload}
+                  case "GETPLAYLISTS":
+                    return {...data,playlists:action.payload}
+                    case "SETPLAYLISTS":
+                      return {...data,playlists:action.payload}
+                      case "ADDSONGTOPLAYLIST":{
+                        return {...data,playlistSongs:action.payload}
+                      }
+                      case "GETUPDATEDSONGSFROMPLAYLIST":{
+                        return {...data,playlistSongs:action.payload}
+                      }
+                      case "ADDLIKEDSONGS" :{
+                        return {...data,likedSongs:action.payload}
+                      }
+                      case "GETADDLIKEDSONGS" :{
+                        return {...data,likedSongs:action.payload}
+                      }
+
         default:
           return data;
       }

@@ -6,7 +6,7 @@ import Playlist from "../Views/Playlist/Playlist";
 import ForgotPassword from "Views/ForgotPassword";
 // import Homes from "../Views/Home";
 import UserPlaylist from "Views/UserPlaylist/index";
-import Playlistcreated from "Views/PlaylistCreated/playlistcreated";
+import CreatePlaylist from "Views/PlaylistCreated/playlistcreated";
 
 export const PUBLIC_ROUTES = [
   

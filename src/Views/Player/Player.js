@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import './player.css';
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsSkipEndCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
 
-const Player = ({songdata,setSongData,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,seekbar,setSeekbar})=> {
-const [show,setShow]=useState(false);
+const Player = ({songdata,setSongData,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,enablePlaybutton,setPlaybutton})=> {
+const [show,setShow]=useState();
       const clickRef = useRef();
   const checkWidth = (e)=>
   {
@@ -27,8 +27,8 @@ const [show,setShow]=useState(false);
       setCurrentSong(songdata[index - 1])
     }
     audioElem.current.currentTime = 0;
-    setIsPlaying(!isPlaying);
-  setSeekbar(true);
+    setIsPlaying(!isPlaying); 
+  setPlaybutton(true);
     
   }
 
@@ -40,7 +40,8 @@ const [show,setShow]=useState(false);
 
     if (index == songdata.length-1)
     {
-      setCurrentSong(songdata[0])
+      
+      setCurrentSong(songdata[0]);
     }
     else
     {
@@ -48,27 +49,30 @@ const [show,setShow]=useState(false);
     }
     audioElem.current.currentTime = 0;
     setIsPlaying(!isPlaying);
-    setSeekbar(true);
+    setPlaybutton(true);
   }
 const PlayPause=()=>{
-    setSeekbar(!seekbar);
+    setPlaybutton(!enablePlaybutton);
 }
-useEffect(()=>{
-    if(seekbar){
-        audioElem.current.play();
-    }
-    else{
-        audioElem.current.pause();
-    }
-},[seekbar])
+// useEffect(()=>{
+//     if(enablePlaybutton){
+//         audioElem.current.play();
+//     }
+//     else{
+//         audioElem.current.pause();
+//     }
+// },[enablePlaybutton])
 
-useEffect(()=>{
-  audioElem.current.play();
-    setShow(true);
-},[isPlaying])
-useEffect(()=>{
-    setShow(false);
-},[])
+// useEffect(()=>{
+  
+//   setShow(true);
+//   setTimeout(() => {
+//     audioElem.current.play();
+//   }, 1000);
+// },[isPlaying])
+// useEffect(()=>{
+//     setShow(false);
+// },[])
   return (
     <>
 
@@ -81,7 +85,7 @@ useEffect(()=>{
     </div>
     <div className="controls">
       <BsFillSkipStartCircleFill className='btn_action' onClick={skipBack}/>
-      {seekbar ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
+      {enablePlaybutton ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
       <BsFillSkipEndCircleFill className='btn_action' onClick={skiptoNext}/>        
     </div>
   </div>: null}
