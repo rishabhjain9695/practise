@@ -31,6 +31,7 @@ export const setSongs=(payload)=>{
     }
 }
 export const getPlaylists=(payload)=>{
+    console.log("getP");
    return {
     type:"GETPLAYLISTS",
     payload
@@ -68,9 +69,16 @@ export const getUpdatedLikedSongs=(payload)=>{
     }
 }
 export const addNewplaylist=(payload)=>{
-    console.log("addingpla",payload);
+    console.log("addingpla");
     return {
         type:"ADDNEWPLAYLIST",
+        payload
+    }
+}
+export const getUpdatedPlaylistsArray=(payload)=>{
+    console.log("addingpla");
+    return {
+        type:"GETUPDATEDPLAYLISTS",
         payload
     }
 }

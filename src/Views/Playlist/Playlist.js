@@ -26,7 +26,7 @@ function Home() {
   console.log(userSongsList,"Songs of User");
 
   const audioElem = useRef();
-  const [currentSong, setCurrentSong] = useState('');
+  const [currentSong, setCurrentSong] = useState({});
   const [isPlaying, setIsPlaying] = useState(false);
   const [songdata, setSongData] = useState([]);
   const [enablePlaybutton, setPlaybutton] = useState(false);

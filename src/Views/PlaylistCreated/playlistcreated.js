@@ -4,10 +4,9 @@ import {db} from "../../firebase"
 import './playlist.css'
 import { NavLink } from 'react-router-dom'
 import maxresdefault from "../../imagess/maxresdefault.jpg"
+import { useEffect, useState } from 'react'
 const CreatePlaylist = () => {
-
-  const userPlaylistArray=useSelector((state)=>state.loginreducer.playlists);
-  console.log(userPlaylistArray,"aarav");
+  const userPlaylistArr=useSelector((state)=>state.loginreducer.playlists);
   return (
     <>
     <div className='main-container'>
@@ -15,7 +14,7 @@ const CreatePlaylist = () => {
      <h2>Spotify Playlists</h2>
      <div className='spotifydiv'>
 <div className="list">
-     {userPlaylistArray?.map((selectedPlaylist,index)=>{
+     {Array.isArray(userPlaylistArr)? userPlaylistArr?.map((selectedPlaylist,index)=>{
 
        return(
        
@@ -27,7 +26,7 @@ const CreatePlaylist = () => {
 </div>
 
        )
-     })}
+     }):null}
     </div>
 </div>
     </div>

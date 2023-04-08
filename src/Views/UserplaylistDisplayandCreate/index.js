@@ -43,7 +43,7 @@ const Userplaylistdisplayandcreate = () => {
           <h2>{name}s</h2>
           <div className='spotifydiv'>
             <div className="list">
-              {updatedPlaylistSongs?.map((e,i) => {
+              {Array.isArray(updatedPlaylistSongs)?updatedPlaylistSongs?.map((e,i) => {
 
                 return (
                     <div className="item" key={i}>
@@ -56,11 +56,11 @@ const Userplaylistdisplayandcreate = () => {
                         setIsPlaying(!isPlaying);
                         setPlaybutton(true);
                         setplayingPlaylistSong(true);
-                      }}>click to Play Playlist</button>
+                      }}>click to Play </button>
                     </div>
 
                   )
-              })}
+              }):null}
             </div>
           </div>
         </div>

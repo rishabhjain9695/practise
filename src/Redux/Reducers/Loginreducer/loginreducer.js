@@ -4,12 +4,15 @@ loggedin:null,
 songs:[],
 playlists:[],
 playlistSongs:[],
-likedSongs:[]
+likedSongs:[],
+  
 
 }
 const loginreducer=(data=initialState,action)=>{
     switch (action.type) {
+      
         case "LOGIN":
+          console.log("hey");
           return { ...data, loggedin: action.loggedin };
     
           case "LOGOUT":
@@ -36,7 +39,10 @@ const loginreducer=(data=initialState,action)=>{
                         return {...data,likedSongs:action.payload}
                       }
                       case "ADDNEWPLAYLIST" :{
-                        return {...data,playlist:action.payload}
+                        return {...data,playlists:action.payload}
+                      }
+                      case "GETUPDATEDPLAYLISTS" :{
+                        return {...data,playlists:action.payload}
                       }
         default:
           return data;

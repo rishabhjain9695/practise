@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { takeLatest, put, all } from "redux-saga/effects";
-import { getUpdatedPlaylistdata, setPlaylists, setSongs, addtoLikedSongs,getUpdatedLikedSongs} from "Redux/Actions/Loginactions/loginactions"
+import { getUpdatedPlaylistdata, setPlaylists, setSongs, addtoLikedSongs,getUpdatedLikedSongs, getUpdatedPlaylistsArray} from "Redux/Actions/Loginactions/loginactions"
 import { collection,getDocs,getDoc,doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { db } from "firebase";
@@ -26,6 +26,8 @@ catch(error){
 }
 }
 function* getPlaylists({payload}){
+
+  console.log("getP")
   let UserPlaylists=[];
 console.log("saga called playlistt");
 console.log(payload,)
@@ -35,7 +37,6 @@ console.log("userRef",userRef);
 const userDoc = yield getDoc(userRef);
 console.log(userDoc,"userdoccc");
 const userdata = userDoc.data().playlist;
-console.log("MANAVVVV",userdata);
 const playlistNamesArray=Object.keys(userdata);
 console.log(playlistNamesArray,"playlnames");
 yield put(setPlaylists(playlistNamesArray));
@@ -69,8 +70,21 @@ function* LikedSongs({payload}){
                 yield put(getUpdatedLikedSongs(userlikedSongs));
 
 }
-function* addNewPlaylist(payload){
-  console.log(payload,"addsaga");
+function* addNewPlaylist({payload}){
+  console.log("addsagasucess",payload);
+  try{
+    yield updateDoc(doc(db, "users",payload.userToken ), {
+      ["playlist" + ["."+`${payload.playlistname}`]]: arrayUnion()
+    });
+    const userRef = doc(db, "users",payload.userToken);
+    console.log("userRef",userRef);
+    const userDoc = yield getDoc(userRef);
+    let playlistArray=Object.keys(userDoc.data().playlist);
+    yield put(getUpdatedPlaylistsArray(playlistArray));
+  }
+catch(error){
+
+}
   
 
 }
@@ -96,12 +110,12 @@ function* getLoginUserData({loggedin}){
 
 function* Sagaa() {
   yield all([
+    takeLatest("ADDNEWPLAYLIST",addNewPlaylist),
     takeLatest("LOGIN", getLoginUserData),
     takeLatest("GETALLSONGS", getAllSongs),
     takeLatest("GETPLAYLISTS",getPlaylists),
     takeLatest("ADDSONGTOPLAYLIST",addSongToPlaylist),
     takeLatest("ADDLIKEDSONGS",LikedSongs),
-    takeLatest("ADDNEWPLAYLIST",addNewPlaylist)
 
   ]);
 }
