@@ -69,14 +69,34 @@ function* LikedSongs({payload}){
                 yield put(getUpdatedLikedSongs(userlikedSongs));
 
 }
-function* addNewPlaylist({playlistname}){
-  console.log("playlistname",playlistname);
+function* addNewPlaylist(payload){
+  console.log(payload,"addsaga");
+  
+
+}
+function* getLoginUserData({loggedin}){
+  console.log("loggedinkey",loggedin);
+  try{
+    const userRef = doc(db, "users",loggedin);
+    console.log("userRef",userRef);
+    const userDoc = yield getDoc(userRef);
+    console.log(userDoc.data(),"userData");
+    // const userdata = userDoc.data().playlist;
+    // console.log("MANAVVVV",userdata);
+    // const playlistNamesArray=Object.keys(userdata);
+    // console.log(playlistNamesArray,"playlnames");
+    // yield put(setPlaylists(playlistNamesArray));
+    }
+    catch(error){
+    
+    }
   
 
 }
 
 function* Sagaa() {
   yield all([
+    takeLatest("LOGIN", getLoginUserData),
     takeLatest("GETALLSONGS", getAllSongs),
     takeLatest("GETPLAYLISTS",getPlaylists),
     takeLatest("ADDSONGTOPLAYLIST",addSongToPlaylist),

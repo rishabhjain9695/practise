@@ -1,23 +1,13 @@
-import React, { useEffect, useState } from 'react'
+
 import { useSelector } from 'react-redux'
 import {db} from "../../firebase"
 import './playlist.css'
-import { Link } from 'react-router-dom'
-
-import {
-  collection,arrayUnion,
-  getDocs,
-  getDoc,
-  addDoc,
-  doc,
-  updateDoc,
-  setDoc
-} from "firebase/firestore";
 import { NavLink } from 'react-router-dom'
 import maxresdefault from "../../imagess/maxresdefault.jpg"
 const CreatePlaylist = () => {
-  const userToken=useSelector((state)=>state.loginreducer.loggedin);
+
   const userPlaylistArray=useSelector((state)=>state.loginreducer.playlists);
+  console.log(userPlaylistArray,"aarav");
   return (
     <>
     <div className='main-container'>

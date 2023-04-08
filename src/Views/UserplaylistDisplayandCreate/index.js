@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import {
-  collection, arrayUnion,
-  getDocs,
-  getDoc,
-  addDoc,
-  doc,
-  updateDoc,
-  setDoc
-} from "firebase/firestore";
-import { db } from '../../firebase';
 import { useSelector } from 'react-redux';
 import likedicon from '../../imagess2/likedicon.png'
 import maxresdefault from '../../imagess/maxresdefault.jpg'

@@ -13,16 +13,14 @@ import {
 } from "firebase/auth";
 import { useState } from "react";
 import {
-  collection,
-  getDocs,
-  addDoc,
+
   doc,
-  updateDoc,
+
   setDoc,
 } from "firebase/firestore";
 
 import { db } from "../../firebase";
-import { SnackbarProvider, enqueueSnackbar } from "notistack";
+import {  enqueueSnackbar } from "notistack";
 function SignUp() {
   const phoneregex = /^[0-9]{0,10}$/;
  const nameRegex=/^[a-zA-Z ]*$/
@@ -59,7 +57,6 @@ function SignUp() {
     }
   }
   const handleEmail=()=>{
-    console.log("goyal12@gmail.com".match(emailRegex));
     if(email.match(emailRegex)){
       setEmailErrmsg(false);
       return false;
@@ -101,7 +98,7 @@ function SignUp() {
     e.preventDefault();
     const code = otp;
     console.log(code);
-    if (otp === "" || otp == null) return;
+    if (otp === "") return;
     try {
       await confirmObj.confirm(code);
       signup();
@@ -115,7 +112,7 @@ function SignUp() {
       .then((userCredential) => {
         console.log(userCredential.user.uid, "user");
         console.log(userCredential, "user");
-        adddata(userCredential.user.uid);
+        addData(userCredential.user.uid);
         enqueueSnackbar("Signed Up Successfuly", {
           variant: "success",
           autoHideDuration: 3000,
@@ -130,9 +127,9 @@ function SignUp() {
         console.log(error);
       });
   };
-  function adddata(UserId) {
-    const ref = doc(db, "users", UserId);
-    setDoc(ref, {
+  function addData(UserId) {
+    const userDataRef = doc(db, "users", UserId);
+    setDoc(userDataRef, {
       userid: UserId,
       name,
       email,
@@ -142,6 +139,7 @@ function SignUp() {
       LikedSongs: [],
     })
       .then((response) => {
+        console.log(response);
       })
       .catch((err) => {
         console.log(err);

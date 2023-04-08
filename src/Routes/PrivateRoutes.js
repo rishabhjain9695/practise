@@ -1,4 +1,4 @@
-import UserPlaylist from "Views/UserPlaylist";
+import UserPlaylist from "Views/CreatePlaylist";
 import CreatePlaylist from "Views/PlaylistCreated/playlistcreated";
 import Home from "Views/Playlist/Playlist";
 import Userplaylistdisplayandcreate from "Views/UserplaylistDisplayandCreate";

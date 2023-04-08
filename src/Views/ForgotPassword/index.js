@@ -24,9 +24,7 @@ function ForgotPassword() {
       const[error,setError]=useState(false);
   return (
        <div id='loginp'>
-    {/* <div id="sign-in-button"></div> */}
     <div id="head">
-    {/* <img src={SpotifyLogo} alt=""  /> */}
     
       <br />
       <h1 id="headingforgot">Password Reset</h1>

@@ -48,31 +48,35 @@ const [show,setShow]=useState();
       setCurrentSong(songdata[index + 1])
     }
     audioElem.current.currentTime = 0;
-    setIsPlaying(!isPlaying);
+    // audioElem.current.src=`${currentSong.SongUrl}`;
+    // audioElem.current.play();
+        setIsPlaying(!isPlaying);
     setPlaybutton(true);
   }
 const PlayPause=()=>{
     setPlaybutton(!enablePlaybutton);
 }
-// useEffect(()=>{
-//     if(enablePlaybutton){
-//         audioElem.current.play();
-//     }
-//     else{
-//         audioElem.current.pause();
-//     }
-// },[enablePlaybutton])
+useEffect(()=>{
+    if(enablePlaybutton){
+        audioElem?.current?.play();
+    }
+    else{
+        audioElem?.current?.pause();
+    }
+},[enablePlaybutton])
 
-// useEffect(()=>{
-  
-//   setShow(true);
-//   setTimeout(() => {
-//     audioElem.current.play();
-//   }, 1000);
-// },[isPlaying])
-// useEffect(()=>{
-//     setShow(false);
-// },[])
+useEffect(()=>{
+  console.log(audioElem.current,"audioelemmm");
+  console.log(audioElem,"audioelemmm");
+  setShow(true);
+  setTimeout(() => {
+    console.log(audioElem,"audioelemmm");
+    audioElem?.current?.play();
+  }, 2000);
+},[isPlaying])
+useEffect(()=>{
+    setShow(false);
+},[])
   return (
     <>
 

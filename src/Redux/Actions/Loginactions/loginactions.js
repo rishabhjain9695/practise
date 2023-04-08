@@ -1,5 +1,12 @@
 
 export const Login=(loggedin)=>{
+    console.log("ayushhshshs");
+    return {
+        type:"LOGIN",
+        loggedin
+    }
+}
+export const setLoginData=(loggedin)=>{
     return {
         type:"LOGIN",
         loggedin
@@ -60,10 +67,10 @@ export const getUpdatedLikedSongs=(payload)=>{
         payload
     }
 }
-export const addNewplaylist=({playlistname})=>{
-    console.log(playlistname,"adding");
+export const addNewplaylist=(payload)=>{
+    console.log("addingpla",payload);
     return {
         type:"ADDNEWPLAYLIST",
-        playlistname
+        payload
     }
 }

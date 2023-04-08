@@ -35,7 +35,9 @@ const loginreducer=(data=initialState,action)=>{
                       case "GETADDLIKEDSONGS" :{
                         return {...data,likedSongs:action.payload}
                       }
-
+                      case "ADDNEWPLAYLIST" :{
+                        return {...data,playlist:action.payload}
+                      }
         default:
           return data;
       }

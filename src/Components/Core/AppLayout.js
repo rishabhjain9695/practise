@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 import { useNetworkStatus } from "Hooks/NetworkStatus";
-import Sidebar from "Views/LoginPage/Sidebar";
+import Sidebar from "Views/Sidebar";
 import Navbars from "Components/Cells/Navbar";
 
 const AppLayout = ({ isAuthenticated, children }) => {

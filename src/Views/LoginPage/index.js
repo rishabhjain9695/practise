@@ -36,16 +36,16 @@ function LoginPage() {
     setEmail("");
       setPassword("");
   },[])
-  // console.log(mydata,"mydaytaa");
-  const hello=async(uid)=>{
-    console.log("hello");
-     const docRef = doc(db, "users",uid);
-    const docSnap = await getDoc(docRef);
-    const getsongs = docSnap.data();
-    console.log(getsongs,"getsongsdedede");
-    console.log("getsongsdedede");
-    // dispatch(getLoggedinuserPlaylist(getsongs.playlist));
-  }
+
+  // const hello=async(uid)=>{
+  //   console.log("hello");
+  //    const docRef = doc(db, "users",uid);
+  //   const docSnap = await getDoc(docRef);
+  //   const getsongs = docSnap.data();
+  //   console.log(getsongs,"getsongsdedede");
+  //   console.log("getsongsdedede");
+   
+  // }
   const sigin=async(e)=>{
   
     e.preventDefault();
@@ -57,7 +57,7 @@ function LoginPage() {
     signInWithEmailAndPassword(auth,email,password).then((Usercredential)=>{
       setEmail("");
       setPassword("");
-      hello(Usercredential.user.uid);
+      // hello(Usercredential.user.uid);
       enqueueSnackbar("Logged In Successfuly", {
         variant: "success",
         autoHideDuration: 3000,

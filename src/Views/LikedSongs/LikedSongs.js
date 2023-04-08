@@ -4,10 +4,7 @@ import maxresdefault from '../../imagess/maxresdefault.jpg'
 const LikedSong = () => {
     
     const likedSongs=useSelector((state)=>state.loginreducer.likedSongs);
-    console.log("erp",likedSongs)
-    const [userLikedSongs,setUserLikedSongs]=useState([]);
-
-  return (
+return (
     <div className='main-container'>
     <div className='spotify-playlists'>
      <h2>Liked Songs</h2>

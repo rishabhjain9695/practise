@@ -1,17 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router-dom";
-// import { setLogin } from "Redux/Actions/loginActions";
+
 import './App.css'
 import {useHistory} from "react-router-dom";
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
-// import { setlogout } from "../action/loginaction";
 import  {Logoutuser} from "Redux/Actions/Loginactions/loginactions";
-
-// setlogout
 export default function Logout() {
   const navigate = useHistory();
-//   const navigate = useHistory();
 const dispatch=useDispatch();
   function handleLogout() {
     dispatch(Logoutuser(null));
