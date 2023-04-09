@@ -1,12 +1,14 @@
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {db} from "../../firebase"
 import './playlist.css'
 import { NavLink } from 'react-router-dom'
-import maxresdefault from "../../imagess/maxresdefault.jpg"
-import { useEffect, useState } from 'react'
+import maxresdefault from "../../imagess/maxresdefault.jpg" 
+import { getSelectedPlaylistSongs } from 'Redux/Actions/Loginactions/loginactions'
 const CreatePlaylist = () => {
   const userPlaylistArr=useSelector((state)=>state.loginreducer.playlists);
+  const userToken=useSelector((state)=>state.loginreducer.loggedin);
+  const dispatch=useDispatch();
   return (
     <>
     <div className='main-container'>
@@ -22,7 +24,7 @@ const CreatePlaylist = () => {
 <img src={maxresdefault}alt=""/>
  
   <h4>Today's Top Hits</h4>
-  <NavLink className='navstyle' to={'/userplaylistdisplay/'+selectedPlaylist}>{selectedPlaylist}</NavLink>
+  <NavLink className='navstyle' to={'/userplaylistdisplay/'+selectedPlaylist} onClick={()=>{dispatch(getSelectedPlaylistSongs({userToken,selectedPlaylist}))}}>{selectedPlaylist}</NavLink>
 </div>
 
        )

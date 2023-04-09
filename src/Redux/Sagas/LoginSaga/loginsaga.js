@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { takeLatest, put, all } from "redux-saga/effects";
-import { getUpdatedPlaylistdata, setPlaylists, setSongs, addtoLikedSongs,getUpdatedLikedSongs, getUpdatedPlaylistsArray} from "Redux/Actions/Loginactions/loginactions"
+import { getUpdatedPlaylistdata, setPlaylists, setSongs, addtoLikedSongs,getUpdatedLikedSongs, getUpdatedPlaylistsArray, setSelectedPlaylistSongs,} from "Redux/Actions/Loginactions/loginactions"
 import { collection,getDocs,getDoc,doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { db } from "firebase";
@@ -88,6 +88,22 @@ catch(error){
   
 
 }
+function* getSelectedPlaylistSongsArr({payload}){
+  console.log("addsagasucess",payload.selectedPlaylist);
+  try{
+   
+    const userData = doc(db, "users", payload.userToken);
+    const userDoc = yield getDoc(userData);
+    const getplaylistdata = userDoc.data().playlist[payload.selectedPlaylist];
+    console.log("gettttttttttttt", getplaylistdata)
+    yield put(setSelectedPlaylistSongs(getplaylistdata));
+  }
+catch(error){
+
+}
+  
+
+}
 function* getLoginUserData({loggedin}){
   console.log("loggedinkey",loggedin);
   try{
@@ -115,6 +131,7 @@ function* Sagaa() {
     takeLatest("GETALLSONGS", getAllSongs),
     takeLatest("GETPLAYLISTS",getPlaylists),
     takeLatest("ADDSONGTOPLAYLIST",addSongToPlaylist),
+    takeLatest("GETSELECTEDPLAYLISTSONGS",getSelectedPlaylistSongsArr),
     takeLatest("ADDLIKEDSONGS",LikedSongs),
 
   ]);

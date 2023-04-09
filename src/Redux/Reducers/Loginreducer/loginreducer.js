@@ -5,8 +5,6 @@ songs:[],
 playlists:[],
 playlistSongs:[],
 likedSongs:[],
-  
-
 }
 const loginreducer=(data=initialState,action)=>{
     switch (action.type) {
@@ -43,6 +41,9 @@ const loginreducer=(data=initialState,action)=>{
                       }
                       case "GETUPDATEDPLAYLISTS" :{
                         return {...data,playlists:action.payload}
+                      }
+                      case "SETSELECTEDPLAYLISTSONGS" :{
+                        return {...data,playlistSongs:action.payload}
                       }
         default:
           return data;

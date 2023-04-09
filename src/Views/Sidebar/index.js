@@ -1,6 +1,5 @@
 import React from 'react'
 import "./Sidebar.css"
-import SpotifyLogo from "../../imagess/SpotifyLogo.png"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 function Sidebar() {

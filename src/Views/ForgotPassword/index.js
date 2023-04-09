@@ -16,7 +16,7 @@ function ForgotPassword() {
             setError(true)
         }
         else{send(email);
-            // setEmail("");
+          
             navigate.push('/ForgotPasswordPage')}
         
       };

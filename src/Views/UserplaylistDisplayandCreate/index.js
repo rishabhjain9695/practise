@@ -13,15 +13,13 @@ const Userplaylistdisplayandcreate = () => {
   const userSongsList=useSelector((state)=> state.loginreducer.songs);
   const userToken=useSelector((state)=>state.loginreducer.loggedin);
   const updatedPlaylistSongs=useSelector((state)=>state.loginreducer.playlistSongs);
-  console.log(updatedPlaylistSongs,"updatedPlaylistSongsssss");
   const params = useParams();
   const audioElem = useRef();
   const { name } = params;
   const [songdata, setSongData] = useState([]);
   const [currentSong, setCurrentSong] = useState('');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playlistsongs, setPlaylistSongs] = useState([]);
-  const [enablePlaybutton, setPlaybutton] = useState(false);
+  const [enablePauseButton, setPlaybutton] = useState(false);
   const [playingPlaylistSongs, setplayingPlaylistSong] = useState(false);
 
   useEffect(() => {
@@ -56,7 +54,7 @@ const Userplaylistdisplayandcreate = () => {
                         setIsPlaying(!isPlaying);
                         setPlaybutton(true);
                         setplayingPlaylistSong(true);
-                      }}>click to Play </button>
+                      }}>click to Play Playlist</button>
                     </div>
 
                   )
@@ -96,10 +94,10 @@ const Userplaylistdisplayandcreate = () => {
                             <img src={likedicon} id="hearticon" alt="" />
                           </button>
                           <button onClick={() => {
-                            // setCurrentSong(songObject);
-                            // setIsPlaying(!isPlaying);
-                            // setPlaybutton(true);
-                            // setplayingPlaylistSong(false);
+                            setCurrentSong(songObject);
+                            setIsPlaying(!isPlaying);
+                            setPlaybutton(true);
+                            setplayingPlaylistSong(false);
                           }}>click</button>
                         </div>
                       )
@@ -108,7 +106,7 @@ const Userplaylistdisplayandcreate = () => {
                 </div>
               </div>
             </div>
-            {<Player songdata={playingPlaylistSongs ? playlistsongs : songdata} setSongData={playingPlaylistSongs ? setPlaylistSongs : setSongData} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePlaybutton={enablePlaybutton} setPlaybutton={setPlaybutton} />}
+            {<Player songdata={playingPlaylistSongs ? updatedPlaylistSongs : songdata} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePauseButton={enablePauseButton} setPlaybutton={setPlaybutton} />}
           </div>}
 
         </>

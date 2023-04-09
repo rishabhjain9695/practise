@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './player.css';
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsSkipEndCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
 
-const Player = ({songdata,setSongData,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,enablePlaybutton,setPlaybutton})=> {
+const Player = ({songdata,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,enablePauseButton,setPlaybutton})=> {
 const [show,setShow]=useState();
       const clickRef = useRef();
   const checkWidth = (e)=>
@@ -26,6 +26,7 @@ const [show,setShow]=useState();
     {
       setCurrentSong(songdata[index - 1])
     }
+
     audioElem.current.currentTime = 0;
     setIsPlaying(!isPlaying); 
   setPlaybutton(true);
@@ -35,7 +36,7 @@ const [show,setShow]=useState();
 
   const skiptoNext = ()=>
   {
-    
+   
     const index = songdata.findIndex(x=>x.SongName == currentSong.SongName);
 
     if (index == songdata.length-1)
@@ -48,30 +49,28 @@ const [show,setShow]=useState();
       setCurrentSong(songdata[index + 1])
     }
     audioElem.current.currentTime = 0;
-    // audioElem.current.src=`${currentSong.SongUrl}`;
-    // audioElem.current.play();
         setIsPlaying(!isPlaying);
     setPlaybutton(true);
   }
 const PlayPause=()=>{
-    setPlaybutton(!enablePlaybutton);
+    setPlaybutton(!enablePauseButton);
 }
 useEffect(()=>{
-    if(enablePlaybutton){
+    if(enablePauseButton){
         audioElem?.current?.play();
     }
     else{
         audioElem?.current?.pause();
     }
-},[enablePlaybutton])
+},[enablePauseButton])
 
 useEffect(()=>{
   console.log(audioElem.current,"audioelemmm");
   console.log(audioElem,"audioelemmm");
   setShow(true);
   setTimeout(() => {
-    console.log(audioElem,"audioelemmm");
-    audioElem?.current?.play();
+    // console.log(audioElem,"audioelemmm");
+     currentSong!=="" &&   audioElem?.current?.play();
   }, 2000);
 },[isPlaying])
 useEffect(()=>{
@@ -89,7 +88,7 @@ useEffect(()=>{
     </div>
     <div className="controls">
       <BsFillSkipStartCircleFill className='btn_action' onClick={skipBack}/>
-      {enablePlaybutton ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
+      {enablePauseButton ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
       <BsFillSkipEndCircleFill className='btn_action' onClick={skiptoNext}/>        
     </div>
   </div>: null}

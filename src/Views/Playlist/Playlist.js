@@ -1,26 +1,12 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import './navbar.css'
-import {
-  collection, arrayUnion,
-  getDocs,
-  getDoc,
-  addDoc,
-  doc,
-  updateDoc,
-  setDoc
-} from "firebase/firestore";
-import { db } from '../../firebase';
 import "./navbar.css"
-import likedicon from '../../imagess2/likedicon.png'
 import maxresdefault from '../../imagess/maxresdefault.jpg'
 import Player from 'Views/Player/Player';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSongs } from 'Redux/Actions/Loginactions/loginactions';
+import {  useSelector } from 'react-redux';
+
 function Home() {
-  const dispatch=useDispatch();
-  const userToken=useSelector((state)=> state.loginreducer.loggedin);
   const userSongsList=useSelector((state)=> state.loginreducer.songs);
 
   console.log(userSongsList,"Songs of User");
@@ -28,13 +14,7 @@ function Home() {
   const audioElem = useRef();
   const [currentSong, setCurrentSong] = useState({});
   const [isPlaying, setIsPlaying] = useState(false);
-  const [songdata, setSongData] = useState([]);
-  const [enablePlaybutton, setPlaybutton] = useState(false);
-  useEffect(() => {
-   setSongData(userSongsList);
-        setCurrentSong("");
-console.log("hello usefeect called")
-  }, [])
+  const [enablePauseButton, setPlaybutton] = useState(false);
   const onPlaying = () => {
     const duration = audioElem.current.duration;
     const ct = audioElem.current.currentTime;
@@ -82,7 +62,7 @@ console.log("hello usefeect called")
           </div>
 
         </div>
-        <Player songdata={songdata} setSongData={setSongData} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePlaybutton={enablePlaybutton} setPlaybutton={setPlaybutton} />
+        <Player songdata={userSongsList} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePauseButton={enablePauseButton} setPlaybutton={setPlaybutton} />
       </div>
 
     </>

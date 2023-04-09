@@ -8,56 +8,32 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import {auth} from "../../firebase"
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { SnackbarProvider, enqueueSnackbar } from 'notistack';
-// import { setLogin } from '../action/loginaction';
+import { enqueueSnackbar } from 'notistack';
 import { getPlaylists, Login } from 'Redux/Actions/Loginactions/loginactions';
-import { useDispatch, useSelector } from "react-redux";
-import {
-  collection,arrayUnion,
-  getDocs,
-  getDoc,
-  addDoc,
-  doc,
-  updateDoc,
-  setDoc
-} from "firebase/firestore";
-import { db } from '../../firebase';
+import { useDispatch } from "react-redux";
 import { getSongs } from 'Redux/Actions/Loginactions/loginactions';
 function LoginPage() {
-  // const mydata=useSelector((state)=>{state.loginreducer.playlist})
   const navigate=useHistory();
-  const[isLoggedIn,setLoggedIn]=useState(false);
-  const[userToken,setUserToken]=useState("");
   const[email,setEmail]=useState("");
   const[password,setPassword]=useState("");
-  const [error,setError]=useState(false);
+  const [error,setError]=useState("");
   const dispatch=useDispatch();
   useEffect(()=>{
     setEmail("");
       setPassword("");
   },[])
 
-  // const hello=async(uid)=>{
-  //   console.log("hello");
-  //    const docRef = doc(db, "users",uid);
-  //   const docSnap = await getDoc(docRef);
-  //   const getsongs = docSnap.data();
-  //   console.log(getsongs,"getsongsdedede");
-  //   console.log("getsongsdedede");
-   
-  // }
   const sigin=async(e)=>{
   
     e.preventDefault();
     if(email==""|| password==""){
-      setError(true);
+      return ;
     }
     else{
  
     signInWithEmailAndPassword(auth,email,password).then((Usercredential)=>{
       setEmail("");
       setPassword("");
-      // hello(Usercredential.user.uid);
       enqueueSnackbar("Logged In Successfuly", {
         variant: "success",
         autoHideDuration: 3000,
@@ -66,16 +42,16 @@ function LoginPage() {
           horizontal: "left",
         },
       });
-      console.log(Usercredential,"ussssssss")
-      console.log(Usercredential.user.uid,"usk")
-      setUserToken(Usercredential.user.uid);
+      console.log(Usercredential,"userinfo")
+      console.log(Usercredential.user.uid,"usertoken")
       dispatch(Login(Usercredential.user.uid));
       dispatch(getSongs());
       dispatch(getPlaylists(Usercredential.user.uid));
       navigate.push('/Home');
      
     }).catch((error)=>{
-      console.log(error);
+      console.log(error.message,"errrrrrrrrrr");
+      setError(error.message);
     })
   }
 }
@@ -89,7 +65,7 @@ function LoginPage() {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e)=>{setEmail(e.target.value)
-        setError(false);}} />
+        setError("");}} />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -98,13 +74,13 @@ function LoginPage() {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password"  value={password} onChange={(e)=>{setPassword(e.target.value)
-        setError(false);}}/>
+        setError("");}}/>
       </Form.Group>
 
       <button  id='btnstyle' type='submit' >Login</button>
     </Form> 
    
-    {error?<span style={{color:'red'}}>Invalid Credentials.Enter Valid Credential</span>:<span></span>}
+    {<span style={{color:'red'}}>{error}</span>}
     <Link style={{textDecoration:'none'}} to='/forgotpassword'>Forgot Password</Link>
     <Link style={{textDecoration:'none'}} to='/signup'>Dont have an Acoount! Create a new Account</Link>
     </div>

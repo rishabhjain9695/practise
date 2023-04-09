@@ -15,41 +15,10 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const storage = getStorage();
 console.log(storage);
-// export function lists(listofSongs,setListofsongs) {
-//   let arr = [];
-//   const listRef = ref(storage, "Musics/");
-//   console.log(listRef, "ggh");
-//   listAll(listRef)
-//     .then((res) => {
-//       res.prefixes.forEach((folderRef) => {
-//         // All the prefixes under listRef.
-//         // You may call listAll() recursively on them.
-//       });
-//       res.items.forEach((itemRef) => {
-//         console.log("apps");
-//           console.log(itemRef, "sdvfvvv");
-//           getDownloadURL(ref(storage, `${itemRef._location.path}`)).then(
-//             (url) => {
-//               console.log(url, "pls");
-//               arr.push(url);
-//             }
-//           );
-//           console.log("state settled");
-// setListofsongs(arr);
-//       });
-//     })
-//     .catch((error) => {
-//       // Uh-oh, an error occurred!
-//     });
-// }
-
-
 export function send(email) {
   sendPasswordResetEmail(auth, email)
     .then(() => {
-      // Password reset email sent!export const db = getFirestore(app);
       console.log(auth, email, "auth", "emaill");
-      // ..
     })
     .catch((error) => {
       const errorCode = error.code;

@@ -82,3 +82,17 @@ export const getUpdatedPlaylistsArray=(payload)=>{
         payload
     }
 }
+export const getSelectedPlaylistSongs=(payload)=>{
+    console.log("SELE",payload);
+    return {
+        type:"GETSELECTEDPLAYLISTSONGS",
+        payload
+    }
+}
+export const setSelectedPlaylistSongs=(payload)=>{
+    console.log("fd");
+    return {
+        type:"SETSELECTEDPLAYLISTSONGS",
+        payload
+    }
+}
