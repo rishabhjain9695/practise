@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './player.css';
-import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsSkipEndCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
+import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
 
 const Player = ({songdata,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,enablePauseButton,setPlaybutton})=> {
-const [show,setShow]=useState();
+const [show,setShow]=useState(false);
       const clickRef = useRef();
   const checkWidth = (e)=>
   {
@@ -58,6 +58,7 @@ const PlayPause=()=>{
 useEffect(()=>{
     if(enablePauseButton){
         audioElem?.current?.play();
+        setShow(true);
     }
     else{
         audioElem?.current?.pause();
@@ -67,15 +68,13 @@ useEffect(()=>{
 useEffect(()=>{
   console.log(audioElem.current,"audioelemmm");
   console.log(audioElem,"audioelemmm");
-  setShow(true);
+  
   setTimeout(() => {
-    // console.log(audioElem,"audioelemmm");
-     currentSong!=="" &&   audioElem?.current?.play();
-  }, 2000);
+    console.log(currentSong,"currentsong")
+     currentSong!==null &&   audioElem?.current?.play();
+  }, 1000);
 },[isPlaying])
-useEffect(()=>{
-    setShow(false);
-},[])
+
   return (
     <>
 
@@ -98,3 +97,6 @@ useEffect(()=>{
 }
 
 export default Player;
+
+
+

@@ -15,7 +15,7 @@ const UserPlaylist = () => {
     return (
         <div id="flexx">
             <input type="text" placeholder="Create Playlist" value={playlistname} onChange={(e) => { setPlaylistName(e.target.value) }} />
-            <NavLink to='/createdplaylist' style={{textDecoration:'none'}} id="btnstylecreateplaylist" onClick={()=>{dispatch(addNewplaylist({userToken,playlistname}))}}>o playlist</NavLink>
+            <NavLink to='/createdplaylist' style={{textDecoration:'none'}} id="btnstylecreateplaylist" onClick={()=>{dispatch(addNewplaylist({userToken,playlistname}))}}> Create New playlist</NavLink>
         </div>
     );
 

@@ -18,7 +18,7 @@ const Userplaylistdisplayandcreate = () => {
   const { name } = params;
   const [songdata, setSongData] = useState([]);
   const [currentSong, setCurrentSong] = useState('');
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);  
   const [enablePauseButton, setPlaybutton] = useState(false);
   const [playingPlaylistSongs, setplayingPlaylistSong] = useState(false);
 

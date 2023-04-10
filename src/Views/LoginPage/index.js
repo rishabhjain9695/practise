@@ -18,13 +18,7 @@ function LoginPage() {
   const[password,setPassword]=useState("");
   const [error,setError]=useState("");
   const dispatch=useDispatch();
-  useEffect(()=>{
-    setEmail("");
-      setPassword("");
-  },[])
-
-  const sigin=async(e)=>{
-  
+  const sigin=(e)=>{
     e.preventDefault();
     if(email==""|| password==""){
       return ;
@@ -61,7 +55,7 @@ function LoginPage() {
       <img src={SpotifyLogo} alt=""  />
       <br />
       <h1 id="heading">To continue,login to Spotify</h1>
-      <Form onSubmit={(e)=>{sigin(e)}}>
+      <Form onSubmit={sigin}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e)=>{setEmail(e.target.value)

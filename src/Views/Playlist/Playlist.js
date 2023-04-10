@@ -9,10 +9,10 @@ import {  useSelector } from 'react-redux';
 function Home() {
   const userSongsList=useSelector((state)=> state.loginreducer.songs);
 
-  console.log(userSongsList,"Songs of User");
+  // console.log(userSongsList,"Songs of User");
 
   const audioElem = useRef();
-  const [currentSong, setCurrentSong] = useState({});
+  const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [enablePauseButton, setPlaybutton] = useState(false);
   const onPlaying = () => {
@@ -33,7 +33,6 @@ function Home() {
             <div >
 
               {userSongsList && userSongsList.map((e,i) => {
-                console.log(currentSong, "checkk");
                 return (
 
                     <div className="item" key={i}>
