@@ -34,3 +34,20 @@
       width: 370px;
     height: 229px;
 }
+#btnstyle2{
+    background-color: green;
+    color:white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 30px;
+    border: 0px;
+    border-radius: 400px;
+    cursor: pointer;
+    margin-left: 58px;
+    margin-top: -7px;
+    width: 83px;
+    
+}
+#btnstyle3{
+ border-radius: 54px;
+}

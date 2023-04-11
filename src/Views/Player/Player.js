@@ -9,7 +9,6 @@ const [show,setShow]=useState(false);
   {
     let width = clickRef.current.clientWidth;
     const offset = e.nativeEvent.offsetX;
-
     const divprogress = offset / width * 100;
     audioElem.current.currentTime = divprogress / 100 * currentSong.length;
 
@@ -68,11 +67,15 @@ useEffect(()=>{
 useEffect(()=>{
   console.log(audioElem.current,"audioelemmm");
   console.log(audioElem,"audioelemmm");
-  
-  setTimeout(() => {
-    console.log(currentSong,"currentsong")
-     currentSong!==null &&   audioElem?.current?.play();
-  }, 1000);
+  console.log(currentSong,"cs")
+  if(currentSong!==null){
+   let id=setTimeout(() => {
+    console.log(currentSong,"currentsong");
+      audioElem?.current?.play();
+      
+    }, 1000);
+    return ()=>clearTimeout(id);
+}
 },[isPlaying])
 
   return (

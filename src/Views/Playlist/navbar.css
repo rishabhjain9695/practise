@@ -92,7 +92,6 @@
     padding: 15px;
     background-color: #181818;
     border-radius: 6px;
-    cursor: pointer;
     transition: all ease 0.4s;
   }
   .spotify-playlists .list .item:hover {
@@ -169,4 +168,14 @@
   i {
     cursor: pointer;
   }
-  
+  #btnn{
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    /* padding: 14px 30px; */
+    border: 0px;
+    border-radius: 40px;
+    cursor: pointer;
+    margin-left: 20px;
+  }

@@ -182,9 +182,9 @@ body {
   min-width: 140px;
   width: 160px;
   padding: 15px;
-  background-color: #181818;
+  background-color:;
   border-radius: 6px;
-  cursor: pointer;
+
   transition: all ease 0.4s;
 }
 .spotify-playlists .list .item:hover {
@@ -269,4 +269,7 @@ body {
 }
 .navstyle:hover{
   color: grey;
+}
+#playBtn{
+  border-radius: 54px; 
 }

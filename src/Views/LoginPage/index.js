@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { enqueueSnackbar } from 'notistack';
 import { getPlaylists, Login } from 'Redux/Actions/Loginactions/loginactions';
 import { useDispatch } from "react-redux";
-import { getSongs } from 'Redux/Actions/Loginactions/loginactions';
+import { getSongs,getLikedSongs } from 'Redux/Actions/Loginactions/loginactions';
 function LoginPage() {
   const navigate=useHistory();
   const[email,setEmail]=useState("");
@@ -41,6 +41,8 @@ function LoginPage() {
       dispatch(Login(Usercredential.user.uid));
       dispatch(getSongs());
       dispatch(getPlaylists(Usercredential.user.uid));
+      dispatch(getLikedSongs(Usercredential.user.uid))
+      // dispatch(getLoginData(Usercredential.user.uid ))
       navigate.push('/Home');
      
     }).catch((error)=>{
@@ -55,10 +57,10 @@ function LoginPage() {
       <img src={SpotifyLogo} alt=""  />
       <br />
       <h1 id="heading">To continue,login to Spotify</h1>
-      <Form onSubmit={sigin}>
+      <Form onSubmit={sigin} >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e)=>{setEmail(e.target.value)
+        <Form.Control type="email" placeholder="Enter email"  value={email} onChange={(e)=>{setEmail(e.target.value)
         setError("");}} />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
@@ -67,7 +69,7 @@ function LoginPage() {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password"  value={password} onChange={(e)=>{setPassword(e.target.value)
+        <Form.Control type="password" placeholder="Password"     value={password} onChange={(e)=>{setPassword(e.target.value)
         setError("");}}/>
       </Form.Group>
 

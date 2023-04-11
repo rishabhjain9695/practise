@@ -1,17 +1,23 @@
 
 export const Login=(loggedin)=>{
-    console.log("ayushhshshs");
     return {
         type:"LOGIN",
         loggedin
     }
 }
-export const setLoginData=(loggedin)=>{
-    return {
-        type:"LOGIN",
-        loggedin
-    }
-}
+// export const getLoginData=(loggedin)=>{
+//     console.log("dynamic",loggedin)
+//     return {
+//         type:"GETLOGIN",
+//         loggedin
+//     }
+// }
+// export const setLoginData=(loggedin)=>{
+//     return {
+//         type:"SETLOGIN",
+//         loggedin
+//     }
+// }
 export const Logoutuser=(loggedin)=>{
     return {
         type:"LOGOUT",
@@ -43,13 +49,16 @@ export const setPlaylists=(payload)=>{
         payload
     }
 }
-export const addToPlaylist=(payload)=>{
+export const    addToPlaylist=(payload)=>{
+  
+    console.log("addToPlaylist action",payload);
     return {
         type:"ADDSONGTOPLAYLIST",
         payload
     }
 }
 export const getUpdatedPlaylistdata=(payload)=>{
+    console.log("getupadtated",payload)
     return {
         type:"GETUPDATEDSONGSFROMPLAYLIST",
         payload
@@ -62,7 +71,7 @@ export const addtoLikedSongs=(payload)=>{
     }
 }
 export const getUpdatedLikedSongs=(payload)=>{
-    console.log("tameez",payload)
+    console.log("add",payload)
     return {
         type:"GETADDLIKEDSONGS",
         payload
@@ -93,6 +102,20 @@ export const setSelectedPlaylistSongs=(payload)=>{
     console.log("fd");
     return {
         type:"SETSELECTEDPLAYLISTSONGS",
+        payload
+    }
+}
+export const getLikedSongs=(payload)=>{
+    console.log("add",payload)
+    return {
+        type:"GETLIKEDSONGSDURINGLOGGEDIN",
+        payload
+    }
+}
+export const setLikedSongs=(payload)=>{
+    console.log("add",payload)
+    return {
+        type:"SETLIKEDSONGSDURINGLOGGEDIN",
         payload
     }
 }

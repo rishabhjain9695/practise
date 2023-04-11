@@ -3,7 +3,6 @@ import { db } from '../../firebase';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "./User.css"
-import { useHistory } from "react-router-dom";
 import { addNewplaylist } from "Redux/Actions/Loginactions/loginactions";
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -20,7 +19,7 @@ const UserPlaylist = () => {
     );
 
 }
-export default UserPlaylist
+export default UserPlaylist;
 
 
 

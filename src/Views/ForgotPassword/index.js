@@ -1,9 +1,7 @@
 import React from 'react'
 
 import '../Signup/App.css'
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import SpotifyLogo from './../Components/imagess/SpotifyLogo.png'
 import { useState } from 'react';
 import "./App.css"
 import {useHistory} from "react-router-dom";

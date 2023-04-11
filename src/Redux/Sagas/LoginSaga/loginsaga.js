@@ -1,11 +1,12 @@
 
 import axios from "axios";
 import { takeLatest, put, all } from "redux-saga/effects";
-import { getUpdatedPlaylistdata, setPlaylists, setSongs, addtoLikedSongs,getUpdatedLikedSongs, getUpdatedPlaylistsArray, setSelectedPlaylistSongs,} from "Redux/Actions/Loginactions/loginactions"
+import { getUpdatedPlaylistdata, setPlaylists, setSongs, addtoLikedSongs,getUpdatedLikedSongs, getUpdatedPlaylistsArray, setSelectedPlaylistSongs, getLikedSongs, setLikedSongs,} from "Redux/Actions/Loginactions/loginactions"
 import { collection,getDocs,getDoc,doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { db } from "firebase";
 import { updateDoc,arrayUnion } from "firebase/firestore";
+import { setLoginData } from "Redux/Actions/Loginactions/loginactions";
 
     function* getAllSongs(){
 console.log("saga called");
@@ -89,11 +90,13 @@ catch(error){
 
 }
 function* getSelectedPlaylistSongsArr({payload}){
-  console.log("addsagasucess",payload.selectedPlaylist);
+  console.log("addsagasucess",payload);
   try{
    
     const userData = doc(db, "users", payload.userToken);
     const userDoc = yield getDoc(userData);
+    const data=userDoc.data().playlist;
+    console.log(data)
     const getplaylistdata = userDoc.data().playlist[payload.selectedPlaylist];
     console.log("gettttttttttttt", getplaylistdata)
     yield put(setSelectedPlaylistSongs(getplaylistdata));
@@ -104,35 +107,53 @@ catch(error){
   
 
 }
-function* getLoginUserData({loggedin}){
-  console.log("loggedinkey",loggedin);
+function* getLikedSongsLogin({payload}){
+  console.log("addsagasucess",payload);
   try{
-    const userRef = doc(db, "users",loggedin);
-    console.log("userRef",userRef);
-    const userDoc = yield getDoc(userRef);
-    console.log(userDoc.data(),"userData");
-    // const userdata = userDoc.data().playlist;
-    // console.log("MANAVVVV",userdata);
-    // const playlistNamesArray=Object.keys(userdata);
-    // console.log(playlistNamesArray,"playlnames");
-    // yield put(setPlaylists(playlistNamesArray));
-    }
-    catch(error){
-    
-    }
-  
+    const user = doc(db, "users",payload);
+                console.log(payload,"userToken")
+                const useref = yield getDoc(user);
+                const userlikedSongs= useref.data().LikedSongs;
+                console.log("aa",userlikedSongs);
+                yield put (setLikedSongs(userlikedSongs));
+  }
+catch(error){
 
 }
+}
+  
+
+// }
+// function* getLoginuserdata(payload){
+//   console.log("getLoginuserdata",payload);
+//   try{
+   
+//     const userData = doc(db, "users", payload.loggedin);
+//     const userDoc = yield getDoc(userData);
+//     const data=userDoc.data();
+//     console.log(data,"getLoginuserdata22")
+//     // const getplaylistdata = userDoc.data().playlist[payload.selectedPlaylist];
+//     // console.log("gettttttttttttt", getplaylistdata)
+//     yield put(setLoginData(data));
+//   }
+// catch(error){
+
+// }
+  
+
+// }
+
 
 function* Sagaa() {
   yield all([
     takeLatest("ADDNEWPLAYLIST",addNewPlaylist),
-    takeLatest("LOGIN", getLoginUserData),
     takeLatest("GETALLSONGS", getAllSongs),
     takeLatest("GETPLAYLISTS",getPlaylists),
     takeLatest("ADDSONGTOPLAYLIST",addSongToPlaylist),
     takeLatest("GETSELECTEDPLAYLISTSONGS",getSelectedPlaylistSongsArr),
     takeLatest("ADDLIKEDSONGS",LikedSongs),
+    // takeLatest("GETLOGIN",getLoginuserdata)
+    takeLatest("GETLIKEDSONGSDURINGLOGGEDIN",getLikedSongsLogin)
 
   ]);
 }
