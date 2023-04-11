@@ -1,34 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './player.css';
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
-const Player = ({songdata,currentSong,setCurrentSong,isPlaying,setIsPlaying,audioElem,enablePauseButton,setPlaybutton})=> {
-const [show,setShow]=useState(false);
+const Player = ()=> {
       const clickRef = useRef();
+      const currentSongUrl=useSelector((state)=>state.loginreducer.currentSong);
+      console.log(currentSongUrl,"cssurl")
+      const [currentSongg,setCurrentSongg]=useState("");
+      const songData=useSelector((state)=>state.loginreducer.songs);
+      const [isPlaaying,setIsplayying]=useState(false);
+      console.log(songData,"sonnn");
+      const audioElems=useRef();
   const checkWidth = (e)=>
   {
-    let width = clickRef.current.clientWidth;
-    const offset = e.nativeEvent.offsetX;
-    const divprogress = offset / width * 100;
-    audioElem.current.currentTime = divprogress / 100 * currentSong.length;
+    // let width = clickRef.current.clientWidth;
+    // const offset = e.nativeEvent.offsetX;
+    // const divprogress = offset / width * 100;
+    // audioElem.current.currentTime = divprogress / 100 * currentSong.length;
 
   }
 
   const skipBack = ()=>
   {
-    const index = songdata.findIndex(x=>x.SongName == currentSong.SongName);
+    console.log(songData[songData.length-1].SongUrl,"sd");
+    console.log(currentSongg,"cs");
+    const index = songData.findIndex(x=>x.SongUrl == currentSongg.SongUrl);
+    console.log(index,"z")
     if (index == 0)
     {
-      setCurrentSong(songdata[songdata.length - 1])
+      setCurrentSongg(songData[songData.length - 1])
     }
     else
     {
-      setCurrentSong(songdata[index - 1])
+      setCurrentSongg(songData[index - 1])
     }
 
-    audioElem.current.currentTime = 0;
-    setIsPlaying(!isPlaying); 
-  setPlaybutton(true);
+    audioElems.current.currentTime = 0;
+  //   setIsPlaying(!isPlaying); 
+  // setPlaybutton(true);
     
   }
 
@@ -36,64 +46,74 @@ const [show,setShow]=useState(false);
   const skiptoNext = ()=>
   {
    
-    const index = songdata.findIndex(x=>x.SongName == currentSong.SongName);
+    const index = songData.findIndex(x=>x.SongUrl == currentSongg.SongUrl);
 
-    if (index == songdata.length-1)
+    if (index == songData.length-1)
     {
       
-      setCurrentSong(songdata[0]);
+      setCurrentSongg(songData[0]);
     }
     else
     {
-      setCurrentSong(songdata[index + 1])
+      setCurrentSongg(songData[index + 1])
     }
-    audioElem.current.currentTime = 0;
-        setIsPlaying(!isPlaying);
-    setPlaybutton(true);
+    audioElems.current.currentTime = 0;
+    //     setIsPlaying(!isPlaying);
+    // setPlaybutton(true);
   }
 const PlayPause=()=>{
-    setPlaybutton(!enablePauseButton);
+  if(isPlaaying){
+    audioElems.current.pause();
+  }
+  else{
+    audioElems.current.play()
+  }
+
+}
+
+// useEffect(()=>{
+// if(isPlaaying){
+//   audioElems.current.pause();
+// }
+// else{
+//   audioElems.current.play();
+// }
+// },[isPlaaying])
+const onPlaying = () => {
+  const duration = audioElems.current.duration;
+  const ct = audioElems.current.currentTime;
+  // setCurrentSong({ ...currentSong, "progress": ct / duration * 100, "length": duration })
 }
 useEffect(()=>{
-    if(enablePauseButton){
-        audioElem?.current?.play();
-        setShow(true);
-    }
-    else{
-        audioElem?.current?.pause();
-    }
-},[enablePauseButton])
-
+  console.log(currentSongg,"ss")
+  if(currentSongg!==""){
+    audioElems.current.play();
+  }
+  console.log(currentSongg,"CSSS")
+},[currentSongg])
 useEffect(()=>{
-  console.log(audioElem.current,"audioelemmm");
-  console.log(audioElem,"audioelemmm");
-  console.log(currentSong,"cs")
-  if(currentSong!==null){
-   let id=setTimeout(() => {
-    console.log(currentSong,"currentsong");
-      audioElem?.current?.play();
-      
-    }, 1000);
-    return ()=>clearTimeout(id);
-}
-},[isPlaying])
+  console.log(currentSongUrl,"poorp")
+  if(currentSongUrl!==null){
+  setCurrentSongg(currentSongUrl);
+  }
+},[currentSongUrl])
 
+   
   return (
-    <>
-
-   {show? <div className='player_container'>
-   <h1>{currentSong?.SongName}</h1>
+    <>     <audio src={currentSongg.SongUrl} ref={audioElems} onTimeUpdate={onPlaying} />
+{ <div className='player_container'>
+   <h1>{currentSongg?.SongName}</h1>
     <div className="navigation">
       <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef} >
-        <div className="seek_bar" style={{width:`${currentSong?.progress+'%'}`}}></div>
+        <div className="seek_bar" style={{width:`${currentSongg?.progress+'%'}`}}></div>
       </div>
     </div>
     <div className="controls">
       <BsFillSkipStartCircleFill className='btn_action' onClick={skipBack}/>
-      {enablePauseButton ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
+      {isPlaaying ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause} /> : <BsFillPlayCircleFill className='btn_action pp'onClick={PlayPause} />}
       <BsFillSkipEndCircleFill className='btn_action' onClick={skiptoNext}/>        
     </div>
-  </div>: null}
+  </div>}
 </>
   
   )
@@ -103,3 +123,12 @@ export default Player;
 
 
 
+// useEffect(()=>{
+//     if(enablePauseButton){
+//         audioElem?.current?.play();
+//         setShow(true);
+//     }
+//     else{
+//         audioElem?.current?.pause();
+//     }
+// },[enablePauseButton])

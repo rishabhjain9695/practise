@@ -11,6 +11,7 @@ import DocumentTitle from "./DocumentTitle";
 import PublicLayout from "Components/Core/PublicLayout";
 import PrivateLayout from "Components/Core/PrivateLayout";
 import RenderRoutes from "./RenderRoutes";
+import Player from "Views/Player/Player";
 
 const DEFAULT_AUTHENTICATED_ROUTE = "/dashboard";
 const DEFAULT_GUEST_ROUTE = "/login";
@@ -41,6 +42,7 @@ const AuthenticatedRoutes = () => {
         </Route>
         <Redirect from="*" to={DEFAULT_AUTHENTICATED_ROUTE} />
       </Switch>
+      <Player/>
     </PrivateLayout>
   );
 };

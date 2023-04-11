@@ -5,7 +5,7 @@ const initialState = {
   playlists: [],
   playlistSongs: [],
   likedSongs: [],
-  // loggedInObj:null
+  currentSong:null
 };
 const loginreducer = (data = initialState, action) => {
   switch (action.type) {
@@ -17,6 +17,7 @@ const loginreducer = (data = initialState, action) => {
       return { ...data, loggedin: action.loggedin,songs:[], playlists: [],
         playlistSongs: [],
         likedSongs: [],
+        currentSong:null
        };
  
     case "SETSONGS":
@@ -44,9 +45,11 @@ const loginreducer = (data = initialState, action) => {
     case "SETLIKEDSONGSDURINGLOGGEDIN": {
       return { ...data, likedSongs: action.payload };
     }
-    // case "SETLOGIN": {
-    //   return {...data, loggedInObj: action.payload };
-    // }
+    case "SETCURRENTSONG": {
+      console.log("SETCURRENTSONG red",action.payload)
+      return { ...data, currentSong: action.payload };
+    }
+ 
     default:
       return data;
     }

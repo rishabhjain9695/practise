@@ -135,7 +135,7 @@ const Userplaylistdisplayandcreate = () => {
                   </div>
                 </div>
               </div>
-              {
+              {/* {
                 <Player
                   songdata={
                     playingPlaylistSongs ? updatedPlaylistSongs : userSongsList
@@ -145,10 +145,11 @@ const Userplaylistdisplayandcreate = () => {
                   isPlaying={isPlaying}
                   setIsPlaying={setIsPlaying}
                   audioElem={audioElem}
+                  
                   enablePauseButton={enablePauseButton}
                   setPlaybutton={setPlaybutton}
                 />
-              }
+              } */}
             </div>
           }
         </>

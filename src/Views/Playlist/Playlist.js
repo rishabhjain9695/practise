@@ -4,11 +4,13 @@ import './navbar.css'
 import "./navbar.css"
 import maxresdefault from '../../imagess/maxresdefault.jpg'
 import Player from 'Views/Player/Player';
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
+import { setCurrentSongObj } from 'Redux/Actions/Loginactions/loginactions';
 function Home() {
   const userSongsList=useSelector((state)=> state.loginreducer.songs);
 
   const audioElem = useRef();
+  const dispatch=useDispatch();
   const [currentSong, setCurrentSong] = useState(null);
      const [filteredSong,setFilteredSong]=useState([]);
      const [searchValue,setSearchValue]=useState("");
@@ -21,11 +23,11 @@ function Home() {
     const debounce = setTimeout(()=>findSearchSong(searchValue), 1000);
     return ()=>clearTimeout(debounce);
    },[searchValue])
-  const onPlaying = () => {
-    const duration = audioElem.current.duration;
-    const ct = audioElem.current.currentTime;
-    setCurrentSong({ ...currentSong, "progress": ct / duration * 100, "length": duration })
-  }
+  // const onPlaying = () => {
+  //   const duration = audioElem.current.duration;
+  //   const ct = audioElem.current.currentTime;
+  //   setCurrentSong({ ...currentSong, "progress": ct / duration * 100, "length": duration })
+  // }
   const searching=(value)=>{
     setSearchValue(value);
     if(value==""){
@@ -36,8 +38,7 @@ function Home() {
     console.log("ab")
     }}
   const findSearchSong=(searchValue)=>{
-       let filteredData= userSongsList && userSongsList?.filter((value)=>value.SongName.toLowerCase().includes(searchValue.toLowerCase()));
-      //  console.log(filteredData[0],"ff");
+       let filteredData=  userSongsList?.filter((value)=>value.SongName.toLowerCase().includes(searchValue.toLowerCase()));
        if(filteredData?.length!==0){
        setCond2(true);
         setFilteredSong(filteredData);
@@ -48,7 +49,7 @@ function Home() {
   }
   return (
     <>         
-      <audio src={currentSong?.SongUrl} ref={audioElem} onTimeUpdate={onPlaying} />
+      
       <div className='main-container'>
       <input type="search" value={searchValue} onChange={(e)=>searching(e.target.value) } />
         <div className='spotify-playlists'>
@@ -64,12 +65,13 @@ function Home() {
 
                       <h4 style={{color:'white'}}>{e.SongName}</h4>
                       <button id="btnn" onClick={() => {
-                        setCurrentSong(e);
+                        // setCurrentSong(e);
+                        dispatch(setCurrentSongObj(e));
                         setIsPlaying(!isPlaying);
                         setPlaybutton(true);
                       }}>click</button>
 
-                    </div>
+                    </div>  
 
                   )
               })): ( cond2 ? filteredSong && filteredSong.map((e,i) => {
@@ -101,7 +103,7 @@ function Home() {
           </div>
 
         </div>
-        <Player songdata={userSongsList} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePauseButton={enablePauseButton} setPlaybutton={setPlaybutton} />
+        {/* <Player songdata={userSongsList} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePauseButton={enablePauseButton} setPlaybutton={setPlaybutton} /> */}
       </div>
 
     </>
