@@ -19,9 +19,7 @@ const loginreducer = (data = initialState, action) => {
       return { ...data, loggedin: action.loggedin,songs:[], playlists: [],
         playlistSongs: [],
         likedSongs: [],
-        currentSong:null,
         isPlaying:false,
-        currentPlayingSongArray:null
        };
  
     case "SETSONGS":

@@ -16,6 +16,7 @@ const Player = () => {
   const clickRef = useRef();
   const debounce = useRef();
   const dispatch = useDispatch();
+
   const currentSongUrl = useSelector(
     (state) => state.loginreducer?.currentSong?.SongUrl
   );
@@ -74,16 +75,16 @@ const Player = () => {
     }
     if (index == songData.length - 1) {
       console.log(songData[0], "save");
-      audioElems.current.pause();
+      // audioElems.current.pause();
       console.log(debounce.current,"after debb")
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[0]));
         dispatch(isPlayinggggg(true));
-      }, 800);
+      }, 600);
       console.log(debounce, "debounceee");
     } else {
       console.log(songData[index + 1], "save");
-      audioElems.current.pause();
+      // audioElems.current.pause();
       console.log(debounce.current,"after debb22")
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[index + 1]));
@@ -115,11 +116,11 @@ const Player = () => {
   }, [currentSongUrl]);
   useEffect(() => {
     dispatch(isPlayinggggg(false));
-    if(audioElems.current){
-      audioElems.current.onended=function(){
-        console.log("heyeeyeyey");
-    }
-  }
+  //   if(audioElems.current){
+  //     audioElems.current.onended=function(){
+  //       console.log("heyeeyeyey");
+  //   }
+  // }
    
   }, []);
 
