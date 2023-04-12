@@ -5,7 +5,9 @@ const initialState = {
   playlists: [],
   playlistSongs: [],
   likedSongs: [],
-  currentSong:null
+  currentSong:null,
+  isPlaying:false,
+  currentPlayingSongArray:null
 };
 const loginreducer = (data = initialState, action) => {
   switch (action.type) {
@@ -17,7 +19,9 @@ const loginreducer = (data = initialState, action) => {
       return { ...data, loggedin: action.loggedin,songs:[], playlists: [],
         playlistSongs: [],
         likedSongs: [],
-        currentSong:null
+        currentSong:null,
+        isPlaying:false,
+        currentPlayingSongArray:null
        };
  
     case "SETSONGS":
@@ -49,7 +53,14 @@ const loginreducer = (data = initialState, action) => {
       console.log("SETCURRENTSONG red",action.payload)
       return { ...data, currentSong: action.payload };
     }
- 
+    case "ISPLAYING": {
+      console.log("ISPLAYING red",action.payload)
+      return { ...data,   isPlaying: action.payload };
+    }
+    case "CURRENTPLAYINGSONGARAAY": {
+      console.log("CURRENTPLAYINGSONGARAAY REDUCER ",action.payload)
+      return { ...data,currentPlayingSongArray: action.payload };
+    }
     default:
       return data;
     }

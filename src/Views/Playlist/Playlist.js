@@ -3,19 +3,15 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import './navbar.css'
 import "./navbar.css"
 import maxresdefault from '../../imagess/maxresdefault.jpg'
+import chainsmokers from '../../imagess/chainsmokers.webp'
 import Player from 'Views/Player/Player';
 import {  useDispatch, useSelector } from 'react-redux';
-import { setCurrentSongObj } from 'Redux/Actions/Loginactions/loginactions';
+import { currentPlayingSongArr, isPlayinggggg, setCurrentSongObj } from 'Redux/Actions/Loginactions/loginactions';
 function Home() {
   const userSongsList=useSelector((state)=> state.loginreducer.songs);
-
-  const audioElem = useRef();
   const dispatch=useDispatch();
-  const [currentSong, setCurrentSong] = useState(null);
      const [filteredSong,setFilteredSong]=useState([]);
      const [searchValue,setSearchValue]=useState("");
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [enablePauseButton, setPlaybutton] = useState(false);
   const [cond,setCond]=useState(false);
   const [cond2,setCond2]=useState(false);
      useEffect(()=>{
@@ -23,11 +19,6 @@ function Home() {
     const debounce = setTimeout(()=>findSearchSong(searchValue), 1000);
     return ()=>clearTimeout(debounce);
    },[searchValue])
-  // const onPlaying = () => {
-  //   const duration = audioElem.current.duration;
-  //   const ct = audioElem.current.currentTime;
-  //   setCurrentSong({ ...currentSong, "progress": ct / duration * 100, "length": duration })
-  // }
   const searching=(value)=>{
     setSearchValue(value);
     if(value==""){
@@ -51,7 +42,7 @@ function Home() {
     <>         
       
       <div className='main-container'>
-      <input type="search" value={searchValue} onChange={(e)=>searching(e.target.value) } />
+      <input type="search" id='searchstyle' value={searchValue} onChange={(e)=>searching(e.target.value) } />
         <div className='spotify-playlists'>
           <h2>All Songs</h2>
           <div className='spotifydiv'>
@@ -61,14 +52,13 @@ function Home() {
                 return (
 
                     <div className="item" key={i}>
-                      <img src={maxresdefault} alt="" />
+                      <img src={chainsmokers} alt="" />
 
                       <h4 style={{color:'white'}}>{e.SongName}</h4>
                       <button id="btnn" onClick={() => {
-                        // setCurrentSong(e);
                         dispatch(setCurrentSongObj(e));
-                        setIsPlaying(!isPlaying);
-                        setPlaybutton(true);
+                        dispatch(isPlayinggggg(true));
+                        dispatch(currentPlayingSongArr(userSongsList));
                       }}>click</button>
 
                     </div>  
@@ -78,13 +68,13 @@ function Home() {
                 return (
 
                     <div className="item" key={i}>
-                      <img src={maxresdefault} alt="" />
+                      <img src={chainsmokers} alt="" />
 
                       <h4>{e.SongName}</h4>
                       <button onClick={() => {
-                        setCurrentSong(e);
-                        setIsPlaying(!isPlaying);
-                        setPlaybutton(true);
+                   dispatch(setCurrentSongObj(e));
+                        dispatch(isPlayinggggg(true));
+                        dispatch(currentPlayingSongArr(filteredSong));
                       }}>click</button>
 
                     </div>
@@ -103,7 +93,6 @@ function Home() {
           </div>
 
         </div>
-        {/* <Player songdata={userSongsList} currentSong={currentSong} setCurrentSong={setCurrentSong} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioElem={audioElem} enablePauseButton={enablePauseButton} setPlaybutton={setPlaybutton} /> */}
       </div>
 
     </>

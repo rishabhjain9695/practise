@@ -4,15 +4,18 @@ import { useSelector } from "react-redux";
 import likedicon from "../../imagess2/likedicon.png";
 import maxresdefault from "../../imagess/maxresdefault.jpg";
 import "./App.css";
-import Player from "Views/Player/Player";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import {
   addToPlaylist,
   addtoLikedSongs,
+  isPlayinggggg,
+  setCurrentSongObj,
+  currentPlayingSongArr,
 } from "Redux/Actions/Loginactions/loginactions";
 const Userplaylistdisplayandcreate = () => {
   const dispatch = useDispatch();
+  const debounce=useRef();
   const userSongsList = useSelector((state) => state.loginreducer.songs);
   const userToken = useSelector((state) => state.loginreducer.loggedin);
   const updatedPlaylistSongs = useSelector(
@@ -23,9 +26,6 @@ const Userplaylistdisplayandcreate = () => {
   const audioElem = useRef(); 
   const { name } = params;
   const [currentSong, setCurrentSong] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [enablePauseButton, setPlaybutton] = useState(false);
-  const [playingPlaylistSongs, setplayingPlaylistSong] = useState(false);
 
   const onPlaying = () => {
     const duration = audioElem.current.duration;
@@ -59,10 +59,15 @@ const Userplaylistdisplayandcreate = () => {
                         <button
                           id="playBtn"
                           onClick={() => {
-                            setCurrentSong(e);
-                            setIsPlaying(!isPlaying);
-                            setPlaybutton(true);
-                            setplayingPlaylistSong(true);
+                            if(debounce.current){
+                              clearTimeout(debounce.current);
+                            }
+                             debounce.current= setTimeout(()=>{
+                             dispatch(setCurrentSongObj(e));
+                             dispatch(isPlayinggggg(true));
+                             dispatch(currentPlayingSongArr(updatedPlaylistSongs));
+
+                            },1000)
                           }}
                         >
                           click to Play Playlist
@@ -103,6 +108,10 @@ const Userplaylistdisplayandcreate = () => {
                             onClick={() => {
                               console.log("clicked.,")
                               dispatch(addToPlaylist(payloadtoSent));
+                              dispatch(currentPlayingSongArr(updatedPlaylistSongs));
+
+                             
+                        
                             }}
                           >
                             Add Song to Playlist
@@ -120,10 +129,11 @@ const Userplaylistdisplayandcreate = () => {
                           </button>
                           <button
                             onClick={() => {
-                              setCurrentSong(songObject);
-                              setIsPlaying(!isPlaying);
-                              setPlaybutton(true);
-                              setplayingPlaylistSong(false);
+                           
+                              dispatch(setCurrentSongObj(songObject));
+
+                             dispatch(isPlayinggggg(true));
+                             dispatch(currentPlayingSongArr(userSongsList));
                             }}
                             id="btnstyle2"
                           >
@@ -135,21 +145,7 @@ const Userplaylistdisplayandcreate = () => {
                   </div>
                 </div>
               </div>
-              {/* {
-                <Player
-                  songdata={
-                    playingPlaylistSongs ? updatedPlaylistSongs : userSongsList
-                  }
-                  currentSong={currentSong}
-                  setCurrentSong={setCurrentSong}
-                  isPlaying={isPlaying}
-                  setIsPlaying={setIsPlaying}
-                  audioElem={audioElem}
-                  
-                  enablePauseButton={enablePauseButton}
-                  setPlaybutton={setPlaybutton}
-                />
-              } */}
+          
             </div>
           }
         </>

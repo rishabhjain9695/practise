@@ -115,7 +115,7 @@ export const getLikedSongs=(payload)=>{
 export const setLikedSongs=(payload)=>{
     console.log("add",payload)
     return {
-        type:"SETLIKEDSONGSDURINGLOGGEDIN",
+        type:"SETisPlaayingLIKEDSONGSDURINGLOGGEDIN",
         payload
     }
 }
@@ -123,6 +123,20 @@ export const setCurrentSongObj=(payload)=>{
     console.log("currentsong",payload)
     return {
         type:"SETCURRENTSONG",
+        payload
+    }
+}
+export const isPlayinggggg=(payload)=>{
+    console.log("isPlayingggg",payload)
+    return {
+        type:"ISPLAYING",
+        payload
+    }
+}
+export const currentPlayingSongArr=(payload)=>{
+    console.log("currentPlayingSong",payload)
+    return {
+        type:"CURRENTPLAYINGSONGARAAY",
         payload
     }
 }
