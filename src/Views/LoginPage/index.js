@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import '../LoginPage'
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import SpotifyLogo from '../../imagess/SpotifyLogo.png'
 import { Link } from 'react-router-dom';
@@ -42,7 +41,6 @@ function LoginPage() {
       dispatch(getSongs());
       dispatch(getPlaylists(Usercredential.user.uid));
       dispatch(getLikedSongs(Usercredential.user.uid))
-      // dispatch(getLoginData(Usercredential.user.uid ))
       navigate.push('/Home');
      
     }).catch((error)=>{
@@ -83,4 +81,4 @@ function LoginPage() {
   )
 }
 
-export default LoginPage
+export default LoginPage;

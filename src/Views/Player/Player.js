@@ -16,6 +16,7 @@ const Player = () => {
   const clickRef = useRef();
   const debounce = useRef();
   const dispatch = useDispatch();
+  const [isFirstRender,setIsFirstRender]=useState(true);
 
   const currentSongUrl = useSelector(
     (state) => state.loginreducer?.currentSong?.SongUrl
@@ -41,8 +42,6 @@ const Player = () => {
   const skipBack = () => {
     if (debounce.current) {
       clearTimeout(debounce.current);
-      // return ;
-
     }
     console.log(songData[songData.length - 1].SongUrl, "sd");
     const index = songData.findIndex((x) => x.SongUrl == currentSongUrl);
@@ -52,13 +51,13 @@ const Player = () => {
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[songData.length - 1]));
         dispatch(isPlayinggggg(true));
-      }, 700);
+      }, 1000);
     } else {
       console.log(songData[index - 1], "save");
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[index - 1]));
         dispatch(isPlayinggggg(true));
-      }, 600);
+      }, 1000);
     }
 
     audioElems.current.currentTime = 0;
@@ -75,21 +74,20 @@ const Player = () => {
     }
     if (index == songData.length - 1) {
       console.log(songData[0], "save");
-      // audioElems.current.pause();
       console.log(debounce.current,"after debb")
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[0]));
         dispatch(isPlayinggggg(true));
-      }, 600);
+      }, 1000);
       console.log(debounce, "debounceee");
     } else {
       console.log(songData[index + 1], "save");
-      // audioElems.current.pause();
-      console.log(debounce.current,"after debb22")
+     
+      console.log(debounce.current,"after debb22");
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[index + 1]));
         dispatch(isPlayinggggg(true));
-      });
+      },1000);
     }
     audioElems.current.currentTime = 0;
   };
@@ -109,25 +107,24 @@ const Player = () => {
     setProgress((ct / duration) * 100);
   };
   useEffect(() => {
-    if (currentSongUrl !== "") {
-      console.log(currentSongUrl, "aas");
-      audioElems.current.play();
-    }
+ if(isFirstRender){
+  setIsFirstRender(false);
+  return ;
+ }
+ audioElems.current.play();
   }, [currentSongUrl]);
   useEffect(() => {
     dispatch(isPlayinggggg(false));
-  //   if(audioElems.current){
-  //     audioElems.current.onended=function(){
-  //       console.log("heyeeyeyey");
-  //   }
-  // }
    
   }, []);
+  const playNextSong=()=>{
+    console.log("heyyeyye");
+  }
 
   return (
     <>
       {" "}
-      <audio src={currentSongUrl} ref={audioElems} onTimeUpdate={onPlaying} />
+      <audio src={currentSongUrl} ref={audioElems} onTimeUpdate={onPlaying}  onEndedCapture={playNextSong}/>
       {
         <div className="player_container">
           <h1>{currentSongName}</h1>
