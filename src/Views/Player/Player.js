@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import './player.css';
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
 import { useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import { setCurrentSongObj } from 'Redux/Actions/Loginactions/loginactions';
 const Player = ()=> {
       const clickRef = useRef();
-      const currentSongUrl=useSelector((state)=>state.loginreducer.currentSong);
-      console.log(currentSongUrl,"cssurl")
+      const dispatch=useDispatch();
+      const currentSongUrl=useSelector((state)=>state.loginreducer.currentSong.SongUrl);
+      const currentSongName=useSelector((state)=>state.loginreducer.currentSong.SongName);
+      console.log(currentSongUrl,"reduxurl")
       const [currentSongg,setCurrentSongg]=useState("");
       const songData=useSelector((state)=>state.loginreducer.songs);
       const [isPlaaying,setIsplayying]=useState(false);
@@ -14,10 +17,10 @@ const Player = ()=> {
       const audioElems=useRef();
   const checkWidth = (e)=>
   {
-    // let width = clickRef.current.clientWidth;
-    // const offset = e.nativeEvent.offsetX;
-    // const divprogress = offset / width * 100;
-    // audioElem.current.currentTime = divprogress / 100 * currentSong.length;
+    let width = clickRef.current.clientWidth;
+    const offset = e.nativeEvent.offsetX;
+    const divprogress = offset / width * 100;
+    audioElems.current.currentTime = divprogress / 100 * currentSong.length;
 
   }
 
@@ -25,15 +28,18 @@ const Player = ()=> {
   {
     console.log(songData[songData.length-1].SongUrl,"sd");
     console.log(currentSongg,"cs");
-    const index = songData.findIndex(x=>x.SongUrl == currentSongg.SongUrl);
+    const index = songData.findIndex(x=>x.SongUrl == currentSongUrl);
     console.log(index,"z")
     if (index == 0)
     {
-      setCurrentSongg(songData[songData.length - 1])
+      console.log(songData[songData.length-1],"save")
+      // setCurrentSongg(songData[songData.length - 1])
+      dispatch(setCurrentSongObj(songData[songData.length-1]));
     }
     else
     {
-      setCurrentSongg(songData[index - 1])
+      console.log(songData[index-1],"save")
+      dispatch(setCurrentSongObj(songData[index-1]));
     }
 
     audioElems.current.currentTime = 0;
@@ -46,16 +52,17 @@ const Player = ()=> {
   const skiptoNext = ()=>
   {
    
-    const index = songData.findIndex(x=>x.SongUrl == currentSongg.SongUrl);
+    const index = songData.findIndex(x=>x.SongUrl == currentSongUrl);
 
     if (index == songData.length-1)
     {
-      
-      setCurrentSongg(songData[0]);
+      console.log(songData[0],"save")
+      dispatch(setCurrentSongObj(songData[0]));
     }
     else
     {
-      setCurrentSongg(songData[index + 1])
+      console.log(songData[index+1],"save")
+      dispatch(setCurrentSongObj(songData[index+1]))
     }
     audioElems.current.currentTime = 0;
     //     setIsPlaying(!isPlaying);
@@ -63,10 +70,12 @@ const Player = ()=> {
   }
 const PlayPause=()=>{
   if(isPlaaying){
-    audioElems.current.pause();
+    // audioElems.current.pause();
+    setIsplayying(false);
   }
   else{
-    audioElems.current.play()
+    // audioElems.current.play()
+    setIsplayying(true);
   }
 
 }
@@ -85,24 +94,19 @@ const onPlaying = () => {
   // setCurrentSong({ ...currentSong, "progress": ct / duration * 100, "length": duration })
 }
 useEffect(()=>{
-  console.log(currentSongg,"ss")
-  if(currentSongg!==""){
+  if(currentSongUrl!==""){
+    console.log(currentSongUrl,"aas")
     audioElems.current.play();
-  }
-  console.log(currentSongg,"CSSS")
-},[currentSongg])
-useEffect(()=>{
-  console.log(currentSongUrl,"poorp")
-  if(currentSongUrl!==null){
-  setCurrentSongg(currentSongUrl);
+    // setIsplayying(true);
+    // PlayPause(); 
   }
 },[currentSongUrl])
 
    
   return (
-    <>     <audio src={currentSongg.SongUrl} ref={audioElems} onTimeUpdate={onPlaying} />
+    <>     <audio src={currentSongUrl} ref={audioElems} onTimeUpdate={onPlaying} />
 { <div className='player_container'>
-   <h1>{currentSongg?.SongName}</h1>
+   <h1>{currentSongName}</h1>
     <div className="navigation">
       <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef} >
         <div className="seek_bar" style={{width:`${currentSongg?.progress+'%'}`}}></div>

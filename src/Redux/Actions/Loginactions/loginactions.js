@@ -120,7 +120,7 @@ export const setLikedSongs=(payload)=>{
     }
 }
 export const setCurrentSongObj=(payload)=>{
-    console.log("currentsong",payload.SongUrl)
+    console.log("currentsong",payload)
     return {
         type:"SETCURRENTSONG",
         payload
