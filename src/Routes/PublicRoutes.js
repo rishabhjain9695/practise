@@ -16,11 +16,7 @@ export const PUBLIC_ROUTES = [
     component: LoginPage,
     title: "LoginPage",
   },
-  {
-    path: "/logout",
-    component: Logout,
-    title: "Logout",
-  },
+ 
   {
     path: "/forgotpassword",
     component: ForgotPassword,

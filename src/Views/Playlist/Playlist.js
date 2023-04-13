@@ -42,11 +42,12 @@ function Home() {
     <>         
       
       <div className='main-container'>
-      <input type="search" id='searchstyle' value={searchValue} onChange={(e)=>searching(e.target.value) } />
+      <input type="search" id='searchstyle' value={searchValue} onChange={(e)=>searching(e.target.value) }/>
+      <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
         <div className='spotify-playlists'>
           <h2>All Songs</h2>
           <div className='spotifydiv'>
-            <div >
+          <div className="list">
 
               {!cond ? ( userSongsList && userSongsList.map((e,i) => {
                 return (
@@ -71,7 +72,7 @@ function Home() {
                       <img src={chainsmokers} alt="" />
 
                       <h4>{e.SongName}</h4>
-                      <button onClick={() => {
+                      <button id="btnn" onClick={() => {
                    dispatch(setCurrentSongObj(e));
                         dispatch(isPlayinggggg(true));
                         dispatch(currentPlayingSongArr(filteredSong));
@@ -84,14 +85,6 @@ function Home() {
 
             </div>
           </div>
-        </div>
-        <div className='spotify-playlists'>
-          <div className='spotifydiv'>
-            <div className="list">
-
-            </div>
-          </div>
-
         </div>
       </div>
 

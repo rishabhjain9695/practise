@@ -57,7 +57,7 @@ const Userplaylistdisplayandcreate = () => {
                         <h4>Today's Top Hits</h4>
                         <span style={{ color: "white" }}> {e.SongName}</span>
                         <button
-                          id="playBtn"
+                          id="btnn1"
                           onClick={() => {
                             if(debounce.current){
                               clearTimeout(debounce.current);
@@ -80,7 +80,6 @@ const Userplaylistdisplayandcreate = () => {
         </div>
         <>
           {
-            <div className="main-container">
               <div className="spotify-playlists">
                 <h2>All Songs</h2>
                 <div className="spotifydiv">
@@ -104,7 +103,7 @@ const Userplaylistdisplayandcreate = () => {
                             {songObject.SongName}
                           </h4>
                           <button
-                            id="btnstyle3"
+                            id="btnn1"
                             onClick={() => {
                               console.log("clicked.,")
                               dispatch(addToPlaylist(payloadtoSent));
@@ -116,17 +115,14 @@ const Userplaylistdisplayandcreate = () => {
                           >
                             Add Song to Playlist
                           </button>
-                          <button
-                            id="btnstyle3"
-                            onClick={() => {
+                    
+                    <i className="fa-solid fa-heart"     onClick={() => {
                               dispatch(
                                 addtoLikedSongs(payloadToSenttoLikedSongs)
                               );
-                            }}
-                          >
-                            {/* <img src={likedicon} id="hearticon" alt="" /> */}
-                            Add to Liked Songs
-                          </button>
+                            }}></i>
+                            {/* <i class="fa-solid fa-heart" style="color: #f70808;"></i> */}
+                          
                           <button
                             onClick={() => {
                            
@@ -135,7 +131,7 @@ const Userplaylistdisplayandcreate = () => {
                              dispatch(isPlayinggggg(true));
                              dispatch(currentPlayingSongArr(userSongsList));
                             }}
-                            id="btnstyle2"
+                            id="btnn"
                           >
                             click
                           </button>
@@ -146,7 +142,7 @@ const Userplaylistdisplayandcreate = () => {
                 </div>
               </div>
           
-            </div>
+        
           }
         </>
       </div>
