@@ -17,13 +17,32 @@ img{
 #btnstyle{
     background-color: green;
     color: #000000;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
-    padding: 14px 30px;
     border: 0px;
     border-radius: 400px;
     cursor: pointer;
     margin-left: 73px;
     margin-top: 2px;
-    width: 15px;
+    width: 1130px;
+}
+#loginBtn{
+    background-color: green;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0px;
+    border-radius: 400px;
+    cursor: pointer;
+    margin-left: 73px;
+    margin-top: 2px;
+    width: 1130px;
+
+}
+#inpts{
+    border-radius: 14px;
+    width: 268px;
+    margin-bottom: 17px;
+    padding: 5px;
+
 }

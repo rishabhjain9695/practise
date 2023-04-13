@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import likedicon from "../../imagess2/likedicon.png";
 import maxresdefault from "../../imagess/maxresdefault.jpg";
 import "./App.css";
 import { useRef } from "react";
@@ -12,39 +11,34 @@ import {
   isPlayinggggg,
   setCurrentSongObj,
   currentPlayingSongArr,
+  currentSongPlayingToggle
 } from "Redux/Actions/Loginactions/loginactions";
 const Userplaylistdisplayandcreate = () => {
   const dispatch = useDispatch();
   const debounce=useRef();
   const userSongsList = useSelector((state) => state.loginreducer.songs);
   const userToken = useSelector((state) => state.loginreducer.loggedin);
+  const [isFirstRender,setIsFirstRender]=useState(true);
   const updatedPlaylistSongs = useSelector(
     (state) => state.loginreducer.playlistSongs
   );  
   console.log(updatedPlaylistSongs,"checkingggggg")
   const params = useParams();
-  const audioElem = useRef(); 
   const { name } = params;
-  const [currentSong, setCurrentSong] = useState(null);
+  useEffect(()=>{
+    if(isFirstRender){
+      setIsFirstRender(false);
+      return;
+    }
+    else{
 
-  const onPlaying = () => {
-    const duration = audioElem.current.duration;
-    const ct = audioElem.current.currentTime;
-    setCurrentSong({
-      ...currentSong,
-      progress: (ct / duration) * 100,
-      length: duration,
-    });
-  };
-
+      dispatch(currentPlayingSongArr(updatedPlaylistSongs));
+    }
+  },[updatedPlaylistSongs])
   return (
     <>
-      <audio
-        src={currentSong?.SongUrl}
-        ref={audioElem}
-        onTimeUpdate={onPlaying}
-      />
       <div className="main-container">
+
         <div className="spotify-playlists">
           <h2>{name}</h2>
           <div className="spotifydiv">
@@ -63,6 +57,7 @@ const Userplaylistdisplayandcreate = () => {
                               clearTimeout(debounce.current);
                             }
                              debounce.current= setTimeout(()=>{
+                              // dispatch(currentSongPlayingToggle(true));
                              dispatch(setCurrentSongObj(e));
                              dispatch(isPlayinggggg(true));
                              dispatch(currentPlayingSongArr(updatedPlaylistSongs));
@@ -106,11 +101,7 @@ const Userplaylistdisplayandcreate = () => {
                             id="btnn1"
                             onClick={() => {
                               console.log("clicked.,")
-                              dispatch(addToPlaylist(payloadtoSent));
-                              dispatch(currentPlayingSongArr(updatedPlaylistSongs));
-
-                             
-                        
+                              dispatch(addToPlaylist(payloadtoSent));                        
                             }}
                           >
                             Add Song to Playlist

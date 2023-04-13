@@ -106,7 +106,7 @@ export const setSelectedPlaylistSongs=(payload)=>{
     }
 }
 export const getLikedSongs=(payload)=>{
-    console.log("add",payload)
+    console.log("LIKEDSONGSLOGEEDIN",payload)
     return {
         type:"GETLIKEDSONGSDURINGLOGGEDIN",
         payload
@@ -115,7 +115,7 @@ export const getLikedSongs=(payload)=>{
 export const setLikedSongs=(payload)=>{
     console.log("add",payload)
     return {
-        type:"SETisPlaayingLIKEDSONGSDURINGLOGGEDIN",
+        type:"SETLIKEDSONGSDURINGLOGGEDIN",
         payload
     }
 }

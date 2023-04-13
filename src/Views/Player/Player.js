@@ -12,19 +12,19 @@ import { setCurrentSongObj } from "Redux/Actions/Loginactions/loginactions";
 import { isPlayinggggg } from "Redux/Actions/Loginactions/loginactions";
 
 const Player = () => {
-  const [progress, setProgress] = useState(0);
+  const progress=useRef();
   const clickRef = useRef();
   const debounce = useRef();
   const dispatch = useDispatch();
   const [isFirstRender,setIsFirstRender]=useState(true);
-
-  const currentSongUrl = useSelector(
-    (state) => state.loginreducer?.currentSong?.SongUrl
+  const currentSong = useSelector(
+    (state) => state.loginreducer?.currentSong
   );
+  console.log(currentSong,"111")
   const currentSongName = useSelector(
     (state) => state.loginreducer?.currentSong?.SongName
   );
-  console.log(currentSongUrl, "reduxurl");
+  console.log(currentSong, "reduxurl");
   const songData = useSelector(
     (state) => state.loginreducer.currentPlayingSongArray
   );
@@ -43,17 +43,14 @@ const Player = () => {
     if (debounce.current) {
       clearTimeout(debounce.current);
     }
-    console.log(songData[songData.length - 1].SongUrl, "sd");
-    const index = songData.findIndex((x) => x.SongUrl == currentSongUrl);
+    const index = songData.findIndex((x) => x.SongUrl == currentSong.SongUrl);
     console.log(index, "z");
     if (index == 0) {
-      console.log(songData[songData.length - 1], "save");
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[songData.length - 1]));
         dispatch(isPlayinggggg(true));
       }, 1000);
     } else {
-      console.log(songData[index - 1], "save");
       debounce.current = setTimeout(() => {
         dispatch(setCurrentSongObj(songData[index - 1]));
         dispatch(isPlayinggggg(true));
@@ -64,7 +61,7 @@ const Player = () => {
   };
 
   const skiptoNext = () => {
-    const index = songData.findIndex((x) => x.SongUrl == currentSongUrl);
+    const index = songData.findIndex((x) => x.SongUrl == currentSong.SongUrl);
     console.log("deb", debounce.current);
     if (debounce.current) {
       console.log(debounce,"debounce 1")
@@ -104,27 +101,45 @@ const Player = () => {
   const onPlaying = () => {
     const duration = audioElems.current.duration;
     const ct = audioElems.current.currentTime;
-    setProgress((ct / duration) * 100);
+    progress.current.style.width=`${(ct/duration)*100 + "%"}`;
+ 
   };
   useEffect(() => {
  if(isFirstRender){
   setIsFirstRender(false);
   return ;
  }
+ audioElems.current.currentTime = 0;
  audioElems.current.play();
-  }, [currentSongUrl]);
+  }, [currentSong]);
+ 
   useEffect(() => {
     dispatch(isPlayinggggg(false));
    
   }, []);
   const playNextSong=()=>{
-    console.log("heyyeyye");
+   const index = songData.findIndex((x) => x.SongUrl == currentSong.SongUrl);
+   console.log(index,"index");  
+   if (index == songData.length - 1) {
+    console.log("2")
+    dispatch(setCurrentSongObj(songData[0]));
+    dispatch(isPlayinggggg(true));
+   }
+   else{
+    console.log("1")
+    dispatch(setCurrentSongObj(songData[index + 1]));
+    dispatch(isPlayinggggg(true));  
+   }
   }
 
+  console.log('sdfsfsaf');  
   return (
     <>
-      {" "}
-      <audio src={currentSongUrl} ref={audioElems} onTimeUpdate={onPlaying}  onEndedCapture={playNextSong}/>
+      
+        {currentSong ? 
+        <audio src={currentSong.SongUrl} ref={audioElems} onTimeUpdate={onPlaying}  onEndedCapture={playNextSong}/>: null}
+      
+      
       {
         <div className="player_container">
           <h1>{currentSongName}</h1>
@@ -136,7 +151,8 @@ const Player = () => {
             >
               <div
                 className="seek_bar"
-                style={{ width: `${progress + "%"}` }}
+                // style={{ width: `${progress.current + "%"}` }}
+                ref={progress}
               ></div>
             </div>
           </div>

@@ -55,7 +55,28 @@ function LoginPage() {
       <img src={SpotifyLogo} alt=""  />
       <br />
       <h1 id="heading">To continue,login to Spotify</h1>
-      <Form onSubmit={sigin} >
+   <Form onSubmit={sigin}  autoComplete="off    ">
+        <label>Email</label>
+      <br/>
+      <input type="email"     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Enter your email" value={email}  onChange={(e)=>{setEmail(e.target.value)} }/>
+      <br/>
+      <label>Password</label>
+      <br/>
+      <input type="password"     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required placeholder=" Enter your password" value={password} onChange={(e)=>{setPassword(e.target.value)} }/>
+      <br/>
+      <button  id='loginBtn' type='submit' >Login</button>
+
+   </Form>
+   
+    {<span style={{color:'red'}}>{error}</span>}
+    <Link style={{textDecoration:'none'}} to='/forgotpassword'>Forgot Password</Link>
+    <Link style={{textDecoration:'none'}} to='/signup'>Dont have an Acoount! Create a new Account</Link>
+    </div>
+  )
+}
+
+export default LoginPage;
+   {/* <Form onSubmit={sigin} autoComplete="o" >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email"  value={email} onChange={(e)=>{setEmail(e.target.value)
@@ -71,14 +92,5 @@ function LoginPage() {
         setError("");}}/>
       </Form.Group>
 
-      <button  id='btnstyle' type='submit' >Login</button>
-    </Form> 
-   
-    {<span style={{color:'red'}}>{error}</span>}
-    <Link style={{textDecoration:'none'}} to='/forgotpassword'>Forgot Password</Link>
-    <Link style={{textDecoration:'none'}} to='/signup'>Dont have an Acoount! Create a new Account</Link>
-    </div>
-  )
-}
-
-export default LoginPage;
+      <button  id='loginBtn' type='submit' >Login</button>
+    </Form>  */}

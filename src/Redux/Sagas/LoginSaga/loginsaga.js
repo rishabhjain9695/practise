@@ -108,7 +108,7 @@ catch(error){
 
 }
 function* getLikedSongsLogin({payload}){
-  console.log("addsagasucess",payload);
+  console.log("LIKEDSONGSLOGGEDINSAGA",payload);
   try{
     const user = doc(db, "users",payload);
                 console.log(payload,"userToken")
@@ -121,29 +121,6 @@ catch(error){
 
 }
 }
-  
-
-// }
-// function* getLoginuserdata(payload){
-//   console.log("getLoginuserdata",payload);
-//   try{
-   
-//     const userData = doc(db, "users", payload.loggedin);
-//     const userDoc = yield getDoc(userData);
-//     const data=userDoc.data();
-//     console.log(data,"getLoginuserdata22")
-//     // const getplaylistdata = userDoc.data().playlist[payload.selectedPlaylist];
-//     // console.log("gettttttttttttt", getplaylistdata)
-//     yield put(setLoginData(data));
-//   }
-// catch(error){
-
-// }
-  
-
-// }
-
-
 function* Sagaa() {
   yield all([
     takeLatest("ADDNEWPLAYLIST",addNewPlaylist),

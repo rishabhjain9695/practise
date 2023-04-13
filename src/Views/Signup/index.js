@@ -148,13 +148,14 @@ function SignUp() {
   return (
     <div id="loginp">
       <br />
-      <h1 className="heading">To continue,login to Spotify</h1>
+      <h1 className="heading">To continue,Signup to Spotify</h1>
       {!flag ? (
-        <Form onSubmit={sendOtp} >
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+        <Form onSubmit={sendOtp} autoComplete="off" >
+               <div>
+               <label>Name</label>
+            <input
               type="text"
+              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               placeholder="Enter Your Name"
               value={name}
               onChange={(e) => {
@@ -164,16 +165,20 @@ function SignUp() {
                setPhoneNoErrmsg(false);
               }}
             />
-            <Form.Text className="text-muted">
+               </div>
+     
+            <br/>
+            <span>
               We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
+            </span>
+               <br/>
+               <div>
+               <label>Email address</label>
+            <input
               type="email"
               placeholder="Enter email"
               value={email}
+              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               onChange={(e) => {
                 setEmail(e.target.value);
                 setAllErrMsg(false);
@@ -181,33 +186,39 @@ function SignUp() {
                 setPhoneNoErrmsg(false);
               }}
             />
+               </div>
+       
+            <br/>
             {emailErrMessage?<span style={{color:"red"}}> Enter Valid Email</span>:null}
-            <Form.Text className="text-muted">
+            <span >
               We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword" >
-            <Form.Label>Password</Form.Label>
-            <Form.Control
+            </span>
+      <br/>
+      <div>
+      <label>Password</label>
+            <input
               type="password"
              
               placeholder="Password"
               value={password}
+               class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               onChange={(e) => {
                 setPassword(e.target.value);
                 setAllErrMsg(false);
                 setEmailErrmsg(false);
                 setPhoneNoErrmsg(false);
               }}
+          
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Phone Number</Form.Label>
-            <Form.Control
+            <br/>
+      </div>
+         <div>
+         <label>Phone Number</label>
+            <input
               type="text"
               placeholder="Enter your Phone Number"
               value={phoneno}
+              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
               onChange={(e) => {
                 handlPhonenoValidation(e);
                 setErrMsg("");
@@ -216,8 +227,11 @@ function SignUp() {
                 setPhoneNoErrmsg(false);
               }}
             />
+         </div>
+       
+            <br/>
             {phonenoErrMessage? <span style={{color:'red'}}>Please enter Valid Phone Number</span>:null}
-          </Form.Group>
+        
           <div id="sign-in-button"></div>
           <div style={{ color: "red" }}>{errMsgg}</div>
           {enterallErrMsg?<span style={{color:'red'}}> Enter all fields</span>:null}
@@ -228,9 +242,9 @@ function SignUp() {
       ) : null}
       {flag ? (
         <Form onSubmit={onSubmitOTP}>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Otp</Form.Label>
-            <Form.Control
+       
+            <label>Otp</label>
+            <input
               type="number"
               placeholder="Enter Otp"
               value={otp}
@@ -239,7 +253,7 @@ function SignUp() {
                 setErrMsg("")
               }}
             />
-          </Form.Group>
+            <br/>
           {errMsgg?<span style={{color:'red'}}>enter valid otp</span>:null}
           <Button variant="primary" type="submit">
             Submit

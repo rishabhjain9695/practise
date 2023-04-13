@@ -11,15 +11,14 @@
     justify-content: space-between;
     background-color: black;
     margin-left: 216px;
+    border-radius: 47px;
+    width: 1281px;
 
 }
 
     
     .navigation{
-        width: 100%;
-
-
-        
+        width: 100%
     }
     
     .seek_bar{

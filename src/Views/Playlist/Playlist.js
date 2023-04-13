@@ -43,7 +43,7 @@ function Home() {
       
       <div className='main-container'>
       <input type="search" id='searchstyle' value={searchValue} onChange={(e)=>searching(e.target.value) }/>
-      <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+      <i className="fa-sharp fa-solid fa-magnifying-glass searchicon"></i>
         <div className='spotify-playlists'>
           <h2>All Songs</h2>
           <div className='spotifydiv'>

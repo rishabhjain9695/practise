@@ -7,7 +7,7 @@ const initialState = {
   likedSongs: [],
   currentSong:null,
   isPlaying:false,
-  currentPlayingSongArray:null
+  currentPlayingSongArray:null,
 };
 const loginreducer = (data = initialState, action) => {
   switch (action.type) {
@@ -45,11 +45,13 @@ const loginreducer = (data = initialState, action) => {
       return { ...data, playlistSongs: action.payload };
     }
     case "SETLIKEDSONGSDURINGLOGGEDIN": {
+      console.log("RRRRRR",action.payload);
       return { ...data, likedSongs: action.payload };
     }
     case "SETCURRENTSONG": {
       console.log("SETCURRENTSONG red",action.payload)
-      return { ...data, currentSong: action.payload };
+      
+      return { ...data, currentSong: {...action.payload } };// deep clone concept implemented; as useselector will not accept unchanged value object 
     }
     case "ISPLAYING": {
       console.log("ISPLAYING red",action.payload)
