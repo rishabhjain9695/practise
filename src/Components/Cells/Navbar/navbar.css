@@ -63,7 +63,9 @@
     cursor: pointer;
     margin-left: 20px; 
   }
-  .topbar .navbar button:hover,
+  .topbar .navbar button:hover{
+    border: 3px solid black;
+  }
   .topbar .navbar button:active,
   .topbar .navbar button:focus {
     background-color: #f2f2f2;
@@ -95,3 +97,20 @@
     font-size: 27px;
     font-weight: bolder;
   }
+
+  #searching{
+    margin-left: 268px;
+    border-radius: 34px;
+    padding: 11px;
+    width: 402px;
+  }
+  #searching:focus{
+    border:5px solid black
+  }
+  .loginbtn{
+    margin-left: 68px;
+    border-radius: 25px;
+    padding: 10px;
+    border: 1px solid black;
+    
+}

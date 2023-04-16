@@ -4,8 +4,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 80vh;
+    height: 140vh;
 }
+
 img{
     height:50px;
     width: 120px;
@@ -13,4 +14,15 @@ img{
 .heading{
     font-size: 15px;
     font-weight: bolder;
+    margin-top: 11px;
+}
+.sendOtpStyling{
+    margin-left: 68px;
+    border-radius: 25px;
+    padding: 10px;
+    border: 1px solid black;
+    
+}
+.sendOtpStyling:hover{
+    border: 3px solid black;
 }

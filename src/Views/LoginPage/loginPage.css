@@ -10,9 +10,10 @@ img{
     width: 120px;
 }
 #heading{
-    font-size: 1111115px;
+    font-size: 11px;
     font-weight: normal;
-    color: blue;
+    
+    /* color: blue; */
 }
 #btnstyle{
     background-color: green;
@@ -34,15 +35,28 @@ img{
     border: 0px;
     border-radius: 400px;
     cursor: pointer;
-    margin-left: 73px;
-    margin-top: 2px;
-    width: 1130px;
-
-}
+    margin-left: 129px;
+    margin-top: -7px;
+    width: 93px;
+    padding: 19px;
+    margin-top: 14px;
+  }  
+  #loginBtn:hover{
+    border: 3px solid black;
+  } 
 #inpts{
     border-radius: 14px;
     width: 268px;
     margin-bottom: 17px;
     padding: 5px;
 
+}
+.inputstyle{
+    width: 400px;
+    padding: 6px;
+    border-radius: 9px;
+    border: 1px solid black;
+}
+.inputstyle:focus{
+    border:3px solid black;
 }

@@ -11,7 +11,6 @@ import {
   isPlayinggggg,
   setCurrentSongObj,
   currentPlayingSongArr,
-  currentSongPlayingToggle
 } from "Redux/Actions/Loginactions/loginactions";
 const Userplaylistdisplayandcreate = () => {
   const dispatch = useDispatch();
@@ -57,7 +56,6 @@ const Userplaylistdisplayandcreate = () => {
                               clearTimeout(debounce.current);
                             }
                              debounce.current= setTimeout(()=>{
-                              // dispatch(currentSongPlayingToggle(true));
                              dispatch(setCurrentSongObj(e));
                              dispatch(isPlayinggggg(true));
                              dispatch(currentPlayingSongArr(updatedPlaylistSongs));
@@ -112,7 +110,6 @@ const Userplaylistdisplayandcreate = () => {
                                 addtoLikedSongs(payloadToSenttoLikedSongs)
                               );
                             }}></i>
-                            {/* <i class="fa-solid fa-heart" style="color: #f70808;"></i> */}
                           
                           <button
                             onClick={() => {

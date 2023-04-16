@@ -10,7 +10,7 @@ return (
      <h2>Liked Songs</h2>
      <div className='spotifydiv'>
     <div className="list">  
-      {likedSongs?.map((e,i)=>{
+      { likedSongs.length>0 && likedSongs.map((e,i)=>{
         return (
           
   <div className="item" key={i}>

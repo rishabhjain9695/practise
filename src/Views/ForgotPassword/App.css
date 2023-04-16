@@ -24,3 +24,9 @@ font-size:45px ;
     margin-left: 50px;
     margin-top: 28px;
 }
+#Send:hover{
+    border: 3px solid black;
+}
+.inputstyle{
+    width: 400px;
+}

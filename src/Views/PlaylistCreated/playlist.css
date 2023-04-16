@@ -289,17 +289,5 @@ body {
   border-radius: 32px;
   padding: 10px;
   width: 754px;
-}
-#loginBtn{
-  background-color: green;
-  color: #000000;
-  font-size: 14px;
-  font-weight: bold;
-  border: 0px;
-  border-radius: 400px;
-  cursor: pointer;
-  margin-left: 73px;
-  margin-top: 2px;
-  width: 93px;
-  padding: 19px;
+
 }

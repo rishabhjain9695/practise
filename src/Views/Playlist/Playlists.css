@@ -7,6 +7,12 @@
   margin-left: 193px;
   margin-top: -24px;
   margin-bottom: 0px;
+  background-image: url('../../imagess/songwalpaper2.jpeg');
+  background-size: contain;
+  margin-left: 245px;
+    margin-bottom: 2px;
+    width: 75vw;
+    height: 94vh;
   }
   
   .topbar {

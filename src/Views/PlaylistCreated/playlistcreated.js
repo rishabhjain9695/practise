@@ -17,7 +17,7 @@ const CreatePlaylist = () => {
      <h2  >Spotify Playlists</h2>
      <div className='spotifydiv'>
 <div className="list" >
-     {Array.isArray(userPlaylistArr)? userPlaylistArr?.map((selectedPlaylist,index)=>{
+     {Array.isArray(userPlaylistArr)? userPlaylistArr.map((selectedPlaylist,index)=>{
 
        return(
        
@@ -28,7 +28,7 @@ const CreatePlaylist = () => {
 }}>
 <img src={maxresdefault}alt=""/>
  
-  <h4>Today's Top Hits</h4>
+  <h4>Today's Top Playlist</h4>
 <span style={{color:'white'}}>  {selectedPlaylist}  </span>
 </div>
 

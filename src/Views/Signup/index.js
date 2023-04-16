@@ -152,10 +152,10 @@ function SignUp() {
       {!flag ? (
         <Form onSubmit={sendOtp} autoComplete="off" >
                <div>
-               <label>Name</label>
+               <label><b>Name</b></label>
             <input
               type="text"
-              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              className="inputstyle form-control"
               placeholder="Enter Your Name"
               value={name}
               onChange={(e) => {
@@ -173,12 +173,12 @@ function SignUp() {
             </span>
                <br/>
                <div>
-               <label>Email address</label>
+               <label><b>Email address</b></label>
             <input
               type="email"
               placeholder="Enter email"
               value={email}
-              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              className="inputstyle form-control"
               onChange={(e) => {
                 setEmail(e.target.value);
                 setAllErrMsg(false);
@@ -195,14 +195,13 @@ function SignUp() {
             </span>
       <br/>
       <div>
-      <label>Password</label>
+      <label><b>Password</b></label>
             <input
               type="password"
              
               placeholder="Password"
               value={password}
-               class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-              onChange={(e) => {
+              className="inputstyle form-control"      onChange={(e) => {
                 setPassword(e.target.value);
                 setAllErrMsg(false);
                 setEmailErrmsg(false);
@@ -213,12 +212,12 @@ function SignUp() {
             <br/>
       </div>
          <div>
-         <label>Phone Number</label>
+         <label><b>Phone Number</b></label>
             <input
               type="text"
               placeholder="Enter your Phone Number"
               value={phoneno}
-              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+              className="inputstyle form-control"
               onChange={(e) => {
                 handlPhonenoValidation(e);
                 setErrMsg("");
@@ -235,7 +234,7 @@ function SignUp() {
           <div id="sign-in-button"></div>
           <div style={{ color: "red" }}>{errMsgg}</div>
           {enterallErrMsg?<span style={{color:'red'}}> Enter all fields</span>:null}
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="sendOtpStyling">
             SendOtp
           </Button>
         </Form>
@@ -244,7 +243,9 @@ function SignUp() {
         <Form onSubmit={onSubmitOTP}>
        
             <label>Otp</label>
+            <br/>
             <input
+                className="inputstyle form-control" 
               type="number"
               placeholder="Enter Otp"
               value={otp}
@@ -255,7 +256,7 @@ function SignUp() {
             />
             <br/>
           {errMsgg?<span style={{color:'red'}}>enter valid otp</span>:null}
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="sendOtpStyling">
             Submit
           </Button>
         </Form>

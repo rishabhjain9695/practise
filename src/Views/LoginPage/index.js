@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import '../LoginPage'
+import './loginPage.css'
 import Form from 'react-bootstrap/Form';
 import SpotifyLogo from '../../imagess/SpotifyLogo.png'
 import { Link } from 'react-router-dom';
@@ -17,11 +17,24 @@ function LoginPage() {
   const[password,setPassword]=useState("");
   const [error,setError]=useState("");
   const dispatch=useDispatch();
+  const emailRegex= /[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const [emailErrMsg,setEmailErrMsg]=useState(false);
+  const [passwordErrMsg,setPasswordErrMsg]=useState(false);
   const sigin=(e)=>{
     e.preventDefault();
     if(email==""|| password==""){
+      setEmailErrMsg(true);
+      setPasswordErrMsg(true);
       return ;
     }
+     if(email!=="" && password == ""){
+     if(!emailRegex.test(email)){
+         setEmailErrMsg(true);
+         setPasswordErrMsg(true);
+     }
+
+    }
+    
     else{
  
     signInWithEmailAndPassword(auth,email,password).then((Usercredential)=>{
@@ -54,43 +67,37 @@ function LoginPage() {
     
       <img src={SpotifyLogo} alt=""  />
       <br />
-      <h1 id="heading">To continue,login to Spotify</h1>
+      <h1 id="heading"><b>To continue,login to Spotify</b></h1>
    <Form onSubmit={sigin}  autoComplete="off    ">
-        <label>Email</label>
+        <label><b>Email</b></label>
       <br/>
-      <input type="email"     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=" Enter your email" value={email}  onChange={(e)=>{setEmail(e.target.value)} }/>
+      <input type="email" className=" inputstyle "     placeholder=" Enter your email" value={email}  onChange={(e)=>{
+        setEmail(e.target.value)
+      
+      setEmailErrMsg(false);
+      setPasswordErrMsg(false);
+      
+      } }/>
       <br/>
-      <label>Password</label>
+      {emailErrMsg ? <span style={{color:'red'}}>Please enter your Email</span>: null}
       <br/>
-      <input type="password"     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required placeholder=" Enter your password" value={password} onChange={(e)=>{setPassword(e.target.value)} }/>
+      <label><b>Password</b></label>
       <br/>
+      <input type="password" className=" inputstyle "     placeholder=" Enter your password" value={password} onChange={(e)=>{setPassword(e.target.value)
+      setEmailErrMsg(false);
+      setPasswordErrMsg(false);
+      } }/>
+      <br/>
+      {passwordErrMsg ? <span style={{color:'red'}}>Please enter your Password</span>:null}
       <button  id='loginBtn' type='submit' >Login</button>
 
    </Form>
    
     {<span style={{color:'red'}}>{error}</span>}
-    <Link style={{textDecoration:'none'}} to='/forgotpassword'>Forgot Password</Link>
+    <Link  to='/forgotpassword'>Forgot Password ?</Link>
     <Link style={{textDecoration:'none'}} to='/signup'>Dont have an Acoount! Create a new Account</Link>
     </div>
   )
 }
 
 export default LoginPage;
-   {/* <Form onSubmit={sigin} autoComplete="o" >
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email"  value={email} onChange={(e)=>{setEmail(e.target.value)
-        setError("");}} />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password"     value={password} onChange={(e)=>{setPassword(e.target.value)
-        setError("");}}/>
-      </Form.Group>
-
-      <button  id='loginBtn' type='submit' >Login</button>
-    </Form>  */}

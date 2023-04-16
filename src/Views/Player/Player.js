@@ -20,16 +20,16 @@ const Player = () => {
   const currentSong = useSelector(
     (state) => state.loginreducer?.currentSong
   );
-  console.log(currentSong,"111")
+  console.log(currentSong,"currentsongObject")
   const currentSongName = useSelector(
     (state) => state.loginreducer?.currentSong?.SongName
   );
-  console.log(currentSong, "reduxurl");
+  console.log(currentSong.SongUrl, "songurl");
   const songData = useSelector(
     (state) => state.loginreducer.currentPlayingSongArray
   );
   const Playing = useSelector((state) => state.loginreducer.isPlaying);
-  console.log(songData, "cool");
+  console.log(songData, "songarray whether it is from playlist or main songs list");
   const audioElems = useRef();
   const checkWidth = (e) => {
     let width = clickRef.current.clientWidth;
@@ -118,7 +118,7 @@ const Player = () => {
    
   }, []);
   const playNextSong=()=>{
-   const index = songData.findIndex((x) => x.SongUrl == currentSong.SongUrl);
+   const index = songData.findIndex((x) => x.SongUrl == currentSong?.SongUrl);
    console.log(index,"index");  
    if (index == songData.length - 1) {
     console.log("2")
@@ -131,16 +131,14 @@ const Player = () => {
     dispatch(isPlayinggggg(true));  
    }
   }
-
-  console.log('sdfsfsaf');  
   return (
     <>
-      
-        {currentSong ? 
+    
+    {currentSong ? 
         <audio src={currentSong.SongUrl} ref={audioElems} onTimeUpdate={onPlaying}  onEndedCapture={playNextSong}/>: null}
       
       
-      {
+      
         <div className="player_container">
           <h1>{currentSongName}</h1>
           <div className="navigation">
@@ -151,7 +149,6 @@ const Player = () => {
             >
               <div
                 className="seek_bar"
-                // style={{ width: `${progress.current + "%"}` }}
                 ref={progress}
               ></div>
             </div>
@@ -178,7 +175,7 @@ const Player = () => {
             />
           </div>
         </div>
-      }
+   
     </>
   );
 };

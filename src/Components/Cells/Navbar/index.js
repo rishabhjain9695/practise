@@ -21,29 +21,26 @@ function Navbars() {
         horizontal: "left",
       },
     });
-    // navigate.push("/");
+    // navigate.push("/");value={searchValue} onChange={(e)=>searching(e.target.value) }
   }
   return (
     <>
   <div className="topbar">
         <div className="prev-next-buttons">
-          <button type="button" className="fa fas fa-chevron-left"></button>
-          <button type="button" className="fa fas fa-chevron-right"></button>
+        <input type="search" id="searching" placeholder='What you want to listen to ?  '  />
+        <i className="fa-sharp fa-solid fa-magnifying-glass searchicon"></i>
         </div>
 
         <div className="navbar">
           <ul>
-          
-          <li> <span>Premium</span></li>
-      
-            <li className="divider">|</li>
-            <li>
+                      <li>
           {!loggedinuser?  <Link to='/signup'>Sign Up</Link>:null}
             </li>
           </ul>
-         {!loggedinuser?<button type="button"> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>:null}
+         {!loggedinuser?<button type="button" className=''> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>:null}
           {loggedinuser? <button type="button" hidden={false} onClick={handleLogout}>Logout</button>:null}
         </div>
+     
       </div>
       <br />
    

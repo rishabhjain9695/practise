@@ -8,6 +8,7 @@ const initialState = {
   currentSong:null,
   isPlaying:false,
   currentPlayingSongArray:null,
+  filteredSong:null
 };
 const loginreducer = (data = initialState, action) => {
   switch (action.type) {
