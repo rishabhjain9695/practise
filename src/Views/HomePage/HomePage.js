@@ -6,13 +6,10 @@ function HomePage() {
     const userSongsList = useSelector((state) => state.loginreducer.songs);
     const searchingSong=useSelector((state)=>state.loginreducer.searchingSong);
     const [filteredSong, setFilteredSong] = useState([]);
-    const [show,setShow]=useState(false);
-  
     useEffect(()=>{
         let debounce;
         console.log(searchingSong,"ayush");
         if(searchingSong==""){
-            console.log(show,"showwww");
               setFilteredSong([]);
         }
         else{
@@ -25,8 +22,6 @@ function HomePage() {
         let filteredData = userSongsList.filter((value) => value.SongName.toLowerCase().includes(searchValue.toLowerCase()));
         console.log(filteredData,"filtered")
         if (filteredData.length !== 0) {
-            console.log(show,"showwwws");
-            
           setFilteredSong(filteredData);
         }
         else {
@@ -38,8 +33,6 @@ function HomePage() {
   return (
     <div id="HomePagediv">
        <div className='main-container'>
-        {/* <input type="search" id='searchstyle' placeholder='Search your Song here' value={searchValue} onChange={(e) => searching(e.target.value)} /> */}
-       
         <div className='spotify-playlists'>
           <h2>All Songs</h2>
           <div className='spotifydiv'>
