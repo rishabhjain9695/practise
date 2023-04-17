@@ -21,9 +21,13 @@ const Userplaylistdisplayandcreate = () => {
   const updatedPlaylistSongs = useSelector(
     (state) => state.loginreducer.playlistSongs
   );  
-  console.log(updatedPlaylistSongs,"checkingggggg")
+  console.log(updatedPlaylistSongs,"checkingggggg");
+  const [search,setSearch]=useState(false);
+  const [filteredSong, setFilteredSong] = useState([]);
+  const searchingSong=useSelector((state)=>state.loginreducer.searchingSong);
   const params = useParams();
   const { name } = params;
+
   useEffect(()=>{
     if(isFirstRender){
       setIsFirstRender(false);
@@ -33,7 +37,35 @@ const Userplaylistdisplayandcreate = () => {
 
       dispatch(currentPlayingSongArr(updatedPlaylistSongs));
     }
-  },[updatedPlaylistSongs])
+  },[updatedPlaylistSongs]);
+  useEffect(()=>{
+    let debounce;
+    console.log(searchingSong,"ayush");
+    if(searchingSong==""){
+      setSearch(false);
+          setFilteredSong([]);
+    }
+    else{
+      setSearch(true);
+        debounce = setTimeout(() => findSearchSong(searchingSong), 1000); // understand logic wrong implemented here of empty string 
+    }
+   
+    return () => clearTimeout(debounce);
+},[searchingSong])
+const findSearchSong = (searchValue) => {
+    let filteredData = userSongsList.filter((value) => value.SongName.toLowerCase().includes(searchValue.toLowerCase()));
+    console.log(filteredData,"filtered")
+    if (filteredData.length !== 0) {
+      
+        
+      setFilteredSong(filteredData);
+    }
+    else {
+
+        setFilteredSong([]);
+
+    }
+  }
   return (
     <>
       <div className="main-container">
@@ -77,7 +109,7 @@ const Userplaylistdisplayandcreate = () => {
                 <h2>All Songs</h2>
                 <div className="spotifydiv">
                   <div className="list">
-                    {userSongsList?.map((songObject, i) => {
+                    { !search ? userSongsList?.map((songObject, i) => {
                       const payloadtoSent = {
                         songInfo: { ...songObject },
                         userToken,
@@ -125,7 +157,55 @@ const Userplaylistdisplayandcreate = () => {
                           </button>
                         </div>
                       );
-                    })}
+                    }) :   filteredSong?.map((songObject, i) => {
+                      const payloadtoSent = {
+                        songInfo: { ...songObject },
+                        userToken,
+                        name,
+                      }
+                      console.log(payloadtoSent,"payy");
+                      const payloadToSenttoLikedSongs = {
+                        userToken,
+                        songName: songObject.SongName,
+                      }
+                      return (
+                        <div className="item" key={i}>
+                          <img src={maxresdefault} alt="" />
+
+                          <h4 style={{ color: "white" }}>
+                            {songObject.SongName}
+                          </h4>
+                          <button
+                            id="btnn1"
+                            onClick={() => {
+                              console.log("clicked.,")
+                              dispatch(addToPlaylist(payloadtoSent));                        
+                            }}
+                          >
+                            Add Song to Playlist
+                          </button>
+                    
+                    <i className="fa-solid fa-heart"     onClick={() => {
+                              dispatch(
+                                addtoLikedSongs(payloadToSenttoLikedSongs)
+                              );
+                            }}></i>
+                          
+                          <button
+                            onClick={() => {
+                           
+                              dispatch(setCurrentSongObj(songObject));
+
+                             dispatch(isPlayinggggg(true));
+                             dispatch(currentPlayingSongArr(userSongsList));
+                            }}
+                            id="btnn"
+                          >
+                            click
+                          </button>
+                        </div>
+                      );
+                    }) }
                   </div>
                 </div>
               </div>

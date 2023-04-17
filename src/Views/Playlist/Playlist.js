@@ -56,7 +56,7 @@ const findSearchSong = (searchValue) => {
                     <img src={chainsmokers} alt="" />
 
                     <h4 style={{ color: 'white' }}>{e.SongName}</h4>
-                    <i i className="fa-solid fa-play" style={{ color: 'white' }} onClick={() => {
+                    <i  className="fa-solid fa-play" style={{ color: 'white' }} onClick={() => {
                       dispatch(setCurrentSongObj(e));
                       dispatch(isPlayinggggg(true));
                       dispatch(currentPlayingSongArr(userSongsList));

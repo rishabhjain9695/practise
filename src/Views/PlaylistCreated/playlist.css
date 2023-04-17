@@ -291,3 +291,18 @@ body {
   width: 754px;
 
 }
+.main-container {
+  background-color: #121212;
+  font-family: 'Montserrat', sans-serif;
+  height: 200vh;
+  width: 90%;
+  margin-left: 193px;
+  margin-top: -24px;
+  margin-bottom: 0px;
+  background-image: url('../../imagess/songwalpaper2.jpeg');
+  background-size: contain;
+  margin-left: 245px;
+    margin-bottom: 2px;
+    width: 75vw;
+    height: 94vh;
+  }

@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height:600px;
     width: 1000px;
 }
 #playbtn{
@@ -296,12 +295,12 @@ body {
   cursor: pointer;
   margin-top: 6px
 }
-/* #searchstyle{
+#searchstyle{
   border-radius: 25px;
   padding: 10px;
   width: 754px;
 
-} */
+}
 #btnn1{
     background-color: #ffffff;
     color: #000000;
