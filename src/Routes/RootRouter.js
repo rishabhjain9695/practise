@@ -14,7 +14,7 @@ import RenderRoutes from "./RenderRoutes";
 import Player from "Views/Player/Player";
 
 const DEFAULT_AUTHENTICATED_ROUTE = "/dashboard";
-const DEFAULT_GUEST_ROUTE = "/login";
+const DEFAULT_GUEST_ROUTE = "/";
 
 const GuestRoutes = () => {
   return (

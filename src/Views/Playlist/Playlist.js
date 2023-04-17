@@ -8,32 +8,35 @@ function Home() {
   const userSongsList = useSelector((state) => state.loginreducer.songs);
   const dispatch = useDispatch();
   const [filteredSong, setFilteredSong] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  const searchingSong=useSelector((state)=>state.loginreducer.searchingSong);
   const [cond, setCond] = useState(false);
   const [cond2, setCond2] = useState(false);
-  useEffect(() => {
-    console.log(searchValue, "searching")
-    const debounce = setTimeout(() => findSearchSong(searchValue), 1000);
-    return () => clearTimeout(debounce);
-  }, [searchValue])
-  const searching = (value) => {
-    setSearchValue(value);
-    if (value == "") {
-      setCond(false);
+  useEffect(()=>{
+    let debounce;
+    console.log(searchingSong,"ayush");
+    if(searchingSong==""){
+        setCond(false);
+          setFilteredSong([]);
     }
-    else {
+    else{
       setCond(true);
-      console.log("ab")
+        debounce = setTimeout(() => findSearchSong(searchingSong), 1000); // understand logic wrong implemented here of empty string 
     }
-  }
-  const findSearchSong = (searchValue) => {
+   
+    return () => clearTimeout(debounce);
+},[searchingSong])
+const findSearchSong = (searchValue) => {
     let filteredData = userSongsList.filter((value) => value.SongName.toLowerCase().includes(searchValue.toLowerCase()));
+    console.log(filteredData,"filtered")
     if (filteredData.length !== 0) {
       setCond2(true);
+        
       setFilteredSong(filteredData);
     }
     else {
       setCond2(false);
+        setFilteredSong([]);
+
     }
   }
   return (

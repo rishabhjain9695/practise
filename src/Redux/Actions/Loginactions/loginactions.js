@@ -5,19 +5,7 @@ export const Login=(loggedin)=>{
         loggedin
     }
 }
-// export const getLoginData=(loggedin)=>{
-//     console.log("dynamic",loggedin)
-//     return {
-//         type:"GETLOGIN",
-//         loggedin
-//     }
-// }
-// export const setLoginData=(loggedin)=>{
-//     return {
-//         type:"SETLOGIN",
-//         loggedin
-//     }
-// }
+
 export const Logoutuser=(loggedin)=>{
     return {
         type:"LOGOUT",
@@ -140,3 +128,24 @@ export const currentPlayingSongArr=(payload)=>{
         payload
     }
 }
+export const searchingSong=(payload)=>{
+    console.log("searchingSong",payload)
+    return {
+        type:"SEARCHINGSONG",
+        payload
+    }
+}
+
+// export const getLoginData=(loggedin)=>{
+//     console.log("dynamic",loggedin)
+//     return {
+//         type:"GETLOGIN",
+//         loggedin
+//     }
+// }
+// export const setLoginData=(loggedin)=>{
+//     return {
+//         type:"SETLOGIN",
+//         loggedin
+//     }
+// }
