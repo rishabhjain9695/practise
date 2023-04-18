@@ -16,23 +16,6 @@ export const PUBLIC_ROUTES = [
 
   },
   
-  {
-    path: "/login",
-    component: LoginPage,
-    title: "LoginPage",
-  },
- 
-  {
-    path: "/forgotpassword",  
-    component: ForgotPassword,
-    title: "ForgotPassword",
-  },
-  {
-    path: "/resetpassword",
-    component: ForgotPasswordPage,
-    title: "Show Team",
-  },
   
-
 
 ];

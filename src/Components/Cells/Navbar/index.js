@@ -13,6 +13,9 @@ function Navbars() {
   console.log(loggedinuser,"asshshsh");
   const navigate=useHistory();
   const dispatch=useDispatch();
+  function handleClick(){
+    navigate.push("/login");
+  }
  
   function handleLogout() {
     dispatch(Logoutuser(null));
@@ -45,7 +48,7 @@ function Navbars() {
           {!loggedinuser?  <Link to='/signup'>Sign Up</Link>:null}
             </li>
           </ul>
-         {!loggedinuser?<button type="button" className=''> <Link style={{textDecoration:'none'}} to='/login'>Log In</Link></button>:null}
+         {!loggedinuser?<button type="button" className='' onClick={handleClick}> Login</button>:null}
           {loggedinuser? <button type="button" hidden={false} onClick={handleLogout}>Logout</button>:null}
         </div>
      

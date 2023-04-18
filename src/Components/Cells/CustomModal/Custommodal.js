@@ -11,7 +11,7 @@ function CustomModal({showModal,setShowModal}) {
   };
   return (
     <>
-      <div className="modalContainer">
+      <div className="modalContainer ">
       <div id="modalDiv">
         <h1>Please Login First</h1>
         

@@ -13,8 +13,8 @@ import PrivateLayout from "Components/Core/PrivateLayout";
 import RenderRoutes from "./RenderRoutes";
 import Player from "Views/Player/Player";
 
-const DEFAULT_AUTHENTICATED_ROUTE = "/dashboard";
-const DEFAULT_GUEST_ROUTE = "/";
+const DEFAULT_AUTHENTICATED_ROUTE = "/home";
+const DEFAULT_GUEST_ROUTE = "/" ;
 
 const GuestRoutes = () => {
   return (
@@ -33,14 +33,14 @@ const GuestRoutes = () => {
 };
 
 const AuthenticatedRoutes = () => {
-  const routes = PUBLIC_ROUTES.concat(PRIVATE_ROUTES);
+  const routes =PRIVATE_ROUTES;
   return (
     <PrivateLayout>
       <Switch>
-        <Route path={routes.map((route) => route.path)}>
-          <RenderRoutes routes={routes} />
-        </Route>
-        <Redirect from="*" to={DEFAULT_AUTHENTICATED_ROUTE} />
+          {routes.map((route, routeIdx) => (
+          <Route path={route.path} key={routeIdx} component={route.component} exact={route.exact} />
+        ))}
+          <Redirect from="*" to={DEFAULT_AUTHENTICATED_ROUTE} />
       </Switch>
       <Player/>
     </PrivateLayout>
