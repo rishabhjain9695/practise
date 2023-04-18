@@ -1,6 +1,6 @@
 .player_container
 {
-    width: 70%;
+    width: 1292px;
     /* padding: 1rem; */
     border: 1px solid rgb(141, 141, 141);
     border-radius: 10px;
@@ -12,7 +12,7 @@
     background-color: black;
     margin-left: 216px;
     border-radius: 47px;
-    width: 1000px;
+    /* width: 1000px; */
     margin-top: -99px;
 
 }

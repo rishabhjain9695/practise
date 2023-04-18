@@ -24,7 +24,8 @@ import {  enqueueSnackbar } from "notistack";
 function SignUp() {
   const phoneregex = /^[0-9]{0,10}$/;
  const nameRegex=/^[a-zA-Z ]*$/
- const emailRegex= /[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+ const emailRegex= /[A-Za-z._ 0-9]{3,}@[A-Za-z]{3,}[.]{1}[A-Za-z.]{2,6}$/;
+ const passwordRegex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
   const [flag, setFlag] = useState(false);
   const[enterallErrMsg,setAllErrMsg]=useState(false);
   const [name, setName] = useState("");
@@ -32,9 +33,11 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [phoneno, setPhoneno] = useState("");
   const [confirmObj, setConfirmObj] = useState("");
-  const [errMsgg, setErrMsg] = useState("");
   const [emailErrMessage,setEmailErrmsg]=useState(false);
+  const [nameErrMessage,setNameErrMessage]=useState(false);
   const [phonenoErrMessage,setPhoneNoErrmsg]=useState(false);
+  const [passwordErrMessage,setPasswordErrMessage]=useState(false);
+  const [otpErrMessage,setOtpErrMessage]=useState(false);
   const [otp, setOtp] = useState("");
   const navigate = useHistory();
   const setUpRecapcha = (phoneno) => {
@@ -57,7 +60,7 @@ function SignUp() {
     }
   }
   const handleEmail=()=>{
-    if(email.match(emailRegex)){
+    if(emailRegex.test(email)){
       setEmailErrmsg(false);
       return false;
     }
@@ -67,22 +70,112 @@ function SignUp() {
     }
     
   }
+  const handlePassword=()=>{
+    if(passwordRegex.test(password)){
+      setPasswordErrMessage(false);
+      return false;
+    }
+    else{
+      setPasswordErrMessage(true);
+      return true;
+    }
+    
+  }
   const sendOtp = async (e) => {
     e.preventDefault();
-    if(email==""||name==""||password==""||phoneno==""){
+    if(email==""&& name==""&& password==""&& phoneno==""){
     console.log("enter first");
     setAllErrMsg(true);
       return;
     }
-    let emailErr=handleEmail();
-    console.log(emailErr,"qq")
-    if(phoneno.length<10){
+    if(name=="" && email=="" && password==""){
+      setNameErrMessage(true);
+      setEmailErrmsg(true);
+      setPasswordErrMessage(true);
+      return ;
+    }
+    if(name=="" && password=="" && phoneno==""){
+      setNameErrMessage(true);
+      setPasswordErrMessage(true);
       setPhoneNoErrmsg(true);
-      return;
+      handleEmail();
+      return ;
     }
-    if(emailErr){
-      return
+    if(name=="" && email=="" && phoneno==""){
+      setNameErrMessage(true);
+      setEmailErrmsg(true);
+      setPhoneNoErrmsg(true);
+      let passwordd =handlePassword();
+      return ;
     }
+    if(email=="" && password=="" && phoneno==""){
+      setEmailErrmsg(true);
+      setPasswordErrMessage(true);
+      setPhoneNoErrmsg(true);
+      return ;
+    }
+    if (name=="" && phoneno==""){
+      setNameErrMessage(true);
+      setPhoneNoErrmsg(true);
+      handleEmail();
+      let password =handlePassword();
+      return ;
+    }
+    if (email=="" && phoneno==""){
+      setEmailErrmsg(true);
+      setPhoneNoErrmsg(true);
+      handlePassword();
+      return ;
+    }
+    if(email=="" && password==""){
+      setEmailErrmsg(true);
+      setPasswordErrMessage(true);
+      if(phoneno.length<10){
+        setPhoneNoErrmsg(true);
+      }
+      return ;
+    }
+    if (password==""){
+       setPasswordErrMessage(true);
+       handleEmail();
+       if(phoneno.length<10){
+        setPhoneNoErrmsg(true);
+      }
+       return;
+    }
+    if(name==""){
+      setNameErrMessage(true);
+      handleEmail();
+      if(phoneno.length<10){
+        setPhoneNoErrmsg(true);
+      }
+      let password=handlePassword();
+      return ;
+    }
+    if(email==""){
+      setEmailErrmsg(true);
+      let passwordd =handlePassword();
+      return ;
+    }
+    if(phoneno==""){
+      setPhoneNoErrmsg(true);
+      handleEmail();
+      let passwordd= handlePassword();
+      return ;
+    }
+if(phoneno.length<10){
+  setPhoneNoErrmsg(true);
+  return ;
+}
+let passwordd=handlePassword();
+if(passwordd){
+  return ;
+
+}
+let emaill=handleEmail();
+if(emaill){
+  return ;
+}
     const phonenumber = "+91" + phoneno;
     try {
       const response = await setUpRecapcha(phonenumber);
@@ -90,7 +183,7 @@ function SignUp() {
       setFlag(true);
       setConfirmObj(response);
     } catch (error) {
-      setErrMsg("Invalid Phone Number");
+      
       console.log(error);
     }
   };
@@ -103,8 +196,7 @@ function SignUp() {
       await confirmObj.confirm(code);
       signup();
     } catch (error) {
-      setErrMsg(error.message);
-      console.log(error.message);
+      setOtpErrMessage(true);
     }
   };
   const signup = () => {
@@ -161,11 +253,15 @@ function SignUp() {
               onChange={(e) => {
                handleName(e);
                setAllErrMsg(false);
+               setNameErrMessage(false);
                setEmailErrmsg(false);
                setPhoneNoErrmsg(false);
+               setPasswordErrMessage(false);
               }}
             />
+            
                </div>
+               {nameErrMessage ? <span style={{color:'red'}}> Please Enter Your Name</span> : null}
      
             <br/>
             <span>
@@ -182,6 +278,7 @@ function SignUp() {
               onChange={(e) => {
                 setEmail(e.target.value);
                 setAllErrMsg(false);
+                setNameErrMessage(false);
                 setEmailErrmsg(false);
                 setPhoneNoErrmsg(false);
               }}
@@ -190,6 +287,7 @@ function SignUp() {
        
             <br/>
             {emailErrMessage?<span style={{color:"red"}}> Enter Valid Email</span>:null}
+            <br/>
             <span >
               We'll never share your email with anyone else.
             </span>
@@ -206,10 +304,13 @@ function SignUp() {
                 setAllErrMsg(false);
                 setEmailErrmsg(false);
                 setPhoneNoErrmsg(false);
+                setNameErrMessage(false);
+                setPasswordErrMessage(false);
               }}
           
             />
             <br/>
+            {passwordErrMessage ? <span style={{color:'red'}}> Please Enter Valid Password</span> : null}
       </div>
          <div>
          <label><b>Phone Number</b></label>
@@ -220,10 +321,12 @@ function SignUp() {
               className="inputstyle form-control"
               onChange={(e) => {
                 handlPhonenoValidation(e);
-                setErrMsg("");
+                
                 setAllErrMsg(false);
                 setEmailErrmsg(false);
+                setNameErrMessage(false);
                 setPhoneNoErrmsg(false);
+                setPasswordErrMessage(false);
               }}
             />
          </div>
@@ -232,7 +335,7 @@ function SignUp() {
             {phonenoErrMessage? <span style={{color:'red'}}>Please enter Valid Phone Number</span>:null}
         
           <div id="sign-in-button"></div>
-          <div style={{ color: "red" }}>{errMsgg}</div>
+          {/* <div style={{ color: "red" }}>{errMsgg}</div> */}
           {enterallErrMsg?<span style={{color:'red'}}> Enter all fields</span>:null}
           <Button variant="primary" type="submit" className="sendOtpStyling">
             SendOtp
@@ -251,11 +354,12 @@ function SignUp() {
               value={otp}
               onChange={(e) => {
                 setOtp(e.target.value);
-                setErrMsg("")
+             
+
               }}
             />
             <br/>
-          {errMsgg?<span style={{color:'red'}}>enter valid otp</span>:null}
+          {otpErrMessage?<span style={{color:'red'}}>enter valid otp</span>:null}
           <Button variant="primary" type="submit" className="sendOtpStyling">
             Submit
           </Button>
@@ -273,3 +377,14 @@ function SignUp() {
 }
 
 export default SignUp;
+
+
+    // let emailErr=handleEmail();
+    // console.log(emailErr,"qq")
+    // if(phoneno.length<10){
+    //   setPhoneNoErrmsg(true);
+    //   return;
+    // }
+    // if(emailErr){
+    //   return
+    // }
