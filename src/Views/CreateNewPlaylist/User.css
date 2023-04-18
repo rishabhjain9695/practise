@@ -27,15 +27,14 @@
 #flexx{
     background-color: #121212;
     font-family: 'Montserrat', sans-serif;
-    height: 200vh;
-    width: 100vw;
-    margin-left: 193px;
-    margin-top: -24px;
-    margin-bottom: 0px;
     background-image: url('../../imagess/songwalpaper2.jpeg');
     background-size: cover;
-    margin-left: 245px;
-      margin-bottom: 2px;
-      
+    margin-left: 193px;
       height: 94vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 84vw;
+      align-items: center;
+      justify-content: center;
 }

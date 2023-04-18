@@ -42,7 +42,7 @@ const AuthenticatedRoutes = () => {
         ))}
           <Redirect from="*" to={DEFAULT_AUTHENTICATED_ROUTE} />
       </Switch>
-      <Player/>
+      
     </PrivateLayout>
   );
 };

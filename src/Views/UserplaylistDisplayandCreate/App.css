@@ -1,8 +1,10 @@
 #flexx{
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: 87vw;
+    justify-content: center;
+    align-items: center; */
 }
 #playbtn{
     border-radius: 54px;
