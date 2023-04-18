@@ -20,13 +20,13 @@ function Sidebar() {
         </ul>
          <ul>
          <li>
-           <Link to='/createdplaylist'>Playlist</Link> 
+           <Link to='/userPlaylists'>Playlist</Link> 
           </li>
           </ul>
         <ul>
         <li>
       
-       <Link to='/playlist' >Create Playlist</Link>
+       <Link to='/createNewPlaylist' >Create Playlist</Link>
            
           
           </li>

@@ -1,8 +1,10 @@
-import UserPlaylist from "Views/CreateNewPlaylist";
+
 import CreatePlaylist from "Views/PlaylistCreated/playlistcreated";
 import Home from "Views/Playlist/Playlist";
 import Userplaylistdisplayandcreate from "Views/UserplaylistDisplayandCreate";
 import LikedSong from "Views/LikedSongs/LikedSongs";
+import CreateNewPlaylist from "Views/CreateNewPlaylist";
+import UserPlaylists from "Views/PlaylistCreated/playlistcreated";
 
 export const PRIVATE_ROUTES = [
 
@@ -12,8 +14,8 @@ export const PRIVATE_ROUTES = [
     title: "Dashboard",
   },
   {
-    path: "/createdplaylist",
-    component: CreatePlaylist,
+    path: "/userPlaylists",
+    component: UserPlaylists,
     title: "playlist created",
   },
   {
@@ -31,9 +33,9 @@ export const PRIVATE_ROUTES = [
     component: LikedSong,
     title: "LikedSongs",
   },{
-    path: "/playlist",
-    component: UserPlaylist,
-    title: "Userplaylist",
+    path: "/createNewPlaylist",
+    component: CreateNewPlaylist,
+    title: "CreateNewPlaylist",
   },
  
 ];

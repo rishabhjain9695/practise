@@ -7,7 +7,7 @@ import songswalpaper from "../../imagess/songswalpaper.jpg"
 import { addNewplaylist } from "Redux/Actions/Loginactions/loginactions";
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-const UserPlaylist = () => {
+const CreateNewPlaylist = () => {
     const userToken=useSelector((state)=>state.loginreducer.loggedin);
     const [playlistname, setPlaylistName] = useState("");
     const dispatch=useDispatch();
@@ -15,12 +15,12 @@ const UserPlaylist = () => {
     return (
         <div id="flexx">
             <input type="text" id="createNewPlaylistInput" placeholder="Create Playlist" value={playlistname} onChange={(e) => { setPlaylistName(e.target.value) }} />
-            <NavLink to='/createdplaylist' style={{textDecoration:'none'}} id="btnstylecreateplaylist" onClick={()=>{dispatch(addNewplaylist({userToken,playlistname}))}}> Create </NavLink>
+            <NavLink to='/userPlaylists' style={{textDecoration:'none'}} id="btnstylecreateplaylist" onClick={()=>{dispatch(addNewplaylist({userToken,playlistname}))}}> Create </NavLink>
         </div>
     );
 
 }
-export default UserPlaylist;
+export default CreateNewPlaylist;
 
 
 

@@ -5,7 +5,7 @@ import './playlist.css'
 import { NavLink, useHistory } from 'react-router-dom'
 import maxresdefault from "../../imagess/maxresdefault.jpg" 
 import { getSelectedPlaylistSongs } from 'Redux/Actions/Loginactions/loginactions'
-const CreatePlaylist = () => {
+const UserPlaylists = () => {
   const userPlaylistArr=useSelector((state)=>state.loginreducer.playlists);
   const userToken=useSelector((state)=>state.loginreducer.loggedin);
   const dispatch=useDispatch();
@@ -45,4 +45,4 @@ const CreatePlaylist = () => {
 
   }
 
-export default CreatePlaylist;
+export default UserPlaylists;
