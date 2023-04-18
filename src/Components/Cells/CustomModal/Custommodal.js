@@ -1,37 +1,28 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 
-function CustomModal(props) {
+import './customM.css'
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+function CustomModal({showModal,setShowModal}) {
+
+  const navigate=useHistory();
   const handleClose = () => {
-    props.setShowModal(false);
+    setShowModal(false);
+    navigate.push("/login");
   };
   return (
     <>
-      <Modal
-        show={props.showModal}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        {props.header ? (
-          <Modal.Header closeButton>
-            <Modal.Title>
-            {props.playlistname}</Modal.Title>
-          </Modal.Header>
-        ) : null}
-        <Modal.Body>{props.children}</Modal.Body>
-        {props.footer ? (
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Cancel
-            </Button>
-            
-          </Modal.Footer>
-        ) : null}
-      </Modal>
+      <div className="modalContainer">
+      <div id="modalDiv">
+        <h1>Please Login First</h1>
+        
+        
+        
+        
+        <button onClick={handleClose}> Ok</button>
+      </div>
+      </div>
     </>
-  );
+  )
 }
 
 export default CustomModal;

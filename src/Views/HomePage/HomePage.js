@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import "./HomePage.css"
 import { useSelector } from 'react-redux';
 import chainsmokers from '../../imagess/chainsmokers.webp'
+import CustomModal from 'Components/Cells/CustomModal/Custommodal';
 function HomePage() {
     const userSongsList = useSelector((state) => state.loginreducer.songs);
     const searchingSong=useSelector((state)=>state.loginreducer.searchingSong);
     const [filteredSong, setFilteredSong] = useState([]);
+    const [showModal,setShowModal]=useState(false);
     useEffect(()=>{
         let debounce;
         console.log(searchingSong,"ayush");
@@ -31,8 +33,7 @@ function HomePage() {
       }
     console.log(userSongsList,"usersonglisttttt");
   return (
-    <div id="HomePagediv">
-       <div className='main-container'>
+       <div id='HomePagediv'>
         <div className='spotify-playlists'>
           <h2>All Songs</h2>
           <div className='spotifydiv'>
@@ -45,7 +46,8 @@ function HomePage() {
 
                     <h4 style={{ color: 'white' }}>{e.SongName}</h4>
                     <i  className="fa-solid fa-play" style={{ color: 'white' }} onClick={() => {
-                        alert("please login first");
+                        
+                        setShowModal(true);
                     }}></i>
 
                   </div>
@@ -53,11 +55,12 @@ function HomePage() {
                 )
               })
       }
+      {showModal ?<CustomModal showModal={showModal} setShowModal={setShowModal}/> : null}
     </div>
     </div>
           </div>
         </div>
-      </div>
+      
   )
 }
 

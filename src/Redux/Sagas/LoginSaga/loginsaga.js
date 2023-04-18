@@ -58,7 +58,7 @@ function* addSongToPlaylist({payload}){
         yield put(getUpdatedPlaylistdata(getplaylistdata));
 
 }
-function* LikedSongs({payload}){
+function*   likedSongs({payload}){
   console.log("likedpayload",payload);
   yield updateDoc(doc(db, "users",payload.userToken ),{
     ["LikedSongs"]: arrayUnion(payload.songName)
@@ -128,8 +128,7 @@ function* Sagaa() {
     takeLatest("GETPLAYLISTS",getPlaylists),
     takeLatest("ADDSONGTOPLAYLIST",addSongToPlaylist),
     takeLatest("GETSELECTEDPLAYLISTSONGS",getSelectedPlaylistSongsArr),
-    takeLatest("ADDLIKEDSONGS",LikedSongs),
-    // takeLatest("GETLOGIN",getLoginuserdata)
+    takeLatest("ADDLIKEDSONGS",likedSongs),
     takeLatest("GETLIKEDSONGSDURINGLOGGEDIN",getLikedSongsLogin)
 
   ]);

@@ -6,8 +6,10 @@ import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 import  {Logoutuser, searchingSong} from "../../../Redux/Actions/Loginactions/loginactions";
 import {useHistory} from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 function Navbars() {
   const loggedinuser=useSelector((state)=>state.loginreducer.loggedin);
+  const [value,setvalue]=useState()
   console.log(loggedinuser,"asshshsh");
   const navigate=useHistory();
   const dispatch=useDispatch();
@@ -24,11 +26,16 @@ function Navbars() {
     });
     navigate.push("/"); 
   }
+  useEffect(()=>{
+    dispatch(searchingSong(""));
+  }
+  ,[])
+  
   return (
     <>
   <div className="topbar">
         <div className="prev-next-buttons">
-        <input type="search" id="searching" placeholder='What you want to listen to ?  ' onChange={(e)=>dispatch(searchingSong(e.target.value))}  />
+        <input type="search" id="searching" placeholder='What you want to listen to ?  '  onChange={(e)=>dispatch(searchingSong(e.target.value))}  />
         <i className="fa-sharp fa-solid fa-magnifying-glass searchicon"></i>
         </div>
 
