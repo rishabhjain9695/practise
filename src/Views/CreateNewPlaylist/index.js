@@ -17,7 +17,10 @@ const CreateNewPlaylist = () => {
         
             <input type="text" id="createNewPlaylistInput" placeholder="Create Playlist" value={playlistname} onChange={(e) => { setPlaylistName(e.target.value) }} />
             <NavLink to='/userPlaylists' style={{textDecoration:'none'}} id="btnstylecreateplaylist" onClick={()=>{dispatch(addNewplaylist({userToken,playlistname}))}}> Create </NavLink>
-        </div>
+    
+ 
+    
+    </div>
         
     );
 

@@ -68,7 +68,7 @@ const findSearchSong = (searchValue) => {
   }
   return (
     <>
-      <div className="main-container">
+      <div >
 
         <div className="spotify-playlists">
           <h2>{name}</h2>
