@@ -27,10 +27,13 @@
         border-radius: 28px;
     }
 #flexx{
+    width: 90vw;
     background-color: #121212;
     font-family: 'Montserrat', sans-serif;
-    background-image: url('../../imagess/songwalpaper2.jpeg');
+    background-image: url('../../imagess/monkey-3507317_960_720.jpg');
+    background-position:center;
     background-size: cover;
+    object-fit: cover ;
     margin-top: 60px;
     margin-left: 193px;
       height: 74vh;
@@ -38,7 +41,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 100vw;
+      /* width: 100vw; */
       align-items: center;
       justify-content: center;
 }
