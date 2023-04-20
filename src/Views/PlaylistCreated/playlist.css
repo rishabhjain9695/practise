@@ -95,9 +95,10 @@ body {
 
 .main-container {
   margin-left: 198px;
-  margin-bottom: 100px;
-  width: 75vw;
-  height: 94vh;
+  margin-top: 70px;
+  margin-bottom: 60px;
+  width: 1400px;
+  height: 68vh;
 }
 
 .topbar {

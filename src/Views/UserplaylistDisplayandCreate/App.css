@@ -1,9 +1,9 @@
-#flexx{
+/* #flexx{
   display: flex;
   justify-content: center;
   align-items: center;
   width: 1000px;
-}
+} */
 #playbtn{
   border-radius: 54px;
 }
@@ -105,10 +105,13 @@ text-decoration: underline;
 }
 
 .main-container {
-margin-left: 198px;
-margin-bottom: 100px;
-width: 1400px;
-height: 114vh;
+
+  margin-left: 199px;
+  margin-top: 70px;
+  margin-bottom: 60px;
+  width: 1037px;
+  height: 68vh;
+
 }
 
 .topbar {
@@ -314,4 +317,12 @@ width: 754px;
 }
 .searchicon{
   margin-left:-43px ;
+}
+#container{
+  background-image: url('../../imagess/songwalpaper2.jpeg');
+  background-size: cover;
+  width: 80vw;
+  margin-left: 200px;
+  margin-top: 100px;
+  height: 150vh;
 }
