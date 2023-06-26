@@ -5,11 +5,12 @@ import createSagaMiddleware from "redux-saga";
 
 import rootReducer from "./Reducers/RootReducer";
 import rootSaga from "./Sagas/RootSaga";
+import Sagaa from "./Sagas/loginsaga";
 
 const rootPersistConfig = {
   key: "root",
   storage: storage,
-  whitelist: ["auth"],
+  whitelist: ["getUserData"],
 };
 
 const composeEnhancers =
@@ -21,6 +22,6 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(Sagaa);
 
 export const persistor = persistStore(store);

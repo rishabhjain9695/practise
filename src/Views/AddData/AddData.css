@@ -1,0 +1,12 @@
+.form{
+display: flex;
+justify-content: center;
+    
+}
+.input{
+    width: 500px;
+    margin-bottom: 11px;
+}
+.mainDiv{
+    
+}

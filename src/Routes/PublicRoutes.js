@@ -1,32 +1,31 @@
+import AddData from "Views/AddData/AddData";
 import AboutUs from "Views/AboutUs";
 import { Link } from "react-router-dom";
+import UserDataTable from "Views/UserTable/UserDataTable";
+import Error from "Error";
 
 export const PUBLIC_ROUTES = [
   {
     path: "/",
-    component: () => (
-      <>
-        <Link to="/wishlist">see wishlist</Link>
-        <p>"WElcome"</p>
-      </>
-    ),
+    component: AddData,
     title: "Homepage",
     exact: true,
   },
   {
-    path: "/about-us/divyan",
-    component: () => <p>"divyan"</p>,
-    title: "About Divyan",
+    path: "/users",
+    component: UserDataTable,
+    title: "usersData",
+    exact:true,
   },
   {
-    path: "/about-us",
-    component: AboutUs,
-    title: "About Us",
+    path: "/:obj",
+    component: AddData,
+    title: "AddData",
     exact: true,
   },
   {
-    path: "/about-us/:name",
-    component: () => <p>"random guy"</p>,
+    path:"*",
+    component:Error,
     title: "About random guy",
   },
 ];

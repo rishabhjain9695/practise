@@ -1,0 +1,15 @@
+.showBtn{
+position: absolute;
+ right: 0;
+ margin-right: 11px;
+ margin-top: 21px
+
+}
+.mainDiv{
+    width: 100vw;
+    position: relative;
+}
+.heading{
+    width: 100vw;
+    text-align: center;
+}

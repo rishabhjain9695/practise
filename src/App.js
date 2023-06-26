@@ -2,7 +2,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/lib/integration/react";
 
 import RootRouter from "./Routes/RootRouter";
-import { store, persistor } from "./Redux/Store";
+import {  persistor } from "./Redux/Store";
+import { store } from "./Redux/Store";
 
 function App() {
   return (
